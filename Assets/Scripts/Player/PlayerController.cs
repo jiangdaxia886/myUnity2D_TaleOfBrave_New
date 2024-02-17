@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
     [Header("基本参数")]
     public float speed;
 
+    private float runSpeed;
+
+    //=>表示walkSpeed时runSpeed的一半
+    private float walkSpeed => speed / 2.5f;
+
     public float slideSpeed;
 
     public float jumpForce;
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public float capsuleCollider2Dy;
 
     public float capsuleCollider2DOffsety;
+
 
 
 
@@ -81,6 +87,23 @@ public class PlayerController : MonoBehaviour
         inputController.GamePlay.Attack.started += PlayerAttack;
         //滑铲
         inputController.GamePlay.Slide.started += Slide;
+        //当步行按键按住时(lambda表达式,传入一个回调函数)
+        runSpeed = speed;
+        inputController.GamePlay.WalkButton.performed += ctx => 
+        {
+            if (physicsCheck.isGround) 
+            {
+                speed = walkSpeed;
+            }
+        };
+        //当步行按键不按时
+        inputController.GamePlay.WalkButton.canceled += ctx =>
+        {
+            if (physicsCheck.isGround)
+            {
+                speed = runSpeed;
+            }
+        };
 
     }
 
