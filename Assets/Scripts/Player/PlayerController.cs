@@ -111,8 +111,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if(!isHurt && !isAttack)
-        //人物移动
-        Move();
+            //人物移动
+            Move();
+
     }
 
     //测试

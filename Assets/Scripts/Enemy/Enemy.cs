@@ -7,22 +7,31 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
 
     //protected 子类可以访问
-    protected Animator anim;
+    [HideInInspector]public Animator anim;
 
-    PhysicsCheck physicsCheck;
+    [HideInInspector]public PhysicsCheck physicsCheck;
 
     [Header("基本参数")]
     public float normalSpeed;
 
     public float chaseSpeed;
 
-    public float currentSpeed;
+    [HideInInspector] public float currentSpeed;
 
     public Vector3 faceDir;
 
     public float hurtForce;
     //攻击者
     public Transform attacker;
+
+    [Header("检测")]
+    public Vector2 centerOffset;
+
+    public Vector2 checkSize;
+
+    public float checkDistance;
+
+    public LayerMask attackLayer;
 
     [Header("计时器")]
     public float waitTime;
@@ -31,12 +40,23 @@ public class Enemy : MonoBehaviour
 
     public bool wait;
 
+    public float lostTime;
+
+    public float lostTimeCounter;
+
     [Header("状态")]
     public bool isHurt;
 
     public bool isDead;
 
-    private void Awake()
+    private BaseState currentState;
+
+    protected BaseState patrolState;
+
+    protected BaseState chaseState;
+
+
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -45,28 +65,35 @@ public class Enemy : MonoBehaviour
         waitTimeCounter = waitTime;
     }
 
+    private void OnEnable()
+    {
+        currentState = patrolState;
+        currentState.OnEnter(this);
+    }
+
     private void Update()
     {
         faceDir = new Vector3(-transform.localScale.x,0,0);
 
         //当面朝墙且碰到墙时再转身
-        if(physicsCheck.touchLeftWall && faceDir.x < 0|| physicsCheck.touchRightWall && faceDir.x > 0)
-        {
-            wait = true;
-            anim.SetBool("walk", false);
-            
-        }
+        currentState.LogicUpdate();
         TimeCounter();
+        
     }
 
     //刚体放在fixedUpdate执行
     private void FixedUpdate()
     {
-        if (!isHurt && !isDead)
+        if (!isHurt && !isDead && !wait)
         {
             Move();
         }
-        
+        currentState.PhysicsUpdate();
+    }
+
+    private void OnDisable()
+    {
+        currentState.OnExit();
     }
 
     //virtual表示可以被重写
@@ -84,12 +111,44 @@ public class Enemy : MonoBehaviour
             if (waitTimeCounter <= 0) 
             { 
                 wait = false;
+                //因为faceDir=-transform.localScale.x，所以这里转身不用负值（因为速度方向和transform.localScale.x是反的，所以faceDir初始化时=-transform.localScale.x）
                 transform.localScale = new Vector3(faceDir.x, 1, 1);
                 waitTimeCounter = waitTime;
             }
         }
+        //如果没有发现玩家，则将追击等待时间减少
+        if (!FoundPlayer() && lostTimeCounter > 0 )
+        {
+            lostTimeCounter -= Time.deltaTime;
+        }
+
     }
 
+    //发现玩家
+    public bool FoundPlayer() 
+    {
+        //向前方发射一个盒子检测射线，从中心点transform.position + (Vector3)centerOffset，向方向为faceDir发射一个大小为checkSize角度为0的射线，射线长度为checkDistance，检测对象为attackLayer
+        return Physics2D.BoxCast(transform.position + (Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
+
+    }
+
+    public void SwitchState(NPCState state)
+    {
+        //根据传进来的枚举值state判断newState切换到哪种状态
+        var newState = state switch
+        {
+            NPCState.Patrol => patrolState,
+            NPCState.Chase => chaseState,
+            _ => null
+        };
+        //当前状态退出
+        currentState.OnExit();
+        //切换到新状态
+        currentState = newState;
+        currentState.OnEnter(this);
+    }
+
+    #region 事件执行方法
     public void OnTakeDamage(Transform attackTrans) 
     {
         attacker = attackTrans;
@@ -107,6 +166,8 @@ public class Enemy : MonoBehaviour
         isHurt = true;
         anim.SetTrigger("hurt");
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
+        //受伤时先将野猪停下，再被击退
+        rb.velocity = new Vector2(0, rb.velocity.y);
         //执行协程
         StartCoroutine(OnHurt(dir));
         
@@ -133,5 +194,12 @@ public class Enemy : MonoBehaviour
     public void DestoryAfterAnimation() 
     {
         Destroy(this.gameObject);
+    }
+    #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        //在场景中绘制检测范围（碰撞范围可视化）
+        Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset + new Vector3(checkDistance * faceDir.x,0), 0.2f);
     }
 }

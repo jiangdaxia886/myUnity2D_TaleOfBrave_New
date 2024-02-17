@@ -38,6 +38,7 @@ public class PhysicsCheck : MonoBehaviour
             //左侧的x轴偏移量等于右侧偏移量的负值
             leftOffset = new Vector2(rightOffset.x - capsuleCollider.bounds.size.x, rightOffset.y);
         }
+        Check();
     }
 
     // Update is called once per frame
@@ -48,8 +49,8 @@ public class PhysicsCheck : MonoBehaviour
 
     private void Check()
     {
-        //检测地面,距离位置transform.position + bottomOffset的checkRaduis范围内是否存在groundLayer图层
-        isGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, checkRaduis, groundLayer);
+        //检测地面,距离位置transform.position + bottomOffset的checkRaduis范围内是否存在groundLayer图层,此处加了new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y)，表示当前敌人前方脚下位置作为检测点，当野猪前方是悬崖时则不往前走
+        isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y), checkRaduis, groundLayer);;
 
         //墙体判断
         touchLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, checkRaduis, groundLayer);
