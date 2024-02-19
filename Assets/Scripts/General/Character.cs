@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
     //设置主动无敌时间
     public float activeInvulnerableDuration;
     //无敌计时器
-    private float invulnerableCounter;
+    [HideInInspector] public float invulnerableCounter;
     //无敌状态
     public bool invulnerable;
 

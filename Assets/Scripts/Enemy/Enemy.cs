@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//需要挂载的组件,挂载Enemy后自动添加
+[RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(PhysicsCheck))]
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
@@ -55,6 +57,8 @@ public class Enemy : MonoBehaviour
 
     protected BaseState chaseState;
 
+    protected BaseState skillState;
+
 
     protected virtual void Awake()
     {
@@ -99,7 +103,12 @@ public class Enemy : MonoBehaviour
     //virtual表示可以被重写
     public virtual void Move()
     {
-        rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime,rb.velocity.y);
+        //如果当前没有播放蜗牛的premove动画，则移动GetCurrentAnimatorStateInfo(0)表示第0个layer，即animation中的baseLayer
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("snailPreMove") && !anim.GetCurrentAnimatorStateInfo(0).IsName("snailRecover"))
+        {
+            rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
+        }
+            
     }
 
     public void TimeCounter()
@@ -139,6 +148,7 @@ public class Enemy : MonoBehaviour
         {
             NPCState.Patrol => patrolState,
             NPCState.Chase => chaseState,
+            NPCState.Skill => skillState,
             _ => null
         };
         //当前状态退出
@@ -152,7 +162,7 @@ public class Enemy : MonoBehaviour
     public void OnTakeDamage(Transform attackTrans) 
     {
         attacker = attackTrans;
-        //转身
+        //受击转身
         //如果玩家在野猪右侧，则野猪向右（野猪默认-1是向右，1向左）
         if (attackTrans.position.x - transform.position.x > 0) 
         {
