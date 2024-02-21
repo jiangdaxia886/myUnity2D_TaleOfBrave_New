@@ -7,6 +7,7 @@ public class BoarChaseState : BaseState
     public override void OnEnter(Enemy enemy)
     {
         currentEnemy = enemy;
+        currentEnemy.lostTimeCounter = currentEnemy.lostTime;
         //Debug.Log("chase");
         //更改速度
         currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
@@ -37,6 +38,6 @@ public class BoarChaseState : BaseState
     public override void OnExit()
     {
         currentEnemy.anim.SetBool("run", false);
-        currentEnemy.lostTimeCounter = currentEnemy.lostTime;
+        
     }
 }

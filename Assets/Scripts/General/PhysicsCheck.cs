@@ -49,8 +49,8 @@ public class PhysicsCheck : MonoBehaviour
 
     private void Check()
     {
-        //检测地面,距离位置transform.position + bottomOffset的checkRaduis范围内是否存在groundLayer图层,此处加了new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y)，表示当前敌人前方脚下位置作为检测点，当野猪前方是悬崖时则不往前走
-        isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y), checkRaduis, groundLayer);;
+        //检测地面,以transform.position + bottomOffset为中心点，半径为checkRaduis范围内是否存在groundLayer图层,此处加了new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y)，表示当前敌人前方脚下位置作为检测点，当野猪前方是悬崖时则不往前走
+        isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y), checkRaduis, groundLayer);
 
         //墙体判断
         touchLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, checkRaduis, groundLayer);

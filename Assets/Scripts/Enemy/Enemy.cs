@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(PhysicsCheck))]
 public class Enemy : MonoBehaviour
 {
-    Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
 
     //protected 子类可以访问
     [HideInInspector]public Animator anim;
@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
     public float hurtForce;
     //攻击者
     public Transform attacker;
+    //出生点
+    public Vector3 spwanPoint;
 
     [Header("检测")]
     public Vector2 centerOffset;
@@ -67,6 +69,7 @@ public class Enemy : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
+        spwanPoint = transform.position;
     }
 
     private void OnEnable()
@@ -134,7 +137,7 @@ public class Enemy : MonoBehaviour
     }
 
     //发现玩家
-    public bool FoundPlayer() 
+    public virtual bool FoundPlayer() 
     {
         //向前方发射一个盒子检测射线，从中心点transform.position + (Vector3)centerOffset，向方向为faceDir发射一个大小为checkSize角度为0的射线，射线长度为checkDistance，检测对象为attackLayer
         return Physics2D.BoxCast(transform.position + (Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
@@ -156,6 +159,11 @@ public class Enemy : MonoBehaviour
         //切换到新状态
         currentState = newState;
         currentState.OnEnter(this);
+    }
+
+    public virtual Vector3 GetNewPoint()
+    {
+        return transform.position;
     }
 
     #region 事件执行方法
@@ -207,7 +215,7 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    private void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         //在场景中绘制检测范围（碰撞范围可视化）
         Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset + new Vector3(checkDistance * faceDir.x,0), 0.2f);
