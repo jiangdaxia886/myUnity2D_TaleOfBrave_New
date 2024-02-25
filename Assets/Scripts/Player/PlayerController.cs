@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private float walkSpeed => speed / 2.5f;
 
     public float slideSpeed;
+    //滑铲力度消耗
+    public int slidePowerCost;
 
     public float jumpForce;
 
@@ -174,6 +176,7 @@ public class PlayerController : MonoBehaviour
                 faceDir = -1;
             transform.localScale = new Vector3(faceDir, 1, 1);
             rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, rb.velocity.y);
+
         }
             
 
@@ -193,7 +196,7 @@ public class PlayerController : MonoBehaviour
     private void Slide(InputAction.CallbackContext context) 
     {
         //Debug.Log("isSlide" + !this.isSlide);
-        if (!isSlide && physicsCheck.isGround)
+        if (!isSlide && physicsCheck.isGround && character.currentPower >= slidePowerCost)
         {
             isSlide = true;
             //滑铲方向等于面朝方向
@@ -204,6 +207,7 @@ public class PlayerController : MonoBehaviour
             capsuleCollider.size = new Vector2(capsuleCollider.size.x, slideSize);
             capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, slideOffsety);
             playerAnimation.PlaySlide();
+            character.OnSlide(slidePowerCost);
 
         }
 

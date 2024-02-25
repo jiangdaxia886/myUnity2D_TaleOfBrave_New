@@ -8,6 +8,7 @@ public class SnailPartrolState : BaseState
     {
         currentEnemy = enemy;
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
+        currentEnemy.anim.SetBool("walk", true);
     }
 
     public override void LogicUpdate()

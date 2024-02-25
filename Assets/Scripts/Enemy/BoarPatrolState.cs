@@ -9,6 +9,7 @@ public class BoarPatrolState : BaseState
     {
         currentEnemy = enemy;
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
+        currentEnemy.anim.SetBool("walk", true);
     }
 
     public override void LogicUpdate()
@@ -21,7 +22,7 @@ public class BoarPatrolState : BaseState
         //当面朝墙且碰到墙时或前方是悬崖再转身
         if (!currentEnemy.physicsCheck.isGround || (currentEnemy.physicsCheck.touchLeftWall && currentEnemy.faceDir.x < 0 || currentEnemy.physicsCheck.touchRightWall && currentEnemy.faceDir.x > 0))
         {
-            //Debug.Log("111111"+ !currentEnemy.physicsCheck.isGround);
+            //Debug.Log("Snail111111"+ !currentEnemy.physicsCheck.isGround);
             currentEnemy.wait = true;
             currentEnemy.anim.SetBool("walk", false);
         }
