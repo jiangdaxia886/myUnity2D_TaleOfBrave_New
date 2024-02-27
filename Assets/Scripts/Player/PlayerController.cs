@@ -39,15 +39,18 @@ public class PlayerController : MonoBehaviour
 
     public float jumpForce;
 
+    public float onWallJumpForce;
+
     public float hurtForce;
 
     public float slideSize;
 
     public float slideOffsety;
 
-    public float capsuleCollider2Dy;
+    //获取初始碰撞体大小
+    [HideInInspector] public float capsuleCollider2Dy;
 
-    public float capsuleCollider2DOffsety;
+    [HideInInspector] public float capsuleCollider2DOffsety;
 
 
 
@@ -73,6 +76,8 @@ public class PlayerController : MonoBehaviour
     //人物朝向
     public float playerDirection;
 
+    public bool wallJump;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -81,6 +86,8 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         character = GetComponent<Character>();
+        capsuleCollider2Dy = capsuleCollider.size.y;
+        capsuleCollider2DOffsety = capsuleCollider.offset.y;
         //实例化控制器类
         inputController = new PlayerInputController();
         //started按键按下去那一刻跳跃,将jump方法作为事件按键按下的那一刻来执行
@@ -162,7 +169,9 @@ public class PlayerController : MonoBehaviour
             if (inputDirection.x < 0)
                 faceDir = -1;
             transform.localScale = new Vector3(faceDir, 1, 1);
-            rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
+            //蹬墙跳状态时方向不受控制
+            if ( !wallJump)
+                rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
         }
         //滑铲
         else
@@ -187,9 +196,16 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext context)
     {
         //Debug.Log("Jump");
-        if(physicsCheck.isGround)
-        //impulse 添加一个瞬时的力
+        if (physicsCheck.isGround)
+            //impulse 添加一个瞬时的力
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        else if (physicsCheck.onWall)
+        {
+            //蹬墙跳
+            rb.AddForce(new Vector2(-0.3f * inputDirection.x, 2f) * onWallJumpForce, ForceMode2D.Impulse);
+            wallJump = true;
+        }
+
     }
 
     //滑铲
@@ -248,5 +264,14 @@ public class PlayerController : MonoBehaviour
     public void CheckState()
     {
         capsuleCollider.sharedMaterial = physicsCheck.isGround?normal:wall;
+        //下滑减慢
+        if (physicsCheck.onWall)
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
+
+        //下落时蹬墙跳为false
+        if (wallJump && rb.velocity.y < 0f)
+        {
+            wallJump = false;
+        }
     }
 }
