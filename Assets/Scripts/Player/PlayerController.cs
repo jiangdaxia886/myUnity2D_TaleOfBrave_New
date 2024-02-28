@@ -201,8 +201,8 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         else if (physicsCheck.onWall)
         {
-            //蹬墙跳
-            rb.AddForce(new Vector2(-0.3f * inputDirection.x, 2f) * onWallJumpForce, ForceMode2D.Impulse);
+            //蹬墙跳，x轴方向速度为inputDirection。x的反方向
+            rb.AddForce(new Vector2(-0.45f * inputDirection.x, 2f) * onWallJumpForce, ForceMode2D.Impulse);
             wallJump = true;
         }
 
@@ -268,8 +268,8 @@ public class PlayerController : MonoBehaviour
         if (physicsCheck.onWall)
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
 
-        //下落时蹬墙跳为false
-        if (wallJump && rb.velocity.y < 0f)
+        //y轴速度小于7时蹬墙跳为false
+        if (wallJump && rb.velocity.y < 7f)
         {
             wallJump = false;
         }

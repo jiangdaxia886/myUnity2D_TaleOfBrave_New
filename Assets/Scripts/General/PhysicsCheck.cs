@@ -8,24 +8,24 @@ public class PhysicsCheck : MonoBehaviour
 {
     private CapsuleCollider2D capsuleCollider;
 
-    [Header("¼ì²â²ÎÊı")]
+    [Header("æ£€æµ‹å‚æ•°")]
     public bool manual;
 
     public bool isPlayer;
 
     private PlayerController playerController;
 
-    private Rigidbody2D rigidbody2D;
-    //Åö×²µãÆ«ÒÆÁ¿
+    private Rigidbody2D rb;
+    //ç¢°æ’ç‚¹åç§»é‡
     public Vector2 bottomOffset;
     public Vector2 leftOffset;
     public Vector2 rightOffset;
-    //Åö×²·¶Î§
+    //ç¢°æ’èŒƒå›´
     public float checkRaduis;
-    //Åö×²Í¼²ã
+    //ç¢°æ’å›¾å±‚
     public LayerMask groundLayer;
 
-    [Header("×´Ì¬")]
+    [Header("çŠ¶æ€")]
     public Boolean isGround;
 
     public bool touchLeftWall;
@@ -38,18 +38,18 @@ public class PhysicsCheck : MonoBehaviour
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider2D>();
-        //Èç¹û²»¹´Ñ¡ÊÖ¶¯ÉèÖÃ
+        //å¦‚æœä¸å‹¾é€‰æ‰‹åŠ¨è®¾ç½®
         if (!manual)
         {
-            //ÓÒ²àÅö×²µãµÄxÆ«ÒÆÁ¿µÈÓÚÅö×²ÌåµÄ·¶Î§/2+Åö×²ÌåµÄÆ«ÒÆÁ¿£¬yÖáÎ»ÖÃÊÇyµÄ±ß½ç/2
-            rightOffset = new Vector2((capsuleCollider.bounds.size.x/2 + capsuleCollider.offset.x)+ 0.1f, (capsuleCollider.bounds.size.y / 2 ));
-            //×ó²àµÄxÖáÆ«ÒÆÁ¿µÈÓÚÓÒ²àÆ«ÒÆÁ¿µÄ¸ºÖµ
+            //å³ä¾§ç¢°æ’ç‚¹çš„xåç§»é‡ç­‰äºç¢°æ’ä½“çš„èŒƒå›´/2+ç¢°æ’ä½“çš„åç§»é‡ï¼Œyè½´ä½ç½®æ˜¯yçš„è¾¹ç•Œ/2
+            rightOffset = new Vector2((capsuleCollider.bounds.size.x / 2 + capsuleCollider.offset.x) + 0.1f, (capsuleCollider.bounds.size.y / 2));
+            //å·¦ä¾§çš„xè½´åç§»é‡ç­‰äºå³ä¾§åç§»é‡çš„è´Ÿå€¼
             leftOffset = new Vector2((-capsuleCollider.bounds.size.x / 2 - capsuleCollider.offset.x) - 0.1f, rightOffset.y);
         }
         if (isPlayer)
         {
             playerController = GetComponent<PlayerController>();
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D>();
         }
         Check();
     }
@@ -62,30 +62,30 @@ public class PhysicsCheck : MonoBehaviour
 
     private void Check()
     {
-        //ÔÚÇ½±ÚÉÏÊ±Ìí¼ÓµØÃæ¼ì²âµãµÄÆ«ÒÆÁ¿£¬Ê¹Åö×²Ìå½Ó´¥µØÃæÊ±²Å¼ì²âÎªtrue
-        if(onWall)
-            //¼ì²âµØÃæ,ÒÔtransform.position + bottomOffsetÎªÖĞĞÄµã£¬°ë¾¶ÎªcheckRaduis·¶Î§ÄÚÊÇ·ñ´æÔÚgroundLayerÍ¼²ã,´Ë´¦¼ÓÁËnew Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y)£¬±íÊ¾µ±Ç°µĞÈËÇ°·½½ÅÏÂÎ»ÖÃ×÷Îª¼ì²âµã£¬µ±Ò°ÖíÇ°·½ÊÇĞüÑÂÊ±Ôò²»ÍùÇ°×ß
-            isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y), checkRaduis, groundLayer);
+        //åœ¨å¢™å£ä¸Šæ—¶æ·»åŠ åœ°é¢æ£€æµ‹ç‚¹çš„åç§»é‡ï¼Œä½¿ç¢°æ’ä½“æ¥è§¦åœ°é¢æ—¶æ‰æ£€æµ‹ä¸ºtrue
+        if (onWall)
+            //æ£€æµ‹åœ°é¢,ä»¥transform.position + bottomOffsetä¸ºä¸­å¿ƒç‚¹ï¼ŒåŠå¾„ä¸ºcheckRaduisèŒƒå›´å†…æ˜¯å¦å­˜åœ¨groundLayerå›¾å±‚,æ­¤å¤„åŠ äº†new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y)ï¼Œè¡¨ç¤ºå½“å‰æ•Œäººå‰æ–¹è„šä¸‹ä½ç½®ä½œä¸ºæ£€æµ‹ç‚¹ï¼Œå½“é‡çŒªå‰æ–¹æ˜¯æ‚¬å´–æ—¶åˆ™ä¸å¾€å‰èµ°
+            isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x, bottomOffset.y), checkRaduis, groundLayer);
         else
             isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x, 0), checkRaduis, groundLayer);
 
-        //Ç½ÌåÅĞ¶Ï
+        //å¢™ä½“åˆ¤æ–­
         touchLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, checkRaduis, groundLayer);
 
         touchRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, checkRaduis, groundLayer);
 
-        //ÔÚÇ½±ÚÉÏ
+        //åœ¨å¢™å£ä¸Š
         if (isPlayer)
         {
-            //ÏÂÂäÊ±ÇÒÌù×ÅÇ½²¢°´¶ÔÓ¦·½Ïò¼ü
-            onWall = (touchLeftWall && playerController.inputDirection.x < 0f || touchRightWall && playerController.inputDirection.x > 0f) && (rigidbody2D.velocity.y < 0f);
+            //ä¸‹è½æ—¶ä¸”è´´ç€å¢™å¹¶æŒ‰å¯¹åº”æ–¹å‘é”®
+            onWall = (touchLeftWall && playerController.inputDirection.x < 0f || touchRightWall && playerController.inputDirection.x > 0f) && (rb.velocity.y < 0f);
         }
 
     }
 
     private void OnDrawGizmosSelected()
     {
-        //ÔÚ³¡¾°ÖĞ»æÖÆ¼ì²â·¶Î§£¨Åö×²·¶Î§¿ÉÊÓ»¯£©
+        //åœ¨åœºæ™¯ä¸­ç»˜åˆ¶æ£€æµ‹èŒƒå›´ï¼ˆç¢°æ’èŒƒå›´å¯è§†åŒ–ï¼‰
         Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, checkRaduis);
         Gizmos.DrawWireSphere((Vector2)transform.position + leftOffset, checkRaduis);
         Gizmos.DrawWireSphere((Vector2)transform.position + rightOffset, checkRaduis);

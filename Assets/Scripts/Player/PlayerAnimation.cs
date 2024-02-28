@@ -9,6 +9,8 @@ public class PlayerAnimation : MonoBehaviour
     private PhysicsCheck physicsCheck;
     private PlayerController playerController;
 
+    public VoidEventSo cameraShakeEvent;
+
     private void Awake()
     {
         //获取动画组件
@@ -55,5 +57,10 @@ public class PlayerAnimation : MonoBehaviour
     public void PlaySlide()
     {
         anim.SetTrigger("slide");
+    }
+
+    public void PlayCameraShake() 
+    {
+        cameraShakeEvent.RaiseEvent();
     }
 }
