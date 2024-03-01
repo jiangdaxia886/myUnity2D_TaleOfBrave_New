@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]public PhysicsCheck physicsCheck;
 
+    private Collider2D coll2d;
+
+
     [Header("基本参数")]
     public float normalSpeed;
 
@@ -67,6 +70,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
+        coll2d = GetComponent<Collider2D>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         spwanPoint = transform.position;
@@ -94,8 +98,9 @@ public class Enemy : MonoBehaviour
         if (!isHurt && !isDead && !wait)
         {
             Move();
+            currentState.PhysicsUpdate();
         }
-        currentState.PhysicsUpdate();
+        
     }
 
     private void OnDisable()
@@ -199,7 +204,7 @@ public class Enemy : MonoBehaviour
         isHurt = false;
     }
 
-    public void OnDie() 
+    public virtual void OnDie() 
     {
         //设置当前敌人图层为ignore Raycast，在project setting中的physics2d设置人物不与ignore Raycast产生碰撞
         gameObject.layer = 2;

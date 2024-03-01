@@ -44,4 +44,10 @@ public class BeeEnemy : Enemy
     {
         
     }
+
+    public override void OnDie()
+    {
+        base.OnDie();
+        GetComponentInChildren<Collider>().enabled = false;
+    }
 }
