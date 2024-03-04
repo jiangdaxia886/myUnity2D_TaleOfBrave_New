@@ -11,20 +11,34 @@ public class AudioManager : MonoBehaviour
 
     public PlayAudioEventSO BGMEvent;
 
+    public PlayAudioEventSO HurtEvent;
+
     public AudioSource BGMSource;
 
     public AudioSource FXSource;
+
+    public AudioSource HurtSource;
 
     private void OnEnable()
     {
         FXEvent.OnEventRaised += OnFXEvent;
         BGMEvent.OnEventRaised += OnBGMEvent;
+        HurtEvent.OnEventRaised += OnHurtEvent;
     }
+
 
     private void OnDisable()
     {
         FXEvent.OnEventRaised -= OnFXEvent;
         BGMEvent.OnEventRaised -= OnBGMEvent;
+        HurtEvent.OnEventRaised -= OnHurtEvent;
+    }
+
+
+    private void OnHurtEvent(AudioClip clip)
+    {
+        HurtSource.clip = clip;
+        HurtSource.Play();
     }
 
     private void OnBGMEvent(AudioClip clip)

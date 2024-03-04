@@ -34,6 +34,10 @@ public class Character : MonoBehaviour
     public UnityEvent<Transform> onTakeDamage;
     //死亡事件
     public UnityEvent onDie;
+    //受伤音效广播
+    public PlayAudioEventSO playAudioEvent;
+    //受伤音效
+    public AudioClip audioClip;
     private void Start()
     {
         CurrentHealth = maxHealth;
@@ -73,6 +77,7 @@ public class Character : MonoBehaviour
             TriggerInvulnerable();
             //执行受伤(如果当前角色添加了onTakeDamage事件，则执行)
             onTakeDamage?.Invoke(attacker.transform);
+            playAudioEvent.RaiseEvent(audioClip);
         }
         else 
         {
