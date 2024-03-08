@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
 
     public void SwitchState(NPCState state)
     {
-        //根据传进来的枚举值state判断newState切换到哪种状态
+        //根据传进来的枚举值state判断currentState切换到哪种状态
         var newState = state switch
         {
             NPCState.Patrol => patrolState,

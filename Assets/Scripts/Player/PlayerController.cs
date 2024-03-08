@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
     public void Move() {
         //人物移动,x轴速度是计算的，y轴速度是原有的9.81重力加速度
         //如果不在滑铲状态，则正常移动及翻转，如果在，则加速，且不能翻转
-        Debug.Log("inputDirection.x"+inputDirection.x);
+        //Debug.Log("inputDirection.x"+inputDirection.x);
         if (!isSlide)
         {
             //人物翻转
