@@ -197,8 +197,11 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log("Jump");
         if (physicsCheck.isGround)
+        {
             //impulse 添加一个瞬时的力
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            GetComponent<AudioDefination>()?.PlayAudioClip();
+        }
         else if (physicsCheck.onWall)
         {
             //蹬墙跳，x轴方向速度为inputDirection。x的反方向

@@ -17,6 +17,8 @@ public class Sign : MonoBehaviour
 
     private bool canPress;
 
+    private IInteractable targetItem;
+
     private void Awake()
     {
         //anim = GetComponentInChildren<Animator>();
@@ -32,7 +34,11 @@ public class Sign : MonoBehaviour
         //InputSystem.onActionChange += new Action<object, InputActionChange>(OnActionChange);
         //设备切换时则播放不同动画
         InputSystem.onActionChange += OnActionChange;
+        //按下打开宝箱按键
+        playerInputAction.GamePlay.Confirm.started += OnConfirm;
     }
+
+
 
     private void OnActionChange(object  obj,InputActionChange actionChange)
     {
@@ -62,16 +68,28 @@ public class Sign : MonoBehaviour
         signSprite.transform.localScale = playerTrans.localScale;
     }
 
+    private void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (canPress)
+        {
+            targetItem.TriggerAction();
+            //打开宝箱时播放音乐
+            GetComponent<AudioDefination>()?.PlayAudioClip();
+        }
+    }
+
     //如果标签是可互动的Interactable，则激活按钮提示
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Interactable"))
         {
             canPress = true;
+            //获得宝箱的互动接口方法
+            targetItem = collision.GetComponent<IInteractable>();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         canPress = false;
     }
