@@ -6,6 +6,9 @@ using System;
 
 public class CameraControl : MonoBehaviour
 {
+    [Header("事件监听")]
+    public VoidEventSo afterSceneLoadedEvent;
+
     private CinemachineConfiner2D confiner2D;
 
     public CinemachineImpulseSource impulseSource;
@@ -18,14 +21,22 @@ public class CameraControl : MonoBehaviour
     }
 
     //受伤时事件执行
+    //在Enable时将此方法注册到事件中，后面调用此事件的invoke则直接调用OnCameraShakeEvent、OnAfterSceneLoadedEvent方法
     private void OnEnable()
     {
         cameraShakeEvent.OnEventRaised += OnCameraShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         cameraShakeEvent.OnEventRaised -= OnCameraShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
+    }
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        GetNewCameraBounds();
     }
 
     //摄像机震动
@@ -34,10 +45,10 @@ public class CameraControl : MonoBehaviour
         impulseSource.GenerateImpulse();
     }
 
-    private void Start()
+/*    private void Start()
     {
         GetNewCameraBounds();
-    }
+    }*/
 
     private void GetNewCameraBounds() 
     {

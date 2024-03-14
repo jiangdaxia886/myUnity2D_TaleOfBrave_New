@@ -34810,10 +34810,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 32.554646, y: 1.6001005}
-      - {x: -31.534, y: 1.7784195}
-      - {x: -31.602594, y: -0.7895651}
-      - {x: 32.567097, y: -0.88931847}
+    - - {x: 31.401436, y: 19.918911}
+      - {x: -18.85723, y: 19.835733}
+      - {x: -18.897848, y: -12.827652}
+      - {x: 31.042486, y: -12.880763}
   m_UseDelaunayMesh: 0
 --- !u!4 &1727339199
 Transform:
@@ -40248,7 +40248,7 @@ Tilemap:
       - {fileID: -1688504058, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -15754526, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -321759620, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 15, y: -4, z: 0}
@@ -40270,7 +40270,7 @@ Tilemap:
       - {fileID: 1030559130, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 1998852525, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1289780929, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 14, y: -3, z: 0}
@@ -40303,7 +40303,7 @@ Tilemap:
       - {fileID: 1030559130, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 1998852525, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1289780929, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 14, y: -2, z: 0}
@@ -40457,7 +40457,7 @@ Tilemap:
       - {fileID: 272276314, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1342014168, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 164343351, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 2, z: 0}
