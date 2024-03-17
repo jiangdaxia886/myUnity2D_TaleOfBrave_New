@@ -21,6 +21,8 @@ public class SceneLoader : MonoBehaviour
     [Header("广播")]
     public VoidEventSo afterSceneLoadedEvent;
 
+    public FadeEventSO fadeEvent;
+
     private GameSceneSO currentLoadScene;
 
     private GameSceneSO sceneToLoad;
@@ -62,6 +64,7 @@ public class SceneLoader : MonoBehaviour
     {
         //游戏开始加载第一个场景
         sceneToLoad = firstLoadScene;
+        loadEventSo.RaiseLoadRequestEvent(sceneToLoad, firstPosition,true);
         OnLoadRequestEvent(sceneToLoad, firstPosition, true);
     }
 
@@ -92,9 +95,10 @@ public class SceneLoader : MonoBehaviour
     //卸载场景、加载新场景协程
     private IEnumerator UnLoadPreviousScene()
     {
+        //卸载场景逐渐变黑
         if (fadeScreen)
-        { 
-        
+        {
+            fadeEvent.FadeIn(fadeDuration);
         }
         //yield表示等待，等待WaitForSeconds时间或下面的等待异步场景卸载
         yield return new WaitForSeconds(fadeDuration);
@@ -103,14 +107,15 @@ public class SceneLoader : MonoBehaviour
             //卸载场景
             yield return currentLoadScene.sceneReference.UnLoadScene();
         }
-        //卸载场景后关闭人物
-        playerTrans.gameObject.SetActive(false);
+        
         loadNewScene();
     }
 
     //加载场景
     private void loadNewScene() 
     {
+        //加载场景之前关闭人物
+        playerTrans.gameObject.SetActive(false);
         var loadingOption = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
         //场景加载好执行OnLoadCompleted
         loadingOption.Completed += OnLoadCompleted;
@@ -129,9 +134,19 @@ public class SceneLoader : MonoBehaviour
         playerTrans.transform.position = positionToGo;
         //启用人物
         playerTrans.gameObject.SetActive(true);
+        //加载场景后变透明
+        if (fadeScreen)
+        {
+            fadeEvent.FadeOut(fadeDuration);
+        }
+
         isLoading = false;
 
-        //场景加载完成后事件
-        afterSceneLoadedEvent?.RaiseEvent();
+        //如果加载的场景是location而不是menu，则人物可以移动
+        if (currentLoadScene.sceneType == SceneType.Location)
+        {
+            //场景加载完成后事件(目前是获取相机边界、人物解锁)
+            afterSceneLoadedEvent?.RaiseEvent();
+        }
     }
 }

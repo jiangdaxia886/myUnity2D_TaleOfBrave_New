@@ -11,7 +11,7 @@ public class TeleportPoint : MonoBehaviour,IInteractable
     public Vector3 postitionToGo;
     public void TriggerAction()
     {
-        Debug.Log("´«ËÍ");
+        //Debug.Log("´«ËÍ");
         loadEventSo.RaiseLoadRequestEvent(sceneToGo, postitionToGo, true);
     }
 

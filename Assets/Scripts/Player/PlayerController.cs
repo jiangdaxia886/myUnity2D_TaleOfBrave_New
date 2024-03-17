@@ -8,6 +8,11 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("事件监听")]
+    public SceneLoadEventSo loadEvent;
+
+    public VoidEventSo afterSceneLoadedEvent;
+
     //用unity自动生成的PlayerInputController控制器类
     public PlayerInputController inputController;
     //刚体类
@@ -121,12 +126,18 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputController.Enable();
+        loadEvent.LoadRequestEvent += OnLoadEvent;
+        afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
     }
+
 
     private void OnDisable()
     {
         inputController.Disable();
+        loadEvent.LoadRequestEvent -= OnLoadEvent;
+        afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
     }
+
 
     //Update()方法每一帧都会执行
     private void Update()
@@ -150,10 +161,23 @@ public class PlayerController : MonoBehaviour
 
     //测试
     //人物在触发器范围内会一直检测
-/*    private void OnTriggerStay2D(Collider2D collision)
+    /*    private void OnTriggerStay2D(Collider2D collision)
+        {
+            Debug.Log(collision.name);
+        }*/
+
+    private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
-        Debug.Log(collision.name);
-    }*/
+        //场景加载时禁用人物操作
+        inputController.GamePlay.Disable(); 
+    }
+
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        //场景加载后恢复人物操作
+        inputController.GamePlay.Enable();
+    }
 
     public void Move() {
         //人物移动,x轴速度是计算的，y轴速度是原有的9.81重力加速度
