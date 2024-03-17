@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
+    [Header("事件监听")]
+    public VoidEventSo newGameEvent;
+
     [Header("基本属性")]
     public float maxHealth;
 
@@ -38,11 +41,23 @@ public class Character : MonoBehaviour
     public PlayAudioEventSO playAudioEvent;
     //受伤音效
     public AudioClip audioClip;
-    private void Start()
+
+    //加载新场景重置血量
+    private void NewGame()
     {
         CurrentHealth = maxHealth;
         OnHealthChange.Invoke(this);
         currentPower = maxPower;
+    }
+
+    private void OnEnable()
+    {
+        newGameEvent.OnEventRaised += NewGame;
+    }
+
+    private void OnDisable()
+    {
+        newGameEvent.OnEventRaised -= NewGame;
     }
 
     private void Update()

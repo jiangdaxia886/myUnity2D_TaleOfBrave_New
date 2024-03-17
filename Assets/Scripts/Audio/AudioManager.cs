@@ -45,6 +45,7 @@ public class AudioManager : MonoBehaviour
     {
         BGMSource.clip = clip;
         BGMSource.Play();
+        //Debug.Log("play BGM");
     }
 
     //使用声源FXSource播放音效

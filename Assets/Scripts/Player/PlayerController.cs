@@ -169,7 +169,8 @@ public class PlayerController : MonoBehaviour
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
         //场景加载时禁用人物操作
-        inputController.GamePlay.Disable(); 
+        inputController.GamePlay.Disable();
+        //Debug.Log("场景加载时禁用人物操作");
     }
 
 
@@ -177,6 +178,7 @@ public class PlayerController : MonoBehaviour
     {
         //场景加载后恢复人物操作
         inputController.GamePlay.Enable();
+        //Debug.Log("场景加载后恢复人物操作");
     }
 
     public void Move() {

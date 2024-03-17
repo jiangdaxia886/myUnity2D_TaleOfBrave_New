@@ -9,21 +9,22 @@ public class UIManager : MonoBehaviour
     [Header("事件监听")]
     public CharacterEventSO characterEvent;
 
-    public SceneLoadEventSo sceneLoadEvent;
+    public SceneLoadEventSo sceneUnloadEvent;
 
     private void OnEnable()
     {
         characterEvent.OnEventRaised += OnHealthEvent;
-        sceneLoadEvent.LoadRequestEvent += OnSceneLoadEvent;
+        sceneUnloadEvent.LoadRequestEvent += OnSceneLoadEvent;
     }
 
 
     private void OnDisable()
     {
         characterEvent.OnEventRaised -= OnHealthEvent;
-        sceneLoadEvent.LoadRequestEvent = OnSceneLoadEvent;
+        sceneUnloadEvent.LoadRequestEvent = OnSceneLoadEvent;
     }
 
+    //场景加载
     private void OnSceneLoadEvent(GameSceneSO sceneToLoad, Vector3 PosTogGo, bool fade)
     {
         //在菜单界面则血量不显示
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
         playerStatBar.gameObject.SetActive(!isMenu);
     }
 
+    //血条变化
     private void OnHealthEvent(Character character)
     {
         var persentage = character.CurrentHealth / character.maxHealth;
