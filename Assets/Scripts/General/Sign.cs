@@ -72,21 +72,27 @@ public class Sign : MonoBehaviour
     {
         if (canPress)
         {
-            targetItem.TriggerAction();
-            //打开宝箱时播放音乐
-            GetComponent<AudioDefination>()?.PlayAudioClip();
+            if (targetItem.TriggerAction())
+            {
+                //打开宝箱时播放音乐
+                GetComponent<AudioDefination>()?.PlayAudioClip();
+                canPress = false;
+            }
         }
     }
 
     //如果标签是可互动的Interactable，则激活按钮提示
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //与宝箱互动完宝箱的tag会改为不可互动，故不会再显示可互动标识
         if (collision.CompareTag("Interactable"))
         {
+            //Debug.Log("666666");
             canPress = true;
             //获得宝箱的互动接口方法
             targetItem = collision.GetComponent<IInteractable>();
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -26,18 +26,21 @@ public class Chest : MonoBehaviour, IInteractable
     }
 
     //打开宝箱
-    public void TriggerAction()
+    public bool TriggerAction()
     {
         //Debug.Log("open chest");
         if (!isDone)
         { 
             openChest();
+            return true;
         }
+        return false;
     }
 
 
     private void openChest()
     {
+        //将宝箱的图片改为打开
         spriteRenderer.sprite = openSprite;
         isDone = true;
         //宝箱被打开后修改标签为untagged，互动动画就不会显示

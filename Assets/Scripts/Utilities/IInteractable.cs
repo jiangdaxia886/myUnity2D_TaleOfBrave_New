@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IInteractable
 {
     //被触发的动作
-    void TriggerAction();
+    bool TriggerAction();
 }

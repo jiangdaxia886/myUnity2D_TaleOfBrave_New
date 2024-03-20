@@ -134,6 +134,7 @@ public class SceneLoader : MonoBehaviour
     //加载场景
     private void loadNewScene()
     {
+        //如果一开始取消勾选人物，menu界面还是能动，所以人物不能一开始取消勾选
         //关闭人物如果放在这里，那么让人物inputcontroller.gameobject.disable()方法无效,其原因是这里是让gameObject无效，在OnLoadCompleted方法中又让gameObject有效，于是inputcontroller有效
         // playerTrans.gameObject.SetActive(false);
         var loadingOption = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);

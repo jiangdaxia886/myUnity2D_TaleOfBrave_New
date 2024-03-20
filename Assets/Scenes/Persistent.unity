@@ -481,7 +481,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2717,7 +2717,7 @@ MonoBehaviour:
   afterSceneLoadedEvent: {fileID: 11400000, guid: b2aba404812e4a94c98f47b49d34d8ce, type: 2}
   fadeEvent: {fileID: 11400000, guid: 4310ae7c7acb3784b97d29b4e83961dd, type: 2}
   sceneUnloadEvent: {fileID: 11400000, guid: 2b791a97af77fcc46b26426b482058f0, type: 2}
-  MenuScene: {fileID: 11400000, guid: 0655d1f598ee9c44490c81664b40f4d4, type: 2}
+  MenuScene: {fileID: 11400000, guid: 58a6797b4be346943ac1790fb904c126, type: 2}
   firstLoadScene: {fileID: 11400000, guid: c9e8937736e1b014e8f01cc492d6cef2, type: 2}
   fadeDuration: 1
 --- !u!1 &2067454349
