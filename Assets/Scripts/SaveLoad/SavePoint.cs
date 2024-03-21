@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SavePoint : MonoBehaviour, IInteractable
 {
+    [Header("广播")]
+    public VoidEventSo LoadGameEvent;
+
+    [Header("变量参数")]
     public SpriteRenderer spriteRenderer;
 
     public GameObject lightObj;
@@ -25,10 +29,15 @@ public class SavePoint : MonoBehaviour, IInteractable
         //未保存则保存
         if (!isDone)
         {
+            //变亮
             spriteRenderer.sprite = lightSprite;
+            //不可互动
             this.gameObject.tag = "Untagged";
             isDone = true;
+            //点光源
             lightObj.SetActive(isDone);
+            //保存数据
+            LoadGameEvent.RaiseEvent();
             return true;
         }
         return false;
