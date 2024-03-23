@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5608183544135805626}
   - component: {fileID: 4184425029037059641}
   - component: {fileID: 4184842566250890214}
+  - component: {fileID: 6314338718846167088}
   m_Layer: 8
   m_Name: BoarEnemy
   m_TagString: Untagged
@@ -376,3 +377,17 @@ MonoBehaviour:
   lostTimeCounter: 0
   isHurt: 0
   isDead: 0
+--- !u!114 &6314338718846167088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907185244366477254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e47021a752b40f498eccb20288f3dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentType: 0
+  ID: 95da24e0-0e3d-48dc-96d1-b6c2a64a8a23

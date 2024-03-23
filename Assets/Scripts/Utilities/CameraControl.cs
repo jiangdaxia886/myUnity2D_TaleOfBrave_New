@@ -53,13 +53,13 @@ public class CameraControl : MonoBehaviour
 
     private void GetNewCameraBounds() 
     {
-        Debug.Log("find bounds!!!!!!!");
+        //Debug.Log("find bounds!!!!!!!");
         var obj = GameObject.FindGameObjectWithTag("Bounds");
         if (obj == null)
         {
             return;
         }
-        Debug.Log("find bounds!!!!!!!");
+        //Debug.Log("find bounds!!!!!!!");
         //获得新场景的摄像机边界
         confiner2D.m_BoundingShape2D = obj.GetComponent<Collider2D>();
         //清除缓存

@@ -1318,6 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a873f5c973d3df241922319cefdc3fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveDataEvent: {fileID: 11400000, guid: 9cee72d7282cfca4782fed0ac1b08f34, type: 2}
 --- !u!4 &1010073718
 Transform:
   m_ObjectHideFlags: 0
@@ -1626,7 +1627,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.719
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1732,7 +1733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1344193628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2719,6 +2720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2052040111}
   - component: {fileID: 2052040112}
+  - component: {fileID: 2052040113}
   m_Layer: 0
   m_Name: SceneLoad Manager
   m_TagString: Untagged
@@ -2764,6 +2766,20 @@ MonoBehaviour:
   MenuScene: {fileID: 11400000, guid: 58a6797b4be346943ac1790fb904c126, type: 2}
   firstLoadScene: {fileID: 11400000, guid: c9e8937736e1b014e8f01cc492d6cef2, type: 2}
   fadeDuration: 1
+--- !u!114 &2052040113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052040110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e47021a752b40f498eccb20288f3dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentType: 0
+  ID: 20583694-ab5a-4d84-a872-274df6e70c13
 --- !u!1 &2067454349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,6 +2798,7 @@ GameObject:
   - component: {fileID: 2067454357}
   - component: {fileID: 2067454358}
   - component: {fileID: 2067454359}
+  - component: {fileID: 2067454360}
   m_Layer: 7
   m_Name: ///player
   m_TagString: Untagged
@@ -3029,7 +3046,7 @@ MonoBehaviour:
   maxHealth: 100
   CurrentHealth: 100
   maxPower: 15
-  currentPower: 0
+  currentPower: 15
   powerRecoverSpeed: 1.2
   invulnerableDuration: 1.5
   activeInvulnerableDuration: 0.57
@@ -3121,6 +3138,20 @@ MonoBehaviour:
   playAudioEvent: {fileID: 11400000, guid: 232ec6c607d245f44a32b4c38384d0d0, type: 2}
   audioClip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   playOnEnable: 0
+--- !u!114 &2067454360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067454349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e47021a752b40f498eccb20288f3dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentType: 0
+  ID: 72d8f72d-f95c-4058-82e4-1e2df4df5214
 --- !u!1 &2141288642
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,8 +3186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -96, y: -51.999992}
-  m_SizeDelta: {x: 768.291, y: 73.222}
+  m_AnchoredPosition: {x: -95.656494, y: -51.999992}
+  m_SizeDelta: {x: 769.3868, y: 73.222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141288644
 MonoBehaviour:

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6702785952707918577}
   - component: {fileID: 8317224005387366584}
   - component: {fileID: 7144372938779992690}
+  - component: {fileID: -4271329785861950774}
   m_Layer: 8
   m_Name: SnailEnemy
   m_TagString: Untagged
@@ -376,3 +377,17 @@ MonoBehaviour:
   damage: 3
   attackRange: 0
   attackRate: 0
+--- !u!114 &-4271329785861950774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023444693364004589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e47021a752b40f498eccb20288f3dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentType: 0
+  ID: c27df29a-526e-4af5-9241-743704f01aef

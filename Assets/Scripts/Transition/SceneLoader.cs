@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader : MonoBehaviour,ISaveable
 {
     public Transform playerTrans;
 
@@ -67,12 +67,16 @@ public class SceneLoader : MonoBehaviour
         loadEventSo.LoadRequestEvent += OnLoadRequestEvent;
         newGameEvent.OnEventRaised += NewGame;
         //Debug.Log("Enable!!!!!!!!!");
+        ISaveable saveable = this;
+        saveable.RegisterSaveData();
     }
 
     private void OnDisable()
     {
         loadEventSo.LoadRequestEvent -= OnLoadRequestEvent;
         newGameEvent.OnEventRaised -= NewGame;
+        ISaveable saveable = this;
+        saveable.UnregisterSaveData();
     }
 
     private void NewGame()
@@ -110,10 +114,13 @@ public class SceneLoader : MonoBehaviour
     //卸载场景、加载新场景协程
     private IEnumerator UnLoadPreviousScene()
     {
+        //卸载场景之前关闭人物
+        playerTrans.gameObject.SetActive(false);
         //卸载场景逐渐变黑
         if (fadeScreen)
         {
             fadeEvent.FadeIn(fadeDuration);
+            //Debug.Log("卸载场景");
         }
         //yield表示等待，等待WaitForSeconds时间或下面的等待异步场景卸载
         yield return new WaitForSeconds(fadeDuration);
@@ -126,8 +133,8 @@ public class SceneLoader : MonoBehaviour
             //卸载场景
             yield return currentLoadScene.sceneReference.UnLoadScene();
         }
-        //卸载场景之后关闭人物
-        playerTrans.gameObject.SetActive(false);
+        
+        //Debug.Log("卸载人物！！！");
         loadNewScene();
     }
 
@@ -137,6 +144,7 @@ public class SceneLoader : MonoBehaviour
         //如果一开始取消勾选人物，menu界面还是能动，所以人物不能一开始取消勾选
         //关闭人物如果放在这里，那么让人物inputcontroller.gameobject.disable()方法无效,其原因是这里是让gameObject无效，在OnLoadCompleted方法中又让gameObject有效，于是inputcontroller有效
         // playerTrans.gameObject.SetActive(false);
+        //异步加载场景，由于异步是和上面卸载场景是同步进行的，导致场景还没卸载完，人物便先移动了位置
         var loadingOption = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
         //场景加载好执行OnLoadCompleted
         loadingOption.Completed += OnLoadCompleted;
@@ -172,5 +180,28 @@ public class SceneLoader : MonoBehaviour
         }
         //场景加载完成后再执行sceneUnloadEvent加载血条
         sceneUnloadEvent.RaiseLoadRequestEvent(sceneToLoad, positionToGo, true);
+    }
+
+    public DataDefination GetDataID()
+    {
+        return GetComponent<DataDefination>();
+    }
+
+    public void GetSaveData(Data data)
+    {
+        data.SaveGameScene(currentLoadScene);
+    }
+
+    public void LoadSaveData(Data data)
+    {
+        var playerID = playerTrans.GetComponent<Character>().GetDataID().ID;
+        if (data.characterPosDict.ContainsKey(playerID))
+        {
+            //获得坐标
+            positionToGo = data.characterPosDict[playerID];
+            //获得场景
+            sceneToLoad = data.GetSavedScene();
+            loadEventSo.RaiseLoadRequestEvent(sceneToLoad, positionToGo, true);
+        }
     }
 }

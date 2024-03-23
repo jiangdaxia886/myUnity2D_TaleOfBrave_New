@@ -5,7 +5,7 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour, IInteractable
 {
     [Header("广播")]
-    public VoidEventSo LoadGameEvent;
+    public VoidEventSo saveDataEvent;
 
     [Header("变量参数")]
     public SpriteRenderer spriteRenderer;
@@ -37,7 +37,7 @@ public class SavePoint : MonoBehaviour, IInteractable
             //点光源
             lightObj.SetActive(isDone);
             //保存数据
-            LoadGameEvent.RaiseEvent();
+            saveDataEvent.RaiseEvent();
             return true;
         }
         return false;

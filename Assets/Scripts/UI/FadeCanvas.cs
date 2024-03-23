@@ -15,6 +15,7 @@ public class FadeCanvas : MonoBehaviour
     private void OnEnable()
     {
         fadeEvent.OnEventRaised += OnFadeEvent;
+        //Debug.Log("fadeEvent  OnEnable");
     }
 
     private void OnDisable()
@@ -26,5 +27,6 @@ public class FadeCanvas : MonoBehaviour
     {
         //变为目标颜色target
         fadeImage.DOBlendableColor(target, duration);
+        //Debug.Log("OnFadeEvent:变为目标颜色target");
     }
 }

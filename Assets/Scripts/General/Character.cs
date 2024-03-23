@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour,ISaveable
 {
     [Header("事件监听")]
     public VoidEventSo newGameEvent;
@@ -46,18 +46,22 @@ public class Character : MonoBehaviour
     private void NewGame()
     {
         CurrentHealth = maxHealth;
-        OnHealthChange.Invoke(this);
         currentPower = maxPower;
+        OnHealthChange.Invoke(this);
     }
 
     private void OnEnable()
     {
         newGameEvent.OnEventRaised += NewGame;
+        ISaveable saveable = this;
+        saveable.RegisterSaveData();
     }
 
     private void OnDisable()
     {
         newGameEvent.OnEventRaised -= NewGame;
+        ISaveable saveable = this;
+        saveable.UnregisterSaveData();
     }
 
     private void Update()
@@ -137,5 +141,42 @@ public class Character : MonoBehaviour
     {
         currentPower -= cost;
         OnHealthChange?.Invoke(this);
+    }
+
+    public DataDefination GetDataID()
+    {
+        return GetComponent<DataDefination>();
+    }
+
+    public void GetSaveData(Data data)
+    {
+        //如果保存数据中有当前物体的坐标，则更改，没有则添加
+        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        {
+            data.characterPosDict[GetDataID().ID] = transform.position;
+            data.floatSaveData[GetDataID().ID + "health"] = this.CurrentHealth;
+            data.floatSaveData[GetDataID().ID + "power"] = this.currentPower;
+        }
+        else
+        {
+            //保存位置
+            data.characterPosDict.Add(GetDataID().ID, transform.position);
+            //保存生命
+            data.floatSaveData.Add(GetDataID().ID + "health", this.CurrentHealth);
+            //保存power
+            data.floatSaveData.Add(GetDataID().ID + "power", this.currentPower);
+        }
+    }
+
+    public void LoadSaveData(Data data)
+    {
+        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        {
+            transform.position = data.characterPosDict[GetDataID().ID];
+            this.CurrentHealth = data.floatSaveData[GetDataID().ID + "health"];
+            this.currentPower = data.floatSaveData[GetDataID().ID + "power"];
+            //更新血条
+            OnHealthChange.Invoke(this);
+        }
     }
 }
