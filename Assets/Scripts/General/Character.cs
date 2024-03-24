@@ -84,7 +84,8 @@ public class Character : MonoBehaviour,ISaveable
     }
 
     //掉入水中，死亡
-    private void OnTriggerStay2D(Collider2D other)
+    //如果使用OnTriggerStay2D,那么可能在死亡gameover界面点击重开时，刚点完又进入了重开界面，因为在人物还没移动之前，人物血量就重置为100，此时人物还在水里，就直接又死亡了
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Water"))
         {
@@ -163,8 +164,13 @@ public class Character : MonoBehaviour,ISaveable
             data.characterPosDict.Add(GetDataID().ID, transform.position);
             //保存生命
             data.floatSaveData.Add(GetDataID().ID + "health", this.CurrentHealth);
+            //Debug.Log("GetDataID().ID: "+ GetDataID().ID + "    GetSaveData.this.CurrentHealth:" + CurrentHealth);
             //保存power
             data.floatSaveData.Add(GetDataID().ID + "power", this.currentPower);
+            /*foreach (var i in data.floatSaveData)
+            {
+                Debug.Log("GetSaveData.foreach:"+i);
+            }*/
         }
     }
 
@@ -172,8 +178,13 @@ public class Character : MonoBehaviour,ISaveable
     {
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
+            /*foreach (var i in data.floatSaveData)
+            {
+                Debug.Log("LoadSaveData.foreach:" + i);
+            }*/
             transform.position = data.characterPosDict[GetDataID().ID];
             this.CurrentHealth = data.floatSaveData[GetDataID().ID + "health"];
+            //Debug.Log("GetDataID().ID: " + GetDataID().ID + "LoadSaveData.this.CurrentHealth:" + CurrentHealth);
             this.currentPower = data.floatSaveData[GetDataID().ID + "power"];
             //更新血条
             OnHealthChange.Invoke(this);

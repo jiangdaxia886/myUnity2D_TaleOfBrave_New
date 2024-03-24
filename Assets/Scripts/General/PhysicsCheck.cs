@@ -34,6 +34,8 @@ public class PhysicsCheck : MonoBehaviour
 
     public bool onWall;
 
+    public float phychveloy;
+
 
     private void Awake()
     {
@@ -66,6 +68,7 @@ public class PhysicsCheck : MonoBehaviour
         if (onWall)
             //检测地面,以transform.position + bottomOffset为中心点，半径为checkRaduis范围内是否存在groundLayer图层,此处加了new Vector2(bottomOffset.x * transform.localScale.x,bottomOffset.y)，表示当前敌人前方脚下位置作为检测点，当野猪前方是悬崖时则不往前走
             isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x, bottomOffset.y), checkRaduis, groundLayer);
+        
         else
             isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bottomOffset.x * transform.localScale.x, 0), checkRaduis, groundLayer);
 
@@ -77,6 +80,9 @@ public class PhysicsCheck : MonoBehaviour
         //在墙壁上
         if (isPlayer)
         {
+/*            phychveloy = rb.velocity.y;
+            playerController.test++;
+            Debug.Log("physicsCheck.playerController.test:" + playerController.test+ "   physicsCheck.phychveloy"+  phychveloy);*/
             //下落时且贴着墙并按对应方向键
             onWall = (touchLeftWall && playerController.inputDirection.x < 0f || touchRightWall && playerController.inputDirection.x > 0f) && (rb.velocity.y < 0f);
         }

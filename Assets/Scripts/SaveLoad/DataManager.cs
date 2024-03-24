@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 //加载数据先执行
 [DefaultExecutionOrder(-100)]
+//目前加载进度两种方式，一种在Update()调用读取键盘按键执行load()，另一中在界面button中添加执行事件loadDataEvent来执行
 public class DataManager : MonoBehaviour
 {
     //静态对象，游戏一开始就会存储在内存中
@@ -14,6 +15,8 @@ public class DataManager : MonoBehaviour
     [Header("事件监听")]
     //保存游戏
     public VoidEventSo saveDataEvent;
+    //加载游戏（用于restart按钮加载游戏）
+    public VoidEventSo loadDataEvent;
     //将实现ISaveable的类注册进来
     public List<ISaveable> saveables = new List<ISaveable>();
 
@@ -34,11 +37,13 @@ public class DataManager : MonoBehaviour
     private void OnEnable()
     {
         saveDataEvent.OnEventRaised += Save;
+        loadDataEvent.OnEventRaised += Load;
     }
 
     private void OnDisable()
     {
         saveDataEvent.OnEventRaised -= Save;
+        loadDataEvent.OnEventRaised -= Load;
     }
 
     //读取键盘上L键，加载保存的数据
@@ -79,22 +84,22 @@ public class DataManager : MonoBehaviour
             saveable.GetSaveData(saveData);
         }
 
-        foreach (var item in saveData.characterPosDict)
+        /*foreach (var item in saveData.characterPosDict)
         {
             Debug.Log(item.Key + ":::" + item.Value);
-        }
+        }*/
     }
 
     public void Load()
     {
         //这里用foreach报错，是因为saveables被修改了，其原因是在切换场景时人物被启用和关闭了，此时character中会有注册saveables的部分
-        /*        foreach (var saveable in saveables)
-                {
-                    saveable.LoadSaveData(saveData);
-                }*/
-        for (int i = 0; i < saveables.Count; i++)
+        foreach (var saveable in saveables)
         {
-            saveables[i].LoadSaveData(saveData);
+            saveable.LoadSaveData(saveData);
         }
+        /*        for (int i = 0; i <= saveables.Count; i++)
+                {
+                    saveables[i].LoadSaveData(saveData);
+                }*/
     }
 }

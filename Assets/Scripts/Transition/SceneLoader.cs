@@ -114,8 +114,8 @@ public class SceneLoader : MonoBehaviour,ISaveable
     //卸载场景、加载新场景协程
     private IEnumerator UnLoadPreviousScene()
     {
-        //卸载场景之前关闭人物
-        playerTrans.gameObject.SetActive(false);
+        //卸载场景之前关闭人物图片
+        playerTrans.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         //卸载场景逐渐变黑
         if (fadeScreen)
         {
@@ -161,8 +161,8 @@ public class SceneLoader : MonoBehaviour,ISaveable
         currentLoadScene = sceneToLoad;
         //改变人物位置
         playerTrans.transform.position = positionToGo;
-        //启用人物
-        playerTrans.gameObject.SetActive(true);
+        //启用人物图片
+        playerTrans.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         //加载场景后变透明
         if (fadeScreen)
         {

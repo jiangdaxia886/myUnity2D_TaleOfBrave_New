@@ -9,9 +9,13 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     [Header("事件监听")]
-    public SceneLoadEventSo loadEvent;
+    //禁用人物操作事件
+    public SceneLoadEventSo sceneLoadEvent;
 
     public VoidEventSo afterSceneLoadedEvent;
+    //（用于restart按钮加载游戏)人物isdead置false
+    public VoidEventSo loadDataEvent;
+
 
     //用unity自动生成的PlayerInputController控制器类
     public PlayerInputController inputController;
@@ -57,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public float capsuleCollider2DOffsety;
 
-    private int test;
+    //public int test;
 
 
     //public int combo;
@@ -126,17 +130,21 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputController.Enable();
-        loadEvent.LoadRequestEvent += OnLoadEvent;
+        sceneLoadEvent.LoadRequestEvent += OnLoadEvent;
         afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
+        loadDataEvent.OnEventRaised += OnLoadDataEvent;
     }
 
 
     private void OnDisable()
     {
         inputController.Disable();
-        loadEvent.LoadRequestEvent -= OnLoadEvent;
+        sceneLoadEvent.LoadRequestEvent -= OnLoadEvent;
         afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
+        loadDataEvent.OnEventRaised -= OnLoadDataEvent;
     }
+
+
 
     //刚体放在fixedUpdate执行
     private void FixedUpdate()
@@ -144,7 +152,7 @@ public class PlayerController : MonoBehaviour
         if (!isHurt && !isAttack)
             //人物移动
             Move();
-        //CheckState();
+        CheckState();
 
     }
 
@@ -156,16 +164,16 @@ public class PlayerController : MonoBehaviour
         //获得当前面朝方向
         if(inputDirection.x != 0)
             playerDirection = inputDirection.x;
-        CheckState();
+        //CheckState();
     }
 
     private void LateUpdate()
     {
-        if (wallJump)
+/*        if (wallJump)
         {
             test++;
-            Debug.Log("LateUpdate:" + test);
-        }
+            Debug.Log("playerController.LateUpdate:" + test);
+        }*/
     }
 
 
@@ -184,6 +192,11 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("场景加载时禁用人物操作");
     }
 
+    //当重新加载数据时isDead置false
+    private void OnLoadDataEvent()
+    {
+        isDead = false;
+    }
 
     private void OnAfterSceneLoadedEvent()
     {
@@ -248,12 +261,12 @@ public class PlayerController : MonoBehaviour
             //蹬墙跳，x轴方向速度为inputDirection.x的反方向
             rb.AddForce(new Vector3(-0.45f * inputDirection.x, 2f,0) * onWallJumpForce, ForceMode2D.Impulse);
             wallJump = true;
-            Debug.Log("Time.time"+Time.time);
-            if (wallJump)
-            {
-                test++;
-                Debug.Log("jump:" + test);
-            }
+            /*             Debug.Log("Time.time"+Time.time);
+                     if (wallJump)
+                       {
+                           test++;
+                           Debug.Log("playerController.input.jump:" + test);
+                       }*/
         }
 
     }
@@ -313,17 +326,16 @@ public class PlayerController : MonoBehaviour
     //当在地面上时用摩擦力材质，不在地面上用光滑材质
     public void CheckState()
     {
-        if (wallJump)
+/*        if (wallJump)
         {
             test++;
-            Debug.Log("Update:" + test);
-            Debug.Log("rb.velocity.y:" + rb.velocity.y+ "    physicsCheck.onWall"+ physicsCheck.onWall);
-            Debug.Log("transform.localScale.x:"+ transform.position.x);
+            Debug.Log("playerController.FixUpdate:" + test + "  rb.velocity.y:" + rb.velocity.y + "    physicsCheck.onWall" + physicsCheck.onWall);
+            Debug.Log("playerController.FixUpdate.touchLeftWall:" + physicsCheck.touchLeftWall + "   playerController.inputDirection.x:" + inputDirection.x + "   phychveloy: " + physicsCheck.phychveloy);
 
-        }
+        }*/
         capsuleCollider.sharedMaterial = physicsCheck.isGround?normal:wall;
         //下滑减慢,同时不是walljump状态时才减慢，因为onwall的监测点比碰撞体突出，所以在walljump时也会处于onwall，会导致蹬墙跳跳不高
-        if (physicsCheck.onWall)
+        if (physicsCheck.onWall && !wallJump)
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
         
         //y轴速度小于7时蹬墙跳为false
