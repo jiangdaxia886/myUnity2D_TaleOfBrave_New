@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public VoidEventSo afterSceneLoadedEvent;
     //（用于restart按钮加载游戏)人物isdead置false
     public VoidEventSo loadDataEvent;
+    //（用于backToMenuEvent按钮加载游戏)人物isdead置false
+    public VoidEventSo backToMenuEvent;
 
 
     //用unity自动生成的PlayerInputController控制器类
@@ -122,6 +124,7 @@ public class PlayerController : MonoBehaviour
                 speed = runSpeed;
             }
         };
+        inputController.Enable();
 
     }
 
@@ -129,10 +132,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        inputController.Enable();
+        
         sceneLoadEvent.LoadRequestEvent += OnLoadEvent;
         afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
         loadDataEvent.OnEventRaised += OnLoadDataEvent;
+        //返回主菜单按键也人物复活
+        backToMenuEvent.OnEventRaised += OnLoadDataEvent;
     }
 
 
@@ -142,6 +147,8 @@ public class PlayerController : MonoBehaviour
         sceneLoadEvent.LoadRequestEvent -= OnLoadEvent;
         afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
         loadDataEvent.OnEventRaised -= OnLoadDataEvent;
+        //返回主菜单按键也人物复活
+        backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
     }
 
 

@@ -20,6 +20,8 @@ public class SceneLoader : MonoBehaviour,ISaveable
 
     public VoidEventSo newGameEvent;
 
+    public VoidEventSo backToMenuEvent;
+
     [Header("广播")]
     public VoidEventSo afterSceneLoadedEvent;
 
@@ -66,7 +68,7 @@ public class SceneLoader : MonoBehaviour,ISaveable
     {
         loadEventSo.LoadRequestEvent += OnLoadRequestEvent;
         newGameEvent.OnEventRaised += NewGame;
-        //Debug.Log("Enable!!!!!!!!!");
+        backToMenuEvent.OnEventRaised += OnBackToMenuEvent;
         ISaveable saveable = this;
         saveable.RegisterSaveData();
     }
@@ -75,8 +77,15 @@ public class SceneLoader : MonoBehaviour,ISaveable
     {
         loadEventSo.LoadRequestEvent -= OnLoadRequestEvent;
         newGameEvent.OnEventRaised -= NewGame;
+        backToMenuEvent.OnEventRaised -= OnBackToMenuEvent;
         ISaveable saveable = this;
         saveable.UnregisterSaveData();
+    }
+
+    private void OnBackToMenuEvent()
+    {
+        sceneToLoad = MenuScene;
+        loadEventSo.RaiseLoadRequestEvent(sceneToLoad, menuPosition, true);
     }
 
     private void NewGame()
@@ -142,7 +151,7 @@ public class SceneLoader : MonoBehaviour,ISaveable
     private void loadNewScene()
     {
         //如果一开始取消勾选人物，menu界面还是能动，所以人物不能一开始取消勾选
-        //关闭人物如果放在这里，那么让人物inputcontroller.gameobject.disable()方法无效,其原因是这里是让gameObject无效，在OnLoadCompleted方法中又让gameObject有效，于是inputcontroller有效
+        //关闭人物如果放在这里，那么让人物inputcontroller.gameobject.disable()方法无效,其原因是这里是让gameObject无效，在OnLoadCompleted方法中又让gameObject有效，但是在人物有效后会执行onEnable函数，playerController中的onEnable函数存在inputController.Enable(); 于是inputcontroller有效
         // playerTrans.gameObject.SetActive(false);
         //异步加载场景，由于异步是和上面卸载场景是同步进行的，导致场景还没卸载完，人物便先移动了位置
         var loadingOption = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);

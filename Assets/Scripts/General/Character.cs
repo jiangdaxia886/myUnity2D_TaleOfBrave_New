@@ -87,7 +87,7 @@ public class Character : MonoBehaviour,ISaveable
     //如果使用OnTriggerStay2D,那么可能在死亡gameover界面点击重开时，刚点完又进入了重开界面，因为在人物还没移动之前，人物血量就重置为100，此时人物还在水里，就直接又死亡了
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Water"))
+        if (other.CompareTag("Water") && CurrentHealth > 0)
         {
             CurrentHealth = 0;
             OnHealthChange?.Invoke(this);

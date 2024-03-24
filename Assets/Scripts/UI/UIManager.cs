@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public VoidEventSo loadDataEvent;
     //（用于character ondie事件）
     public VoidEventSo gameOverEvent;
+    //（用于backToMenuEvent按钮加载游戏）关闭gameover面板
+    public VoidEventSo backToMenuEvent;
 
     [Header("组件")]
     public GameObject gameOverPanel;
@@ -27,6 +29,8 @@ public class UIManager : MonoBehaviour
         sceneUnloadEvent.LoadRequestEvent += OnSceneUnloadEvent;
         loadDataEvent.OnEventRaised += OnLoadDataEvent;
         gameOverEvent.OnEventRaised += OnGameOverEvent;
+        //回到主菜单也关闭面板
+        backToMenuEvent.OnEventRaised += OnLoadDataEvent;
     }
 
 
@@ -36,6 +40,8 @@ public class UIManager : MonoBehaviour
         sceneUnloadEvent.LoadRequestEvent -= OnSceneUnloadEvent;
         loadDataEvent.OnEventRaised -= OnLoadDataEvent;
         gameOverEvent.OnEventRaised -= OnGameOverEvent;
+        //回到主菜单也关闭面板
+        backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
     }
 
     //死亡时将gameover面板开启

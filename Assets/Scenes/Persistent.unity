@@ -769,7 +769,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 655033881}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 56b655d6b96c6984581a581cd1742040, type: 2}
+        m_TargetAssemblyTypeName: VoidEventSo, Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &655033881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3060,6 +3072,7 @@ MonoBehaviour:
   sceneUnloadEvent: {fileID: 11400000, guid: 2b791a97af77fcc46b26426b482058f0, type: 2}
   loadDataEvent: {fileID: 11400000, guid: 05d359bf594181b44aadb67a7a7e8278, type: 2}
   gameOverEvent: {fileID: 11400000, guid: c19ece2f68d05fe4e8ec6644e12ce97a, type: 2}
+  backToMenuEvent: {fileID: 11400000, guid: 56b655d6b96c6984581a581cd1742040, type: 2}
   gameOverPanel: {fileID: 1627902983}
   restartBtn: {fileID: 1331876776}
 --- !u!4 &1635056538
@@ -3348,10 +3361,11 @@ MonoBehaviour:
   menuPosition: {x: 1.78, y: -7.93, z: 0}
   loadEventSo: {fileID: 11400000, guid: ee9841ad8edd96b4ca3592c745ac8a2c, type: 2}
   newGameEvent: {fileID: 11400000, guid: fd17fec008516b641a900230fc307d61, type: 2}
+  backToMenuEvent: {fileID: 11400000, guid: 56b655d6b96c6984581a581cd1742040, type: 2}
   afterSceneLoadedEvent: {fileID: 11400000, guid: b2aba404812e4a94c98f47b49d34d8ce, type: 2}
   fadeEvent: {fileID: 11400000, guid: 4310ae7c7acb3784b97d29b4e83961dd, type: 2}
   sceneUnloadEvent: {fileID: 11400000, guid: 2b791a97af77fcc46b26426b482058f0, type: 2}
-  MenuScene: {fileID: 11400000, guid: 58a6797b4be346943ac1790fb904c126, type: 2}
+  MenuScene: {fileID: 11400000, guid: 0655d1f598ee9c44490c81664b40f4d4, type: 2}
   firstLoadScene: {fileID: 11400000, guid: c9e8937736e1b014e8f01cc492d6cef2, type: 2}
   fadeDuration: 1
 --- !u!114 &2052040113
@@ -3540,6 +3554,7 @@ MonoBehaviour:
   sceneLoadEvent: {fileID: 11400000, guid: ee9841ad8edd96b4ca3592c745ac8a2c, type: 2}
   afterSceneLoadedEvent: {fileID: 11400000, guid: b2aba404812e4a94c98f47b49d34d8ce, type: 2}
   loadDataEvent: {fileID: 11400000, guid: 05d359bf594181b44aadb67a7a7e8278, type: 2}
+  backToMenuEvent: {fileID: 11400000, guid: 56b655d6b96c6984581a581cd1742040, type: 2}
   inputDirection: {x: 0, y: 0}
   speed: 330
   slideSpeed: 500
@@ -3634,7 +3649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newGameEvent: {fileID: 11400000, guid: fd17fec008516b641a900230fc307d61, type: 2}
   maxHealth: 100
-  CurrentHealth: 5
+  CurrentHealth: 100
   maxPower: 15
   currentPower: 15
   powerRecoverSpeed: 1.2
