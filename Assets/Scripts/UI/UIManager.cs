@@ -23,6 +23,17 @@ public class UIManager : MonoBehaviour
 
     public GameObject restartBtn;
 
+    public GameObject mobileTouch;
+
+    //如果是主机那么触屏按钮不显示
+    private void Awake()
+    {
+#if UNITY_STANDALONE
+        mobileTouch.SetActive(false);
+#endif
+
+    }
+
     private void OnEnable()
     {
         characterEvent.OnEventRaised += OnHealthEvent;
