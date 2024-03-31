@@ -246,6 +246,7 @@ MonoBehaviour:
   touchLeftWall: 0
   touchRightWall: 0
   onWall: 0
+  phychveloy: 0
 --- !u!114 &6702785952707918577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newGameEvent: {fileID: 11400000, guid: fd17fec008516b641a900230fc307d61, type: 2}
   maxHealth: 30
-  CurrentHealth: 0
+  CurrentHealth: 30
   maxPower: 0
   currentPower: 0
   powerRecoverSpeed: 0
