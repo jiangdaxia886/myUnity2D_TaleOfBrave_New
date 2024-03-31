@@ -12,18 +12,30 @@ public class AudioManager : MonoBehaviour
     public PlayAudioEventSO BGMEvent;
 
     public PlayAudioEventSO HurtEvent;
+    //调整音量
+    public FloatEventSO VolumeChangeEvent;
+    //监听暂停
+    public VoidEventSo pauseEvent;
 
+    [Header("广播")]
+    public FloatEventSO syncVolumeEvent;
+
+    [Header("组件")]
     public AudioSource BGMSource;
 
     public AudioSource FXSource;
 
     public AudioSource HurtSource;
 
+    public AudioMixer mixer;
+
     private void OnEnable()
     {
         FXEvent.OnEventRaised += OnFXEvent;
         BGMEvent.OnEventRaised += OnBGMEvent;
         HurtEvent.OnEventRaised += OnHurtEvent;
+        VolumeChangeEvent.OnEventRaised += OnVolumeChangeEvent;
+        pauseEvent.OnEventRaised += OnPauseEvent;
     }
 
 
@@ -32,8 +44,24 @@ public class AudioManager : MonoBehaviour
         FXEvent.OnEventRaised -= OnFXEvent;
         BGMEvent.OnEventRaised -= OnBGMEvent;
         HurtEvent.OnEventRaised -= OnHurtEvent;
+        VolumeChangeEvent.OnEventRaised -= OnVolumeChangeEvent;
+        pauseEvent.OnEventRaised -= OnPauseEvent;
     }
 
+
+    private void OnPauseEvent()
+    {
+        float amount;
+        mixer.GetFloat("MasterVolume", out amount);
+        syncVolumeEvent.RaiseEvent(amount);
+    }
+
+    private void OnVolumeChangeEvent(float amount)
+    {
+        //mixer的音量是-80~20分贝
+        //MasterVolume是暴露出来的mixer的参数名
+        mixer.SetFloat("MasterVolume", amount * 100 - 80);
+    }
 
     private void OnHurtEvent(AudioClip clip)
     {

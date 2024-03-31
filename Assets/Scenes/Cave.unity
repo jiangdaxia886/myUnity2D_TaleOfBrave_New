@@ -17038,7 +17038,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38573b22e9676ab44a8cd7a6a9420917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: {fileID: 1677499005}
   postExposure: -2.6
 --- !u!1 &1700977350
 GameObject:
@@ -17243,6 +17242,7 @@ GameObject:
   - component: {fileID: 1822324688}
   - component: {fileID: 1822324687}
   - component: {fileID: 1822324686}
+  - component: {fileID: 1822324690}
   m_Layer: 0
   m_Name: Save Point Rocks
   m_TagString: Interactable
@@ -17381,6 +17381,18 @@ Transform:
   - {fileID: 7719048}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1822324690
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822324685}
+  m_Enabled: 1
+  m_SortingLayerID: -1777227223
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &1861679682
 GameObject:
   m_ObjectHideFlags: 0

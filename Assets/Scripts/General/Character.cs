@@ -154,14 +154,14 @@ public class Character : MonoBehaviour,ISaveable
         //如果保存数据中有当前物体的坐标，则更改，没有则添加
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
-            data.characterPosDict[GetDataID().ID] = transform.position;
+            data.characterPosDict[GetDataID().ID] = new SerializeVector3( transform.position);
             data.floatSaveData[GetDataID().ID + "health"] = this.CurrentHealth;
             data.floatSaveData[GetDataID().ID + "power"] = this.currentPower;
         }
         else
         {
             //保存位置
-            data.characterPosDict.Add(GetDataID().ID, transform.position);
+            data.characterPosDict.Add(GetDataID().ID, new SerializeVector3(transform.position));
             //保存生命
             data.floatSaveData.Add(GetDataID().ID + "health", this.CurrentHealth);
             //Debug.Log("GetDataID().ID: "+ GetDataID().ID + "    GetSaveData.this.CurrentHealth:" + CurrentHealth);
@@ -182,7 +182,7 @@ public class Character : MonoBehaviour,ISaveable
             {
                 Debug.Log("LoadSaveData.foreach:" + i);
             }*/
-            transform.position = data.characterPosDict[GetDataID().ID];
+            transform.position = data.characterPosDict[GetDataID().ID].ToVector3();
             this.CurrentHealth = data.floatSaveData[GetDataID().ID + "health"];
             //Debug.Log("GetDataID().ID: " + GetDataID().ID + "LoadSaveData.this.CurrentHealth:" + CurrentHealth);
             this.currentPower = data.floatSaveData[GetDataID().ID + "power"];

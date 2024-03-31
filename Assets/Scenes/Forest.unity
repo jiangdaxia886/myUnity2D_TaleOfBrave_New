@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 9262007}
   - component: {fileID: 9262009}
   - component: {fileID: 9262010}
+  - component: {fileID: 9262011}
   m_Layer: 0
   m_Name: Save Point Rocks
   m_TagString: Interactable
@@ -273,6 +274,18 @@ MonoBehaviour:
   darkSprite: {fileID: -1253153905, guid: 2f54a0b4f09f23242810497046ba4380, type: 3}
   lightSprite: {fileID: -75147764, guid: 2f54a0b4f09f23242810497046ba4380, type: 3}
   isDone: 0
+--- !u!210 &9262011
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9262006}
+  m_Enabled: 1
+  m_SortingLayerID: -1777227223
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &97706086
 GameObject:
   m_ObjectHideFlags: 0
@@ -43106,7 +43119,7 @@ Tilemap:
       - {fileID: -1688504058, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -15754526, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -321759620, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 15, y: -9, z: 0}
@@ -43128,7 +43141,7 @@ Tilemap:
       - {fileID: 1030559130, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 1998852525, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1289780929, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 14, y: -8, z: 0}

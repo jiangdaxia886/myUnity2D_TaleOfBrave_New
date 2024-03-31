@@ -207,7 +207,7 @@ public class SceneLoader : MonoBehaviour,ISaveable
         if (data.characterPosDict.ContainsKey(playerID))
         {
             //获得坐标
-            positionToGo = data.characterPosDict[playerID];
+            positionToGo = data.characterPosDict[playerID].ToVector3();
             //获得场景
             sceneToLoad = data.GetSavedScene();
             loadEventSo.RaiseLoadRequestEvent(sceneToLoad, positionToGo, true);

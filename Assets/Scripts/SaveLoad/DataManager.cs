@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Newtonsoft.Json;
+using System.IO;
 
 //加载数据先执行
 [DefaultExecutionOrder(-100)]
@@ -22,6 +24,9 @@ public class DataManager : MonoBehaviour
 
     private Data saveData;
 
+    //获取存储路径
+    private string jsonFolder;
+
     //单例模式
     private void Awake()
     {
@@ -32,6 +37,10 @@ public class DataManager : MonoBehaviour
 
         //Data类没有继承monobehaviour，没有生命周期管理，所以在使用时需要new
         saveData = new Data();
+        //获取保存的文件夹
+        jsonFolder = Application.persistentDataPath + "/SAVE DATA/";
+        //读取保存的问价
+        ReadSaveData();
     }
 
     private void OnEnable()
@@ -84,10 +93,17 @@ public class DataManager : MonoBehaviour
             saveable.GetSaveData(saveData);
         }
 
-        /*foreach (var item in saveData.characterPosDict)
+        //扩展名写为什么都可，这里写成.sav
+        var resultPath = jsonFolder + "data.sav";
+        //将saveData转换为String类型的数据
+        var jsonData = JsonConvert.SerializeObject(saveData);
+        //判断是否有该保存文件，如果有，则直接写入，如果没有，则创建目录
+        if (!File.Exists(resultPath))
         {
-            Debug.Log(item.Key + ":::" + item.Value);
-        }*/
+            Directory.CreateDirectory(jsonFolder);
+        }
+        //写文件
+        File.WriteAllText(resultPath, jsonData);
     }
 
     public void Load()
@@ -97,9 +113,21 @@ public class DataManager : MonoBehaviour
         {
             saveable.LoadSaveData(saveData);
         }
-        /*        for (int i = 0; i <= saveables.Count; i++)
-                {
-                    saveables[i].LoadSaveData(saveData);
-                }*/
+    }
+
+    private void ReadSaveData() 
+    {
+
+        //扩展名写为什么都可，这里写成.sav
+        var resultPath = jsonFolder + "data.sav";
+        //判断是否有该保存文件，如果有，则直接读，如果没有，则创建目录
+        if (File.Exists(resultPath))
+        {
+            var stringData = File.ReadAllText(resultPath);
+            //将读取的文件反序列化为Data
+            var jsonData = JsonConvert.DeserializeObject<Data>(stringData);
+
+            saveData = jsonData;
+        }
     }
 }
