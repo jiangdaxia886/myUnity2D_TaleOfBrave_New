@@ -91,7 +91,9 @@ public class SceneLoader : MonoBehaviour,ISaveable
     private void NewGame()
     {
         //游戏开始加载第一个场景
+        Debug.Log("NewGame:::::");
         sceneToLoad = firstLoadScene;
+        
         loadEventSo.RaiseLoadRequestEvent(sceneToLoad, firstPosition, true);
         //OnLoadRequestEvent(sceneToLoad, firstPosition, true);
     }

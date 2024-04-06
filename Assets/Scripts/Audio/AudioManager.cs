@@ -54,12 +54,14 @@ public class AudioManager : MonoBehaviour
         float amount;
         mixer.GetFloat("MasterVolume", out amount);
         syncVolumeEvent.RaiseEvent(amount);
+        //Debug.Log("OnPauseEvent:amount" + amount);
     }
 
     private void OnVolumeChangeEvent(float amount)
     {
         //mixer的音量是-80~20分贝
         //MasterVolume是暴露出来的mixer的参数名
+        //Debug.Log("OnVolumeChangeEvent:amount" + amount);
         mixer.SetFloat("MasterVolume", amount * 100 - 80);
     }
 

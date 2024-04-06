@@ -75,6 +75,7 @@ public class UIManager : MonoBehaviour
     //µ÷ÕûÒôÁ¿»¬¿é
     private void OnSyncVolumeEvent(float amount)
     {
+        //Debug.Log("OnSyncVolumeEvent()amount::" + amount);
         volumeSlider.value = (amount + 80) / 100;
     }
 

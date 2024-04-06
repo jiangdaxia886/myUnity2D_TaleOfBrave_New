@@ -1379,7 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53df1b2964fb41b49a70c652e660be0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 8
   attackRange: 0
   attackRate: 0
 --- !u!60 &759623286
@@ -1426,11 +1426,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.073581204, y: 2.2719042}
-      - {x: -0.16268623, y: 0.9292022}
-      - {x: 1.2096989, y: 0.23163164}
-      - {x: 1.6704804, y: 0.3893051}
-      - {x: 1.0877073, y: 1.9172924}
+    - - {x: -0.86261034, y: 2.4868815}
+      - {x: -0.81455314, y: 1.5880042}
+      - {x: 2.2083027, y: 1.056868}
+      - {x: 3.119844, y: 1.7207785}
+      - {x: 2.6272256, y: 2.7355936}
   m_UseDelaunayMesh: 0
 --- !u!114 &759623287
 MonoBehaviour:
@@ -2953,12 +2953,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.7042774, y: 1.5150692}
-      - {x: -0.09961665, y: 1.4758056}
-      - {x: -1.2500162, y: 0.7466996}
-      - {x: 0.0727168, y: 0.38930464}
-      - {x: 1.0410385, y: 0.585163}
-      - {x: 1.4766365, y: 0.96073645}
+    - - {x: 2.4795766, y: 2.5414135}
+      - {x: 0.6354679, y: 2.141542}
+      - {x: -0.0017595291, y: 0.94087243}
+      - {x: 1.3556472, y: 0.59734774}
+      - {x: 3.0105095, y: 0.95963943}
+      - {x: 3.1409774, y: 2.0286896}
   m_UseDelaunayMesh: 0
 --- !u!114 &1354508260
 MonoBehaviour:
@@ -3437,7 +3437,7 @@ Transform:
   m_GameObject: {fileID: 1569806311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.010000229, y: 2.62, z: 0}
+  m_LocalPosition: {x: -0.14, y: 3.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3983,12 +3983,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.010511607, y: 1.9039979}
-      - {x: 0.016011, y: 1.8331993}
-      - {x: -0.40908802, y: 1.0200034}
-      - {x: 0.68238986, y: 0.69414294}
-      - {x: 1.4701605, y: 0.72091496}
-      - {x: 2.2544951, y: 0.91868937}
+    - - {x: 0.6485083, y: 2.3408875}
+      - {x: -0.018662691, y: 2.173002}
+      - {x: -0.2149142, y: 0.99919903}
+      - {x: 0.7864109, y: 0.92299044}
+      - {x: 2.8779135, y: 1.0399143}
+      - {x: 3.0450568, y: 2.8465524}
   m_UseDelaunayMesh: 0
 --- !u!114 &1678295890
 MonoBehaviour:
@@ -4524,12 +4524,12 @@ SpriteRenderer:
   m_SortingLayerID: -1777227223
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: -40857023, guid: 013a39614341a2e4a91b5a9a67bc5dec, type: 3}
+  m_Sprite: {fileID: -523147958, guid: 55c95d9216721c247be4bcd10402f27e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.5, y: 3.5}
+  m_Size: {x: 5.3333335, y: 5.3333335}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
