@@ -905,7 +905,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Mage_Spritelist_36
+      name: Light_Mage_Spritelist_36_shoot
       rect:
         serializedVersion: 2
         x: 0
@@ -1031,7 +1031,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Mage_Spritelist_42
+      name: Light_Mage_Spritelist_42_shoot
       rect:
         serializedVersion: 2
         x: 768
@@ -1052,15 +1052,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Mage_Spritelist_43
+      name: bullet1
       rect:
         serializedVersion: 2
-        x: 896
-        y: 512
-        width: 128
-        height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 935
+        y: 541
+        width: 51
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1073,15 +1073,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Mage_Spritelist_44
+      name: bullet2
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 512
-        width: 128
-        height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 992
+        y: 541
+        width: 62
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1094,15 +1094,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Mage_Spritelist_45
+      name: bullet3
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 512
-        width: 128
-        height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 1061
+        y: 542
+        width: 54
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1115,57 +1115,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Light_Mage_Spritelist_46
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 512
-        width: 128
-        height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f668a3020ee5ed140aa87b9dd9bff7f9
-      internalID: 1824646918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Light_Mage_Spritelist_47
-      rect:
-        serializedVersion: 2
-        x: 1408
-        y: 512
-        width: 128
-        height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d452d310393049409c807eb5ca76fdd
-      internalID: -1404235871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Light_Mage_Spritelist_48_attack_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 385
+        y: 384
         width: 81
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.28491098, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1181,12 +1139,12 @@ TextureImporter:
       name: Light_Mage_Spritelist_49
       rect:
         serializedVersion: 2
-        x: 128
+        x: 129
         y: 384
         width: 91
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.2500473, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1203,11 +1161,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 385
+        y: 384
         width: 102
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.22955681, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1227,8 +1185,8 @@ TextureImporter:
         y: 384
         width: 111
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.21006541, y: 0.0018904209}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1245,11 +1203,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 385
+        y: 384
         width: 121
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.18803166, y: 0.0018908978}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1269,8 +1227,8 @@ TextureImporter:
         y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.18240738, y: 0.0018908978}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1290,8 +1248,8 @@ TextureImporter:
         y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.1861887, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1311,8 +1269,8 @@ TextureImporter:
         y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.1861887, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1329,11 +1287,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 385
+        y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.18618774, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1353,8 +1311,8 @@ TextureImporter:
         y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.18240738, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1371,11 +1329,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1280
-        y: 385
+        y: 384
         width: 128
-        height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 129
+      alignment: 9
+      pivot: {x: 0.18807888, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1392,11 +1350,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1408
-        y: 385
+        y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.18996906, y: 0.0018908978}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1416,8 +1374,8 @@ TextureImporter:
         y: 384
         width: 128
         height: 128
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.18618965, y: 0.00000023841858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1539,7 +1497,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 257
+        y: 256
         width: 128
         height: 128
       alignment: 7
@@ -1765,6 +1723,132 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bullet4
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 542
+        width: 49
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c378b952bf41ab148a724ae9e0b37ed0
+      internalID: -1708567607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet5
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 542
+        width: 50
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9220f577ee66df446931b930f9a35242
+      internalID: -331414774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet6
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 541
+        width: 50
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba8d9d1a28927e4e90c8ec227a2543f
+      internalID: 272866417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet7
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 537
+        width: 54
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2647f5e9f6073b4b85061f61c772516
+      internalID: 438505360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet8
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 538
+        width: 52
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105df0d0fa53f354ea643d906ee2e97c
+      internalID: 1285954274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet9
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 541
+        width: 53
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e04290af39ca4464faf70159c637c85e
+      internalID: 1254044442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1778,7 +1862,6 @@ TextureImporter:
     - texture: {fileID: 2800000, guid: f8548c8937efa83428207ca6f97a5730, type: 3}
       name: _secondary
     nameFileIdTable:
-      Light_Mage_Spritelist_0: 298875201
       Light_Mage_Spritelist_0_red_idle0: -523147958
       Light_Mage_Spritelist_1: -879565249
       Light_Mage_Spritelist_10: -293550796
@@ -1809,17 +1892,14 @@ TextureImporter:
       Light_Mage_Spritelist_33: 1896484962
       Light_Mage_Spritelist_34: 2147452950
       Light_Mage_Spritelist_35_attack_2: -1846523946
-      Light_Mage_Spritelist_36: 55960745
+      Light_Mage_Spritelist_36_shoot: 55960745
       Light_Mage_Spritelist_37: 595851260
       Light_Mage_Spritelist_38: -35644330
       Light_Mage_Spritelist_39: 540360689
       Light_Mage_Spritelist_4: -829483212
       Light_Mage_Spritelist_40: -1267421225
       Light_Mage_Spritelist_41: -476455539
-      Light_Mage_Spritelist_42: -1383243379
-      Light_Mage_Spritelist_43: -1505155176
-      Light_Mage_Spritelist_44: 1656983010
-      Light_Mage_Spritelist_45: -1159769097
+      Light_Mage_Spritelist_42_shoot: -1383243379
       Light_Mage_Spritelist_46: 1824646918
       Light_Mage_Spritelist_47: -1404235871
       Light_Mage_Spritelist_48_attack_3: 13328602
@@ -1856,6 +1936,15 @@ TextureImporter:
       Light_Mage_Spritelist_76: 44369444
       Light_Mage_Spritelist_8: -470423630
       Light_Mage_Spritelist_9: -1878570730
+      bullet1: -1505155176
+      bullet2: 1656983010
+      bullet3: -1159769097
+      bullet4: -1708567607
+      bullet5: -331414774
+      bullet6: 272866417
+      bullet7: 438505360
+      bullet8: 1285954274
+      bullet9: 1254044442
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1235,7 +1235,7 @@ GameObject:
   - component: {fileID: 724185261}
   - component: {fileID: 724185260}
   - component: {fileID: 724185262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1382,6 +1382,7 @@ MonoBehaviour:
   damage: 8
   attackRange: 0
   attackRate: 0
+  isDurationAttack: 1
 --- !u!60 &759623286
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2975,6 +2976,7 @@ MonoBehaviour:
   damage: 10
   attackRange: 0
   attackRate: 0
+  isDurationAttack: 0
 --- !u!114 &1354508261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3421,7 +3423,7 @@ GameObject:
   - component: {fileID: 1569806312}
   - component: {fileID: 1569806313}
   - component: {fileID: 1569806314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sign Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4002,6 +4004,7 @@ MonoBehaviour:
   damage: 10
   attackRange: 0
   attackRate: 0
+  isDurationAttack: 0
 --- !u!60 &1678295889
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4539,6 +4542,7 @@ GameObject:
   - component: {fileID: 2067454358}
   - component: {fileID: 2067454359}
   - component: {fileID: 2067454360}
+  - component: {fileID: 2067454361}
   m_Layer: 7
   m_Name: ///player
   m_TagString: Untagged
@@ -4907,6 +4911,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   persistentType: 0
   ID: 72d8f72d-f95c-4058-82e4-1e2df4df5214
+--- !u!114 &2067454361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067454349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c37712bfb88e841b7804bc373b1fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 1
+  bulletPrefab: {fileID: 4342757524308937239, guid: 881a8de74d2aed34781068f973cd5cb0, type: 3}
+  gunEnd: {x: 0, y: 1.7}
+  direction: {x: 0, y: 0}
+  timer: 0
 --- !u!1 &2108728722
 GameObject:
   m_ObjectHideFlags: 0

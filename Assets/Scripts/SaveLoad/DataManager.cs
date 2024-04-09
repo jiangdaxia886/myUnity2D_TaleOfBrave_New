@@ -55,7 +55,7 @@ public class DataManager : MonoBehaviour
         loadDataEvent.OnEventRaised -= Load;
     }
 
-    //读取键盘上L键，加载保存的数据
+    //按下L键，读取键盘上L键，加载保存的数据
     private void Update()
     {
         if (Keyboard.current.lKey.wasPressedThisFrame)

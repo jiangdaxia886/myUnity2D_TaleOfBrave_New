@@ -80,6 +80,15 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dd2c681-a334-43dc-8cbf-ef11850b0835"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -322,6 +331,28 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa013038-086b-4b0a-a333-7259420869b4"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7410f73-be28-4850-989a-ccadbed710d4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -915,6 +946,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         m_GamePlay_Slide = m_GamePlay.FindAction("Slide", throwIfNotFound: true);
         m_GamePlay_WalkButton = m_GamePlay.FindAction("WalkButton", throwIfNotFound: true);
         m_GamePlay_Confirm = m_GamePlay.FindAction("Confirm", throwIfNotFound: true);
+        m_GamePlay_Fire = m_GamePlay.FindAction("Fire", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -994,6 +1026,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     private readonly InputAction m_GamePlay_Slide;
     private readonly InputAction m_GamePlay_WalkButton;
     private readonly InputAction m_GamePlay_Confirm;
+    private readonly InputAction m_GamePlay_Fire;
     public struct GamePlayActions
     {
         private @PlayerInputController m_Wrapper;
@@ -1004,6 +1037,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         public InputAction @Slide => m_Wrapper.m_GamePlay_Slide;
         public InputAction @WalkButton => m_Wrapper.m_GamePlay_WalkButton;
         public InputAction @Confirm => m_Wrapper.m_GamePlay_Confirm;
+        public InputAction @Fire => m_Wrapper.m_GamePlay_Fire;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1031,6 +1065,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1053,6 +1090,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1241,6 +1281,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         void OnSlide(InputAction.CallbackContext context);
         void OnWalkButton(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

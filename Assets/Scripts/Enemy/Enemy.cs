@@ -200,7 +200,7 @@ public class Enemy : MonoBehaviour
     {
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
         //协程，在执行完击退后等待0.5s再执行下一步
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isHurt = false;
     }
 
