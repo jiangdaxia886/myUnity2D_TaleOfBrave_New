@@ -144,6 +144,12 @@ public class Character : MonoBehaviour,ISaveable
         OnHealthChange?.Invoke(this);
     }
 
+    public void OnFire(int cost)
+    {
+        currentPower -= cost;
+        OnHealthChange?.Invoke(this);
+    }
+
     public DataDefination GetDataID()
     {
         return GetComponent<DataDefination>();

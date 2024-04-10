@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BeeChaseState : BaseState
@@ -23,9 +24,11 @@ public class BeeChaseState : BaseState
 
     public override void LogicUpdate()
     {
-        if (currentEnemy.lostTimeCounter <= 0)
+        //子弹击中后被销毁，所以currentEnemy.attacker == null时也要切换回巡逻状态
+        if (currentEnemy.lostTimeCounter <= 0 || currentEnemy.attacker == null)
         {
             currentEnemy.SwitchState(NPCState.Patrol);
+            return;
         }
         //玩家的中心点是在脚底，因为切割的时候选的是bottom，所以目标点的y轴需要添加1.5f
         target = new Vector3(currentEnemy.attacker.position.x, currentEnemy.attacker.position.y + 1f, 0);

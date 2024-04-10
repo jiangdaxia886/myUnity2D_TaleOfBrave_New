@@ -186,6 +186,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   explosionPrefab: {fileID: 7192369174211062189, guid: 88d72ba1e76a5544d8a61ecc4f1a458c, type: 3}
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  checkDistance: 15
 --- !u!114 &719433094119626930
 MonoBehaviour:
   m_ObjectHideFlags: 0

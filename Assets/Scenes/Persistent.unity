@@ -4928,6 +4928,7 @@ MonoBehaviour:
   gunEnd: {x: 0, y: 1.7}
   direction: {x: 0, y: 0}
   timer: 0
+  firePowerCost: 4
 --- !u!1 &2108728722
 GameObject:
   m_ObjectHideFlags: 0

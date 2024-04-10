@@ -111,7 +111,7 @@ public class Enemy : MonoBehaviour
     //virtual表示可以被重写
     public virtual void Move()
     {
-        //如果当前没有播放蜗牛的premove动画，则移动GetCurrentAnimatorStateInfo(0)表示第0个layer，即animation中的baseLayer
+        //如果当前没有播放蜗牛的premove动画，则移动,GetCurrentAnimatorStateInfo(0)表示第0个layer，即animation中的baseLayer
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("snailPreMove") && !anim.GetCurrentAnimatorStateInfo(0).IsName("snailRecover"))
         {
             rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);

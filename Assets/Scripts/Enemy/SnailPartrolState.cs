@@ -13,8 +13,8 @@ public class SnailPartrolState : BaseState
 
     public override void LogicUpdate()
     {
-        //发现player切换到skill
-        if (currentEnemy.FoundPlayer())
+        //发现player或受伤切换到skill
+        if (currentEnemy.FoundPlayer() || currentEnemy.isHurt)
         {
             currentEnemy.SwitchState(NPCState.Skill);
         }

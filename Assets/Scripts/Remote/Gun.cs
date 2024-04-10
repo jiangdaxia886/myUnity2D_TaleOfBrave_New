@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 public class Gun : MonoBehaviour
 {
@@ -17,9 +18,13 @@ public class Gun : MonoBehaviour
     //计时器
     public float timer = 0;
 
+    public int firePowerCost;
+
     private Animator anim;
 
     private PlayerController playerController;
+
+    private Character character;
 
     //用unity自动生成的PlayerInputController控制器类
     public PlayerInputController inputController;
@@ -28,6 +33,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        character = GetComponent<Character>();
         inputController = new PlayerInputController();
         inputController.Enable();
     }
@@ -57,10 +63,12 @@ public class Gun : MonoBehaviour
             if(timer < 0)
                 timer = 0;
         }
-        //按下射击键
-        else if(inputController.GamePlay.Fire.WasPressedThisFrame())
+        //按下射击键且射击能量够用
+        else if(inputController.GamePlay.Fire.WasPressedThisFrame() && character.currentPower >= firePowerCost)
         {
             Fire();
+            //射击能量消耗
+            character.OnFire(firePowerCost);
             playerController.isAttack = true;
             timer = interval;
         }
@@ -69,7 +77,9 @@ public class Gun : MonoBehaviour
     private void Fire()
     {
         anim.SetTrigger("Shoot");
+        //生成子弹
         GameObject bullet = Instantiate(bulletPrefab, (Vector2)this.gameObject.transform.position + gunEnd, Quaternion.identity);
+        bullet.transform.localScale = this.transform.localScale;
         bullet.GetComponent<Bullet>().SetSpeed(direction);
     }
 }
