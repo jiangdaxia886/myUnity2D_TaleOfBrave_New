@@ -24,23 +24,34 @@ public class Bullet : MonoBehaviour
     //敌人目标位置
     private Vector3 target;
 
-    private double dis = 99999;
+    private double dis;
 
     private Collider2D targetEnemy;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        targetEnemy = null;
-
-
+        
     }
 
+    private void OnEnable()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        targetEnemy = null;
+        dis = 99999;
+    }
+
+
     //子弹飞行速度方向
-    public void SetSpeed(Vector2 direction) 
+    public void SetSpeed() 
     {
         //rb.velocity = direction * speed;
         rb.velocity = (Vector2)FoundTarget() * speed;
+    }
+
+    private void Update()
+    {
+        //SetSpeed();
     }
 
     public Vector3 FoundTarget()
@@ -55,6 +66,7 @@ public class Bullet : MonoBehaviour
         //Debug.Log("this.transform.localScale.x :" + this.transform.localScale.x);
         //敌人方向
         int enemyDirection;
+        Debug.Log("Bullet.this.transform.position:" + this.transform.position);
         if (obj.Length  > 0)
         {
             //寻找最近敌人
@@ -62,9 +74,11 @@ public class Bullet : MonoBehaviour
             {
                 enemyDirection = i.transform.position.x - this.gameObject.transform.position.x > 0 ? 1 : -1;
                 //与敌人距离
-                tmp = Math.Pow(i.transform.position.x - this.gameObject.transform.position.x, 2) + Math.Pow(i.transform.position.y - this.gameObject.transform.position.y, 2);
+                tmp = Math.Sqrt( Math.Pow(i.transform.position.x - this.gameObject.transform.position.x, 2) + Math.Pow(i.transform.position.y - this.gameObject.transform.position.y, 2));
                 //敌人与玩家角度
                 tan = Math.Abs((i.transform.position.y - this.gameObject.transform.position.y) / (i.transform.position.x - this.gameObject.transform.position.x));
+
+                //Debug.Log("i.name:" + i.name+ ";tmpdistance:"+tmp+ ";x" + i.transform.position.x+";y:"+ i.transform.position.y+";tan:"+tan);
                 //如果此敌人在玩家面朝方向45度角以内，并且是最近的敌人，则切换目标
                 if (tmp < dis && enemyDirection == direction && tan <= 1 )
                 {
@@ -74,6 +88,7 @@ public class Bullet : MonoBehaviour
             }
             if (targetEnemy != null)
             {
+                //ebug.Log("FoundTarget()!!:"+ targetEnemy.name);
                 //敌人的中心点是在脚底，因为切割的时候选的是bottom，所以目标点的y轴需要添加0.5f
                 //寻找目标点
                 target = new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y + 0.5f, 0);
@@ -93,11 +108,17 @@ public class Bullet : MonoBehaviour
     {
         //Debug.Log(collision.name);
         //生成爆炸特效
-        GameObject explosion = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+        //GameObject explosion = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
+        //使用对象池生成爆炸特效
+        GameObject explosion = ObjectPool.Instance.GetObject(explosionPrefab);
+        explosion.transform.position = this.transform.position;
         explosion.transform.localScale = rb.velocity.x > 0 ? new Vector3(1,1,1) : new Vector3(-1,1,1);
+
         //暂停子弹携程
-        StartCoroutine(Stop());
-        Destroy(this.gameObject);
+        //StartCoroutine(Stop());
+        //Destroy(this.gameObject);
+        //将该预制体放回对象池
+        ObjectPool.Instance.PushObject(this.gameObject);
 
 
     }

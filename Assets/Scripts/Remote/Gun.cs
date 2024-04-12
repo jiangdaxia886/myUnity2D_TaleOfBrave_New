@@ -65,6 +65,7 @@ public class Gun : MonoBehaviour
         }
         //按下射击键且射击能量够用
         else if(inputController.GamePlay.Fire.WasPressedThisFrame() && character.currentPower >= firePowerCost)
+        
         {
             Fire();
             //射击能量消耗
@@ -78,8 +79,12 @@ public class Gun : MonoBehaviour
     {
         anim.SetTrigger("Shoot");
         //生成子弹
-        GameObject bullet = Instantiate(bulletPrefab, (Vector2)this.gameObject.transform.position + gunEnd, Quaternion.identity);
+        //GameObject bullet = Instantiate(bulletPrefab, (Vector2)this.gameObject.transform.position + gunEnd, Quaternion.identity);
+        //在对象池中获得子弹
+        GameObject bullet = ObjectPool.Instance.GetObject(bulletPrefab);
+        bullet.transform.position = this.transform.position + (Vector3)gunEnd;
+        //Debug.Log("Gun.this.transform.position:" + this.transform.position);
         bullet.transform.localScale = this.transform.localScale;
-        bullet.GetComponent<Bullet>().SetSpeed(direction);
+        bullet.GetComponent<Bullet>().SetSpeed();
     }
 }

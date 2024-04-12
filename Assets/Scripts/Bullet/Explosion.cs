@@ -24,7 +24,9 @@ public class Explosion : MonoBehaviour
         //当动画播放完销毁爆炸特效
         if (animatorStateInfo.normalizedTime >= 1)
         {
-            Destroy(this.gameObject);
+
+            //Destroy(this.gameObject);
+            ObjectPool.Instance.PushObject(this.gameObject);
         }
     }
 }
