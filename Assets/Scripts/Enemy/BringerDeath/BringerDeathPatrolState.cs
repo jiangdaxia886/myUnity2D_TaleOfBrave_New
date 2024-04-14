@@ -1,15 +1,15 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BoarPatrolState : BaseState
+public class BringerDeathPatrolState : BaseState
 {
-
-
     public override void OnEnter(Enemy enemy)
     {
         currentEnemy = enemy;
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
         currentEnemy.anim.SetBool("walk", true);
+        Debug.Log("BringerDeathPatrolState::::::");
     }
 
     public override void LogicUpdate()
@@ -27,7 +27,7 @@ public class BoarPatrolState : BaseState
             currentEnemy.anim.SetBool("walk", false);
         }
         else
-        { 
+        {
             currentEnemy.anim.SetBool("walk", true);
         }
     }
@@ -36,7 +36,7 @@ public class BoarPatrolState : BaseState
 
     public override void PhysicsUpdate()
     {
-        
+
     }
 
     public override void OnExit()

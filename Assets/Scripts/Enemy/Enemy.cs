@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]public PhysicsCheck physicsCheck;
 
+    [HideInInspector] public EnemyMagicAttack enemyMagicAttack;
+
     private Collider2D coll2d;
 
 
@@ -35,8 +37,9 @@ public class Enemy : MonoBehaviour
     public Vector2 centerOffset;
 
     public Vector2 checkSize;
-
+    //发现玩家距离
     public float checkDistance;
+
 
     public LayerMask attackLayer;
 
@@ -71,6 +74,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
         coll2d = GetComponent<Collider2D>();
+        enemyMagicAttack = GetComponent<EnemyMagicAttack>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         spwanPoint = transform.position;
@@ -84,17 +88,19 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        faceDir = new Vector3(-transform.localScale.x,0,0);
 
+        
         //当面朝墙且碰到墙时再转身
         currentState.LogicUpdate();
         TimeCounter();
-        
+
+
     }
 
     //刚体放在fixedUpdate执行
     private void FixedUpdate()
     {
+        faceDir = new Vector3(-transform.localScale.x, 0, 0);
         if (!isHurt && !isDead && !wait)
         {
             Move();
@@ -129,8 +135,14 @@ public class Enemy : MonoBehaviour
             { 
                 wait = false;
                 //因为faceDir=-transform.localScale.x，所以这里转身不用负值（因为速度方向和transform.localScale.x是反的，所以faceDir初始化时=-transform.localScale.x）
+                //模型转身
                 transform.localScale = new Vector3(faceDir.x, 1, 1);
+                //方向变量转向
+                faceDir = new Vector3(-transform.localScale.x, 0, 0);
+                //重新检测点
+                physicsCheck.Check();
                 waitTimeCounter = waitTime;
+                //Debug.Log("Enemy.!currentEnemy.physicsCheck.isGround" + !this.physicsCheck.isGround );
             }
         }
         //如果没有发现玩家，则将追击等待时间减少
@@ -147,6 +159,13 @@ public class Enemy : MonoBehaviour
         //向前方发射一个盒子检测射线，从中心点transform.position + (Vector3)centerOffset，向方向为faceDir发射一个大小为checkSize角度为0的射线，射线长度为checkDistance，检测对象为attackLayer
         return Physics2D.BoxCast(transform.position + (Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
 
+    }
+
+    //生成魔法攻击
+    public GameObject MagicAttack() 
+    {
+        GameObject magicAttack = Instantiate(this.enemyMagicAttack.magicAttack, (Vector2)this.attacker.transform.position + this.enemyMagicAttack.magicPosition, Quaternion.identity);
+        return magicAttack;
     }
 
     public void SwitchState(NPCState state)

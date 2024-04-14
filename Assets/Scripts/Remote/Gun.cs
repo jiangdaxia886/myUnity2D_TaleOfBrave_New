@@ -11,8 +11,6 @@ public class Gun : MonoBehaviour
     public float interval;
     //子弹
     public GameObject bulletPrefab;
-    //发射子弹的枪口位置
-    public Vector2 gunEnd;
     //子弹射击方向
     public Vector2 direction;
     //计时器
@@ -26,14 +24,16 @@ public class Gun : MonoBehaviour
 
     private Character character;
 
+    public GameObject player;
+
     //用unity自动生成的PlayerInputController控制器类
     public PlayerInputController inputController;
 
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
-        character = GetComponent<Character>();
+        playerController = player.GetComponent<PlayerController>();
+        character = player.GetComponent<Character>();
         inputController = new PlayerInputController();
         inputController.Enable();
     }
@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour
         // Start is called before the first frame update
         void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = player.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -82,7 +82,7 @@ public class Gun : MonoBehaviour
         //GameObject bullet = Instantiate(bulletPrefab, (Vector2)this.gameObject.transform.position + gunEnd, Quaternion.identity);
         //在对象池中获得子弹
         GameObject bullet = ObjectPool.Instance.GetObject(bulletPrefab);
-        bullet.transform.position = this.transform.position + (Vector3)gunEnd;
+        bullet.transform.position = this.transform.position;
         //Debug.Log("Gun.this.transform.position:" + this.transform.position);
         bullet.transform.localScale = this.transform.localScale;
         bullet.GetComponent<Bullet>().SetSpeed();

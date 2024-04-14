@@ -10,6 +10,12 @@ public class Attack : MonoBehaviour
 
     public float attackRate;
 
+    //远程攻击距离阈值
+    public float remoteDistanceMax;
+
+    //远程攻击距离阈值
+    public float remoteDistanceMin;
+
     //是否持续伤害
     public bool isDurationAttack;
 

@@ -327,7 +327,6 @@ MonoBehaviour:
   touchLeftWall: 0
   touchRightWall: 0
   onWall: 0
-  phychveloy: 0
 --- !u!114 &4184425029037059641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +342,7 @@ MonoBehaviour:
   damage: 15
   attackRange: 0
   attackRate: 0
+  isDurationAttack: 0
 --- !u!114 &4184842566250890214
 MonoBehaviour:
   m_ObjectHideFlags: 0
