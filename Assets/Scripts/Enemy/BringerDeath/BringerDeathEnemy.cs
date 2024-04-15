@@ -13,8 +13,8 @@ public class BringerDeathEnemy : Enemy
 
     public override bool FoundPlayer()
     {
-        //判断以transform.position为中心点，半径为checkDistance范围内是否有attackLayer
-        var obj = Physics2D.OverlapCircle(transform.position, checkDistance, attackLayer);
+        //向前方发射一个盒子检测射线，从中心点transform.position + (Vector3)centerOffset，向方向为faceDir发射一个大小为checkSize角度为0的射线，射线长度为checkDistance，检测对象为attackLayer
+        var obj = Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
         if (obj)
         {
             //将attacker设置为玩家
@@ -22,5 +22,8 @@ public class BringerDeathEnemy : Enemy
         }
         return obj;
     }
+    public override void Move()
+    {
 
+    }
 }

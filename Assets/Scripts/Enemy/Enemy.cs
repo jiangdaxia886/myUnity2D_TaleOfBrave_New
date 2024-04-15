@@ -162,10 +162,17 @@ public class Enemy : MonoBehaviour
     }
 
     //生成魔法攻击
-    public GameObject MagicAttack() 
+    public void MagicAttack() 
     {
+        StartCoroutine(MagicAttackGenerate());
+    }
+
+    private IEnumerator MagicAttackGenerate()
+    {
+        Debug.Log("this.attacker.transform.position:" + this.attacker.transform.position);
         GameObject magicAttack = Instantiate(this.enemyMagicAttack.magicAttack, (Vector2)this.attacker.transform.position + this.enemyMagicAttack.magicPosition, Quaternion.identity);
-        return magicAttack;
+        //协程，在执行完击退后等待0.5s再执行下一步
+        yield return new WaitForSeconds(0.3f);
     }
 
     public void SwitchState(NPCState state)

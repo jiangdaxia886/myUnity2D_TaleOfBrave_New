@@ -13,12 +13,14 @@ GameObject:
   - component: {fileID: 7466198124354613707}
   - component: {fileID: 8126139956580350477}
   - component: {fileID: 1016047280269985791}
+  - component: {fileID: 6240733280218659711}
   - component: {fileID: 5870362175319415433}
   - component: {fileID: 206879440483177754}
   - component: {fileID: 5608183544135805626}
   - component: {fileID: 4262972762572684680}
   - component: {fileID: 4184425029037059641}
   - component: {fileID: 6314338718846167088}
+  - component: {fileID: 5649255819012433053}
   m_Layer: 8
   m_Name: BringerDeathEnemy
   m_TagString: Untagged
@@ -200,6 +202,58 @@ CapsuleCollider2D:
   m_Offset: {x: 0.109487474, y: 1.3786932}
   m_Size: {x: 1.1923338, y: 2.7354496}
   m_Direction: 0
+--- !u!60 &6240733280218659711
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907185244366477254}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 10
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.75, y: 0}
+    oldSize: {x: 7, y: 4.65}
+    newSize: {x: 3, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.9498062, y: 3.629229}
+      - {x: -1.9848958, y: 2.4103389}
+      - {x: -2.3948348, y: 0.3055408}
+      - {x: -3.5073807, y: -0.04687853}
+      - {x: -5.35553, y: 0.62165505}
+      - {x: -5.113429, y: 2.386112}
+      - {x: -2.0505695, y: 4.353497}
+  m_UseDelaunayMesh: 0
 --- !u!95 &5870362175319415433
 Animator:
   serializedVersion: 5
@@ -234,8 +288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newGameEvent: {fileID: 11400000, guid: fd17fec008516b641a900230fc307d61, type: 2}
-  maxHealth: 50
-  CurrentHealth: 50
+  maxHealth: 80
+  CurrentHealth: 80
   maxPower: 0
   currentPower: 0
   powerRecoverSpeed: 0
@@ -249,7 +303,7 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4262972762572684680}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
         m_MethodName: OnTakeDamage
         m_Mode: 0
@@ -276,7 +330,7 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4262972762572684680}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
         m_MethodName: OnDie
         m_Mode: 1
@@ -342,6 +396,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   anim: {fileID: 0}
   physicsCheck: {fileID: 0}
+  enemyMagicAttack: {fileID: 0}
   normalSpeed: 100
   chaseSpeed: 260
   currentSpeed: 0
@@ -350,8 +405,8 @@ MonoBehaviour:
   attacker: {fileID: 0}
   spwanPoint: {x: 0, y: 0, z: 0}
   centerOffset: {x: 0, y: 0}
-  checkSize: {x: 0, y: 0}
-  checkDistance: 4.5
+  checkSize: {x: 1, y: 1}
+  checkDistance: 6
   attackLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -376,7 +431,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   attackRange: 0
-  attackRate: 0
+  attackRate: 2
+  remoteDistanceMax: 5
+  remoteDistanceMin: 3
   isDurationAttack: 0
 --- !u!114 &6314338718846167088
 MonoBehaviour:
@@ -392,3 +449,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   persistentType: 0
   ID: 95da24e0-0e3d-48dc-96d1-b6c2a64a8a23
+--- !u!114 &5649255819012433053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907185244366477254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9673860797609ea4a87288245f39bbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicAttack: {fileID: 7192369174211062189, guid: 6565e6136311eef418347a52cf3b049a, type: 3}
+  magicPosition: {x: 0, y: 2.5}

@@ -36,7 +36,14 @@ public class BringerDeathPatrolState : BaseState
 
     public override void PhysicsUpdate()
     {
-
+        if (!currentEnemy.isHurt && !currentEnemy.isDead && !currentEnemy.wait)
+        {
+            currentEnemy.rb.velocity = new Vector2(currentEnemy.currentSpeed * currentEnemy.faceDir.x * Time.deltaTime, currentEnemy.rb.velocity.y);
+        }
+        else
+        {
+            currentEnemy.rb.velocity = Vector2.zero;
+        }
     }
 
     public override void OnExit()

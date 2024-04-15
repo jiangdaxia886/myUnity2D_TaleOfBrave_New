@@ -565,6 +565,8 @@ MonoBehaviour:
   damage: 8
   attackRange: 0
   attackRate: 0
+  remoteDistanceMax: 0
+  remoteDistanceMin: 0
   isDurationAttack: 0
 --- !u!66 &97706092
 CompositeCollider2D:
@@ -43204,7 +43206,7 @@ Tilemap:
       - {fileID: 272276314, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1342014168, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 164343351, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: -9, z: 0}
@@ -43336,7 +43338,7 @@ Tilemap:
       - {fileID: 272276314, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1342014168, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 164343351, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: -5, z: 0}
@@ -43347,7 +43349,7 @@ Tilemap:
       - {fileID: 1030559130, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 1998852525, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1289780929, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 14, y: -4, z: 0}
@@ -43567,7 +43569,7 @@ Tilemap:
       - {fileID: 272276314, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: -1342014168, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
       - {fileID: 164343351, guid: a5ced510b4f2c564ca79f427fe3bac72, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 2, z: 0}
