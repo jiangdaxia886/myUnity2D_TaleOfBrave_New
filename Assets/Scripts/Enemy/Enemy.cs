@@ -11,11 +11,17 @@ public class Enemy : MonoBehaviour
     //protected 子类可以访问
     [HideInInspector]public Animator anim;
 
+    [HideInInspector] public Animator magicAttackAnim;
+
+    private AnimatorStateInfo animatorStateInfo;
+
     [HideInInspector]public PhysicsCheck physicsCheck;
 
     [HideInInspector] public EnemyMagicAttack enemyMagicAttack;
 
     private Collider2D coll2d;
+
+    private Animator hitAnimator;
 
 
     [Header("基本参数")]
@@ -75,6 +81,8 @@ public class Enemy : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         coll2d = GetComponent<Collider2D>();
         enemyMagicAttack = GetComponent<EnemyMagicAttack>();
+        //获得子物体受击动画的动画器
+        hitAnimator = transform.GetChild(0).GetComponent<Animator>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         spwanPoint = transform.position;
@@ -93,6 +101,20 @@ public class Enemy : MonoBehaviour
         //当面朝墙且碰到墙时再转身
         currentState.LogicUpdate();
         TimeCounter();
+
+        //动画播放结束销毁动画
+        if (magicAttackAnim) 
+        {
+            //获取当前动画进度
+            animatorStateInfo = magicAttackAnim.GetCurrentAnimatorStateInfo(0);
+            //Debug.Log("animatorStateInfo.normalizedTime:"+animatorStateInfo.normalizedTime);
+            //动画播放90%就销毁动画
+            if (animatorStateInfo.normalizedTime >= 0.9)
+            {
+
+                Destroy(magicAttackAnim.gameObject);
+            }
+        }
 
 
     }
@@ -169,10 +191,11 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator MagicAttackGenerate()
     {
-        Debug.Log("this.attacker.transform.position:" + this.attacker.transform.position);
-        GameObject magicAttack = Instantiate(this.enemyMagicAttack.magicAttack, (Vector2)this.attacker.transform.position + this.enemyMagicAttack.magicPosition, Quaternion.identity);
+        //Debug.Log("this.attacker.transform.position:" + this.attacker.transform.position);
         //协程，在执行完击退后等待0.5s再执行下一步
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.75f);
+        GameObject magicAttack = Instantiate(this.enemyMagicAttack.magicAttack, (Vector2)this.attacker.transform.position + this.enemyMagicAttack.magicPosition, Quaternion.identity);
+        magicAttackAnim = magicAttack.GetComponent<Animator>();
     }
 
     public void SwitchState(NPCState state)
@@ -206,14 +229,20 @@ public class Enemy : MonoBehaviour
         if (attackTrans.position.x - transform.position.x > 0) 
         {
             transform.localScale = new Vector3(-1, 1, 1);
+            
         }
         if (attackTrans.position.x - transform.position.x < 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
+            
         }
         //受伤被击退
         isHurt = true;
         anim.SetTrigger("hurt");
+        hitAnimator.transform.position = new Vector2(hitAnimator.transform.position.x, attackTrans.position.y + 1.2f);
+        //如果攻击者是player
+        if(attackTrans.CompareTag("Player"))
+            hitAnimator.SetTrigger("Hit");
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
         //受伤时先将野猪停下，再被击退
         rb.velocity = new Vector2(0, rb.velocity.y);

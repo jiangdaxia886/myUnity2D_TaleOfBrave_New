@@ -174,6 +174,8 @@ public class SceneLoader : MonoBehaviour,ISaveable
         playerTrans.transform.position = positionToGo;
         //启用人物图片
         playerTrans.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        //人物血量恢复（如果不回复，人物复活之后敌人的碰撞体还没消失，于是立刻死亡又出现一次gameover场景）
+        playerTrans.gameObject.GetComponent<Character>().CurrentHealth = playerTrans.gameObject.GetComponent<Character>().maxHealth;
         //加载场景后变透明
         if (fadeScreen)
         {

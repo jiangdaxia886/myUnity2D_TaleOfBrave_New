@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6ec07f3b483844548a31c1f84f0a2443
+guid: aa6c9bdb6cdc30040b14c288c16c288f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 36
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -149,85 +149,232 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wanderer_Magican_Spritelist_0_enemy_be_attack
+      name: break02_0
       rect:
         serializedVersion: 2
-        x: 2334
-        y: 671
-        width: 43
-        height: 47
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b43f7c04cf9f5e742a0c610ce97c1028
-      internalID: 1246749359
+      spriteID: 48785318f5b96c04fb833924086dc55a
+      internalID: 28693520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wanderer_Magican_Spritelist_1
+      name: break02_1
       rect:
         serializedVersion: 2
-        x: 2387
-        y: 666
-        width: 53
-        height: 55
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ff73248eee3c1b40bbcb4fcedfd43f8
-      internalID: 1534481433
+      spriteID: 4fb5064e29c892c4697d530b3e86dd99
+      internalID: -647723989
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wanderer_Magican_Spritelist_2
+      name: break02_2
       rect:
         serializedVersion: 2
-        x: 2445
-        y: 666
-        width: 47
-        height: 57
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3474d1bcb6b0d254bbde9b08c61c8054
-      internalID: 89852055
+      spriteID: af031bcccebe59a4590a9a829b4486bf
+      internalID: -1597632242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wanderer_Magican_Spritelist_3_enemy_be_attack
+      name: break02_3
       rect:
         serializedVersion: 2
-        x: 2494
-        y: 668
-        width: 53
-        height: 51
+        x: 192
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33a5105ca1a3f934c91a1a88e22004e1
-      internalID: 1998586015
+      spriteID: 26fe114eb1412bd4c97bc8ff77c13ccb
+      internalID: 1958571082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c326477115c39f548a2342af0536db27
+      internalID: 845294221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 523efb06a1afbb8469e9f9a727798a40
+      internalID: 501514983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20252562213b46847ae10dac8c1cfb1a
+      internalID: 1198922955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e794ba0a4339834f94259db445ef761
+      internalID: -1700001478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e94b90d948b82bf44b63f47d4ffa6ae4
+      internalID: 1336649634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 384c3ca990ba2d349b6763e019bfa691
+      internalID: -401280974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: break02_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de2990856bed94749958a9ec99be70b7
+      internalID: -1007759941
       vertices: []
       indices: 
       edges: []
@@ -241,12 +388,21 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: b0c8972d37005a4488d6972b17de89d8, type: 3}
+      name: _secondary
     nameFileIdTable:
-      Wanderer_Magican_Spritelist_0_enemy_be_attack: 1246749359
-      Wanderer_Magican_Spritelist_1: 1534481433
-      Wanderer_Magican_Spritelist_2: 89852055
-      Wanderer_Magican_Spritelist_3_enemy_be_attack: 1998586015
+      break02_0: 28693520
+      break02_1: -647723989
+      break02_10: -1007759941
+      break02_2: -1597632242
+      break02_3: 1958571082
+      break02_4: 845294221
+      break02_5: 501514983
+      break02_6: 1198922955
+      break02_7: -1700001478
+      break02_8: 1336649634
+      break02_9: -401280974
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

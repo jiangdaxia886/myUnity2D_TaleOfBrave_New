@@ -1016,7 +1016,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.1, y: 0.1, z: 0}
+  m_DefaultVelocity: {x: 0.13, y: 0.13, z: 0}
 --- !u!4 &643560086
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 759623287}
   m_Layer: 0
   m_Name: Attack3
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1382,6 +1382,8 @@ MonoBehaviour:
   damage: 15
   attackRange: 0
   attackRate: 0
+  remoteDistanceMax: 0
+  remoteDistanceMin: 0
   isDurationAttack: 1
 --- !u!60 &759623286
 PolygonCollider2D:
@@ -2941,7 +2943,7 @@ GameObject:
   - component: {fileID: 1354508261}
   m_Layer: 0
   m_Name: Attack2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3027,6 +3029,8 @@ MonoBehaviour:
   damage: 10
   attackRange: 0
   attackRate: 0
+  remoteDistanceMax: 0
+  remoteDistanceMin: 0
   isDurationAttack: 0
 --- !u!114 &1354508261
 MonoBehaviour:
@@ -4020,7 +4024,7 @@ GameObject:
   - component: {fileID: 1678295890}
   m_Layer: 0
   m_Name: Attack1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4055,6 +4059,8 @@ MonoBehaviour:
   damage: 10
   attackRange: 0
   attackRate: 0
+  remoteDistanceMax: 0
+  remoteDistanceMin: 0
   isDurationAttack: 0
 --- !u!60 &1678295889
 PolygonCollider2D:
@@ -4595,7 +4601,7 @@ GameObject:
   - component: {fileID: 2067454360}
   m_Layer: 7
   m_Name: ///player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4793,7 +4799,6 @@ MonoBehaviour:
   touchLeftWall: 0
   touchRightWall: 0
   onWall: 0
-  phychveloy: 0
 --- !u!95 &2067454356
 Animator:
   serializedVersion: 5

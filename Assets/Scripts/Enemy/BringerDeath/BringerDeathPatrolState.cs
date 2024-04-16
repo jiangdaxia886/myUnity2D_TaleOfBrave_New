@@ -9,7 +9,7 @@ public class BringerDeathPatrolState : BaseState
         currentEnemy = enemy;
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
         currentEnemy.anim.SetBool("walk", true);
-        Debug.Log("BringerDeathPatrolState::::::");
+        //Debug.Log("BringerDeathPatrolState::::::");
     }
 
     public override void LogicUpdate()
