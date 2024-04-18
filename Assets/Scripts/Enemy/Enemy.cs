@@ -82,7 +82,8 @@ public class Enemy : MonoBehaviour
         coll2d = GetComponent<Collider2D>();
         enemyMagicAttack = GetComponent<EnemyMagicAttack>();
         //获得子物体受击动画的动画器
-        hitAnimator = transform.GetChild(0).GetComponent<Animator>();
+        if(transform.childCount > 0)
+            hitAnimator = transform.GetChild(0).GetComponent<Animator>();
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         spwanPoint = transform.position;
@@ -239,7 +240,7 @@ public class Enemy : MonoBehaviour
         //受伤被击退
         isHurt = true;
         anim.SetTrigger("hurt");
-        hitAnimator.transform.position = new Vector2(hitAnimator.transform.position.x, attackTrans.position.y + 1.2f);
+        hitAnimator.transform.position = new Vector2(this.transform.position.x, attackTrans.position.y + 1.2f);
         //如果攻击者是player
         if(attackTrans.CompareTag("Player"))
             hitAnimator.SetTrigger("Hit");

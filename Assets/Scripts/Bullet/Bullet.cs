@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
         double tan;
         //面朝方向
         int direction = this.transform.localScale.x > 0 ? 1 : -1;
-        //Debug.Log("this.transform.localScale.x :" + this.transform.localScale.x);
+        Debug.Log("this.transform.localScale.x :" + this.transform.localScale.x);
         //敌人方向
         int enemyDirection;
         Debug.Log("Bullet.this.transform.position:" + this.transform.position);
@@ -88,7 +88,7 @@ public class Bullet : MonoBehaviour
             }
             if (targetEnemy != null)
             {
-                //ebug.Log("FoundTarget()!!:"+ targetEnemy.name);
+                Debug.Log("FoundTarget()!!:"+ targetEnemy.name);
                 //敌人的中心点是在脚底，因为切割的时候选的是bottom，所以目标点的y轴需要添加0.5f
                 //寻找目标点
                 target = new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y + 0.5f, 0);

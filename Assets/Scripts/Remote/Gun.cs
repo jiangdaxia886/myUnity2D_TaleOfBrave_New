@@ -84,7 +84,7 @@ public class Gun : MonoBehaviour
         GameObject bullet = ObjectPool.Instance.GetObject(bulletPrefab);
         bullet.transform.position = this.transform.position;
         //Debug.Log("Gun.this.transform.position:" + this.transform.position);
-        bullet.transform.localScale = this.transform.localScale;
+        bullet.transform.localScale = player.transform.localScale;
         bullet.GetComponent<Bullet>().SetSpeed();
     }
 }
