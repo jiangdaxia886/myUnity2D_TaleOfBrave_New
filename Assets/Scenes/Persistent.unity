@@ -4757,7 +4757,7 @@ MonoBehaviour:
   inputDirection: {x: 0, y: 0}
   speed: 330
   slideSpeed: 600
-  slidePowerCost: 5
+  slidePowerCost: 3
   jumpForce: 16.5
   onWallJumpForce: 7
   hurtForce: 8

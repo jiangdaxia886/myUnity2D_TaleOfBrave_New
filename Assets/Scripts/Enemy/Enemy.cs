@@ -1,3 +1,4 @@
+using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class Enemy : MonoBehaviour
     private Collider2D coll2d;
 
     private Animator hitAnimator;
+
+    public DamageNumber damageNumber;
 
 
     [Header("基本参数")]
@@ -193,7 +196,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator MagicAttackGenerate()
     {
         //Debug.Log("this.attacker.transform.position:" + this.attacker.transform.position);
-        //协程，在执行完击退后等待0.5s再执行下一步
+        //协程，在执行完抬手待0.75s再执行下一步
         yield return new WaitForSeconds(0.75f);
         GameObject magicAttack = Instantiate(this.enemyMagicAttack.magicAttack, (Vector2)this.attacker.transform.position + this.enemyMagicAttack.magicPosition, Quaternion.identity);
         magicAttackAnim = magicAttack.GetComponent<Animator>();
@@ -241,9 +244,11 @@ public class Enemy : MonoBehaviour
         isHurt = true;
         anim.SetTrigger("hurt");
         hitAnimator.transform.position = new Vector2(this.transform.position.x, attackTrans.position.y + 1.2f);
-        //如果攻击者是player
+        //如果攻击者是player,才播放受击特效
         if(attackTrans.CompareTag("Player"))
             hitAnimator.SetTrigger("Hit");
+        //弹幕伤害
+        damageNumber.Spawn(transform.position + new Vector3(0,2,0), attackTrans.GetComponent<Attack>().damage);
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
         //受伤时先将野猪停下，再被击退
         rb.velocity = new Vector2(0, rb.velocity.y);
