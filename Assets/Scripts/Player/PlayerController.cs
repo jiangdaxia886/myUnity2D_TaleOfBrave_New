@@ -29,6 +29,11 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D capsuleCollider;
     
     private Character character;
+    //残影
+    public GameObject dashObj;
+
+    private SpriteRenderer spriteRenderer;
+
 
 
     //当前位置
@@ -95,6 +100,7 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         character = GetComponent<Character>();
+        //spriteRenderer = this.GetComponent<SpriteRenderer>();
         capsuleCollider2Dy = capsuleCollider.size.y;
         capsuleCollider2DOffsety = capsuleCollider.offset.y;
         //实例化控制器类
@@ -193,7 +199,7 @@ public class PlayerController : MonoBehaviour
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
         //场景加载时禁用人物操作
-        inputController.GamePlay.Disable();
+        //inputController.GamePlay.Disable();
         //Debug.Log("场景加载时禁用人物操作");
     }
 
@@ -216,6 +222,10 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("inputDirection.x"+inputDirection.x);
         if (!isSlide)
         {
+            //粒子特效残影（未修复bug）
+            //dashObj.SetActive(false);
+/*            dashObj.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
+            dashObj.transform.localScale = this.transform.localScale;*/
             //人物翻转
             int faceDir = (int)transform.localScale.x;
 
@@ -238,6 +248,12 @@ public class PlayerController : MonoBehaviour
                 faceDir = 1;
             if (slideDirection < 0)
                 faceDir = -1;
+            //残影
+            ShadowPool.instance.GetFormPool();
+/*            dashObj.SetActive(true);
+            dashObj.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
+            dashObj.transform.localScale = this.transform.localScale;*/
+
             transform.localScale = new Vector3(faceDir, 1, 1);
             rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, rb.velocity.y);
 

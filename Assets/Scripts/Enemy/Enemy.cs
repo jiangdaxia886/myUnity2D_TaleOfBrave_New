@@ -106,19 +106,7 @@ public class Enemy : MonoBehaviour
         currentState.LogicUpdate();
         TimeCounter();
 
-        //动画播放结束销毁动画
-        if (magicAttackAnim) 
-        {
-            //获取当前动画进度
-            animatorStateInfo = magicAttackAnim.GetCurrentAnimatorStateInfo(0);
-            //Debug.Log("animatorStateInfo.normalizedTime:"+animatorStateInfo.normalizedTime);
-            //动画播放90%就销毁动画
-            if (animatorStateInfo.normalizedTime >= 0.9)
-            {
 
-                Destroy(magicAttackAnim.gameObject);
-            }
-        }
 
 
     }
@@ -198,8 +186,8 @@ public class Enemy : MonoBehaviour
         //Debug.Log("this.attacker.transform.position:" + this.attacker.transform.position);
         //协程，在执行完抬手待0.75s再执行下一步
         yield return new WaitForSeconds(0.75f);
-        GameObject magicAttack = Instantiate(this.enemyMagicAttack.magicAttack, (Vector2)this.attacker.transform.position + this.enemyMagicAttack.magicPosition, Quaternion.identity);
-        magicAttackAnim = magicAttack.GetComponent<Animator>();
+        //远程攻击
+        enemyMagicAttack.AfterMagicAttack(attacker);
     }
 
     public void SwitchState(NPCState state)
@@ -243,10 +231,14 @@ public class Enemy : MonoBehaviour
         //受伤被击退
         isHurt = true;
         anim.SetTrigger("hurt");
+
+        #region 受击特效
         hitAnimator.transform.position = new Vector2(this.transform.position.x, attackTrans.position.y + 1.2f);
         //如果攻击者是player,才播放受击特效
         if(attackTrans.CompareTag("Player"))
             hitAnimator.SetTrigger("Hit");
+        #endregion
+
         //弹幕伤害
         damageNumber.Spawn(transform.position + new Vector3(0,2,0), attackTrans.GetComponent<Attack>().damage);
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;

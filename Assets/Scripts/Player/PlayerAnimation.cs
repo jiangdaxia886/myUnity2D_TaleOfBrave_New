@@ -59,6 +59,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetTrigger("slide");
     }
 
+
     public void PlayCameraShake() 
     {
         cameraShakeEvent.RaiseEvent();

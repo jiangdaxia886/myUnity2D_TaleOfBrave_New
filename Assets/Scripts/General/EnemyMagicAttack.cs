@@ -8,4 +8,14 @@ public class EnemyMagicAttack : MonoBehaviour
     public GameObject magicAttack;
 
     public Vector2 magicPosition;
+
+
+
+
+    public void AfterMagicAttack(Transform Attacker)
+    {
+        //对象池生成远程攻击
+        GameObject attackEffect = ObjectPool.Instance.GetObject(magicAttack);
+        attackEffect.transform.position = (Vector2)Attacker.transform.position + magicPosition;
+    }
 }
