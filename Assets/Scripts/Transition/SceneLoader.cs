@@ -185,12 +185,14 @@ public class SceneLoader : MonoBehaviour,ISaveable
         isLoading = false;
 
         //如果加载的场景是location而不是menu，则人物可以移动
-        if (currentLoadScene.sceneType == SceneType.Location)
+/*        if (currentLoadScene.sceneType == SceneType.Location)
         {
             //Debug.Log("解除控制");
             //场景加载完成后事件(目前是获取相机边界、人物解锁)
             afterSceneLoadedEvent?.RaiseEvent();
-        }
+        }*/
+        //现在这版本20240422在menu人物也可以移动
+        afterSceneLoadedEvent?.RaiseEvent();
         //场景加载完成后再执行sceneUnloadEvent加载血条
         sceneUnloadEvent.RaiseLoadRequestEvent(sceneToLoad, positionToGo, true);
     }

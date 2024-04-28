@@ -22,7 +22,7 @@ public class BoarPatrolState : BaseState
         //当面朝墙且碰到墙时或前方是悬崖再转身
         if (!currentEnemy.physicsCheck.isGround || (currentEnemy.physicsCheck.touchLeftWall && currentEnemy.faceDir.x < 0 || currentEnemy.physicsCheck.touchRightWall && currentEnemy.faceDir.x > 0))
         {
-            Debug.Log("currentEnemy.physicsCheck.touchLeftWall" + currentEnemy.physicsCheck.touchLeftWall+ ";currentEnemy.faceDir.x:"+ currentEnemy.faceDir.x);
+            //Debug.Log("currentEnemy.physicsCheck.touchLeftWall" + currentEnemy.physicsCheck.touchLeftWall+ ";currentEnemy.faceDir.x:"+ currentEnemy.faceDir.x);
             currentEnemy.wait = true;
             currentEnemy.anim.SetBool("walk", false);
         }

@@ -53,7 +53,6 @@ public class CameraControl : MonoBehaviour
 
     private void GetNewCameraBounds() 
     {
-        //Debug.Log("find bounds!!!!!!!");
         var obj = GameObject.FindGameObjectWithTag("Bounds");
         if (obj == null)
         {

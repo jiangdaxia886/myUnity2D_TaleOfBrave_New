@@ -59,5 +59,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _LightColor: {r: 0.9685534, g: 0.8918621, b: 0.58174115, a: 0}
+    - _LightColor: {r: 1.0592737, g: 0.975399, b: 0.63623035, a: 0}
   m_BuildTextureStacks: []

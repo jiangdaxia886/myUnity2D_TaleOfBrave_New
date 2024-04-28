@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    public GameObject effects;
+
+    public EffectManager effectManager;
+
 
 
     //当前位置
@@ -60,6 +64,9 @@ public class PlayerController : MonoBehaviour
     public float slideSize;
 
     public float slideOffsety;
+    //土狼时间
+    public float JumpGraceTime;
+
 
     //获取初始碰撞体大小
     [HideInInspector] public float capsuleCollider2Dy;
@@ -92,6 +99,10 @@ public class PlayerController : MonoBehaviour
 
     public bool wallJump;
 
+    private float JumpTimer;
+
+    private JumpState jumpState;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -100,6 +111,7 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         character = GetComponent<Character>();
+        effectManager = effects.GetComponent<EffectManager>();
         //spriteRenderer = this.GetComponent<SpriteRenderer>();
         capsuleCollider2Dy = capsuleCollider.size.y;
         capsuleCollider2DOffsety = capsuleCollider.offset.y;
@@ -164,6 +176,17 @@ public class PlayerController : MonoBehaviour
             //人物移动
             Move();
         CheckState();
+        //土狼时间（JumpTimer > 0 时可以跳跃）
+        if (physicsCheck.isGround || physicsCheck.onWall)
+        {
+            JumpTimer = JumpGraceTime;
+            //记录起跳状态
+            jumpState = physicsCheck.isGround ? JumpState.GroundJump : JumpState.WallJump;
+        }
+        else if(JumpTimer > 0)
+        {
+            JumpTimer -= Time.deltaTime;
+        }
 
     }
 
@@ -199,7 +222,7 @@ public class PlayerController : MonoBehaviour
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
         //场景加载时禁用人物操作
-        //inputController.GamePlay.Disable();
+        inputController.GamePlay.Disable();
         //Debug.Log("场景加载时禁用人物操作");
     }
 
@@ -250,9 +273,12 @@ public class PlayerController : MonoBehaviour
                 faceDir = -1;
             //残影
             ShadowPool.instance.GetFormPool();
-/*            dashObj.SetActive(true);
-            dashObj.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
-            dashObj.transform.localScale = this.transform.localScale;*/
+            //粒子特效
+            if(physicsCheck.isGround)
+                effectManager.WallSlide(this.transform.position + (Vector3)inputDirection * 0.5f, -inputDirection);
+            /*            dashObj.SetActive(true);
+                        dashObj.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
+                        dashObj.transform.localScale = this.transform.localScale;*/
 
             transform.localScale = new Vector3(faceDir, 1, 1);
             rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, rb.velocity.y);
@@ -266,22 +292,27 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        //Debug.Log("Jump");
-        if (physicsCheck.isGround)
+        //土狼时间>0且是地面起跳
+        if (JumpTimer > 0 && jumpState == JumpState.GroundJump)
         {
             //impulse 添加一个瞬时的力
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             GetComponent<AudioDefination>()?.PlayAudioClip();
             /* Debug.Log("physicsCheck.isGround:" + physicsCheck.isGround);
             Debug.Log("physicsCheck.onWall:" + physicsCheck.onWall);*/
+            //粒子特效
+            effectManager.JumpDust(this.transform.position, Vector2.up);
         }
-        else if (physicsCheck.onWall)
+        //土狼时间>0且是蹬墙跳
+        else if (JumpTimer > 0 && jumpState == JumpState.WallJump)
         {
             //因为是瞬时的力，为了保证跳跃高度一样，在跳跃之前速度置为0
             rb.velocity = Vector2.zero;
             //蹬墙跳，x轴方向速度为inputDirection.x的反方向
             rb.AddForce(new Vector3(-0.45f * inputDirection.x, 2f,0) * onWallJumpForce, ForceMode2D.Impulse);
             wallJump = true;
+            //粒子特效
+            effectManager.JumpDust(this.transform.position + (Vector3)inputDirection * 0.5f + new Vector3(0,0.3f,0), -inputDirection);
             /*             Debug.Log("Time.time"+Time.time);
                      if (wallJump)
                        {
@@ -357,9 +388,13 @@ public class PlayerController : MonoBehaviour
         capsuleCollider.sharedMaterial = physicsCheck.isGround?normal:wall;
         //下滑减慢,同时不是walljump状态时才减慢，因为onwall的监测点比碰撞体突出，所以在walljump时也会处于onwall，会导致蹬墙跳跳不高
         if (physicsCheck.onWall && !wallJump)
+        {
+            //粒子特效
+            effectManager.WallSlide(this.transform.position + (Vector3)inputDirection * 0.5f + new Vector3(0,1,0) ,-inputDirection);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
+        }
         
-        //y轴速度小于7时蹬墙跳为false
+        //y轴速度小于7时蹬墙跳为false,左右可以操控移动
         if (wallJump && rb.velocity.y < 7f)
         {
             wallJump = false;

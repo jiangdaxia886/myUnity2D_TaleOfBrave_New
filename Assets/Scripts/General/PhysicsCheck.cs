@@ -20,6 +20,7 @@ public class PhysicsCheck : MonoBehaviour
     public Vector2 bottomOffset;
     public Vector2 leftOffset;
     public Vector2 rightOffset;
+    public float offset;
     //碰撞范围
     public float checkRaduis;
     //碰撞图层
@@ -55,10 +56,10 @@ public class PhysicsCheck : MonoBehaviour
         if (!manual)
         {
 
-            //右侧碰撞点的x偏移量等于碰撞体的范围/2+碰撞体的偏移量，y轴位置是y的边界/2
-            rightOffset = new Vector2((capsuleCollider.bounds.size.x / 2 + capsuleCollider.offset.x * transform.localScale.x), (capsuleCollider.bounds.size.y / 4));
+            //右侧碰撞点的x偏移量等于碰撞体的范围/2+碰撞体的偏移量，y轴位置是y的边界/4
+            rightOffset = new Vector2((capsuleCollider.bounds.size.x / 2 + capsuleCollider.offset.x * transform.localScale.x + offset * transform.localScale.x), (capsuleCollider.bounds.size.y / 4));
             //左侧的x轴偏移量等于右侧偏移量的负值
-            leftOffset = new Vector2((-capsuleCollider.bounds.size.x / 2 + capsuleCollider.offset.x * transform.localScale.x), rightOffset.y);
+            leftOffset = new Vector2((-capsuleCollider.bounds.size.x / 2 + capsuleCollider.offset.x * transform.localScale.x + offset * transform.localScale.x), rightOffset.y);
         }
         Check();
     }

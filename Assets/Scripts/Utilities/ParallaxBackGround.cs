@@ -26,7 +26,7 @@ public class ParallaxBackGround : MonoBehaviour
         Texture2D texture = sprite.texture;
         //背景图片宽度
         textureUnitSizeX = texture.width / sprite.pixelsPerUnit * transform.localScale.x;
-        Debug.Log("sprite.pixelsPerUnit:"+sprite.pixelsPerUnit+ ";texture.width:"+ texture.width + ";textureUnitSizeX:"+ textureUnitSizeX);
+        //Debug.Log("sprite.pixelsPerUnit:"+sprite.pixelsPerUnit+ ";texture.width:"+ texture.width + ";textureUnitSizeX:"+ textureUnitSizeX);
         textureUnitSizeY = texture.height / sprite.pixelsPerUnit;
     }
 
@@ -35,7 +35,8 @@ public class ParallaxBackGround : MonoBehaviour
         //移动长度
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
         //当前背景图片移动，移动长度乘以衰减系数parallaxEffectMultiplier
-        transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
+        //transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
+        transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, 0);
         lastCameraPosition = cameraTransform.position;
         //如果勾选了水平背景刷新
         if (infiniteHorizontal)
