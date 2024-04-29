@@ -296,6 +296,8 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.PlayAttack();
         isAttack = true;
+        //¹¥»÷Ê±¶³Ö¡
+        GetComponent<FrameFrozen>()?.frazee(0.05f);
         //Debug.Log("isAttack");
         /*combo++;
         if(combo >= 4)
