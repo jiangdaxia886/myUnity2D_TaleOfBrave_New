@@ -9,6 +9,8 @@ public class LandStart : StateMachineBehaviour
     {
 
         animator.gameObject.GetComponent<PlayerController>().effectManager.LandDust(animator.gameObject.transform.position);
+        animator.gameObject.GetComponent<PlayerController>().rippleEffect.GetComponent<RippleEffect>().Ripple(animator.gameObject.transform.position);
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

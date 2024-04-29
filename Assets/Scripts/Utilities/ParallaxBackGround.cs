@@ -10,6 +10,8 @@ public class ParallaxBackGround : MonoBehaviour
 
     public Vector2 BackGroundOffset;
 
+    public GameObject cameraBound;
+
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
@@ -20,7 +22,7 @@ public class ParallaxBackGround : MonoBehaviour
         cameraTransform = Camera.main.transform;
         lastCameraPosition = cameraTransform.position;
         //背景初始位置
-        transform.position = new Vector3(cameraTransform.position.x + BackGroundOffset.x, cameraTransform.position.y + BackGroundOffset.y, 0f);
+        transform.position = new Vector3(cameraBound.transform.position.x + BackGroundOffset.x, cameraBound.transform.position.y + BackGroundOffset.y, 0f);
         //获取图片纹理
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
         Texture2D texture = sprite.texture;

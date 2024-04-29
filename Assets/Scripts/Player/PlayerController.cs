@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XInput;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private Character character;
     //残影
     public GameObject dashObj;
+    //Ripple
+    public GameObject rippleEffect;
 
     private SpriteRenderer spriteRenderer;
 
@@ -56,6 +59,15 @@ public class PlayerController : MonoBehaviour
     public int slidePowerCost;
 
     public float jumpForce;
+
+    public float jumpVelocity;
+
+    private float jumpSpeed;
+
+    //跳跃最大时长
+    public float jumpDura;
+    //跳跃计时器
+    private float jumpTimer;
 
     public float onWallJumpForce;
 
@@ -99,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public bool wallJump;
 
-    private float JumpTimer;
+    private float beforeJumpTimer;
 
     private JumpState jumpState;
 
@@ -118,7 +130,13 @@ public class PlayerController : MonoBehaviour
         //实例化控制器类
         inputController = new PlayerInputController();
         //started按键按下去那一刻跳跃,将jump方法作为事件按键按下的那一刻来执行
-        inputController.GamePlay.Jump.started += Jump;
+        //inputController.GamePlay.Jump.started += Jump;
+        inputController.GamePlay.Jump.performed += Jump;
+        inputController.GamePlay.Jump.canceled += ctx =>
+        {
+                jumpSpeed = 0;
+        };
+        inputController.Enable();
         //攻击
         inputController.GamePlay.Attack.started += PlayerAttack;
         //滑铲
@@ -179,14 +197,17 @@ public class PlayerController : MonoBehaviour
         //土狼时间（JumpTimer > 0 时可以跳跃）
         if (physicsCheck.isGround || physicsCheck.onWall)
         {
-            JumpTimer = JumpGraceTime;
+            beforeJumpTimer = JumpGraceTime;
             //记录起跳状态
             jumpState = physicsCheck.isGround ? JumpState.GroundJump : JumpState.WallJump;
         }
-        else if(JumpTimer > 0)
+        else if(beforeJumpTimer > 0)
         {
-            JumpTimer -= Time.deltaTime;
+            beforeJumpTimer -= Time.deltaTime;
         }
+        if (jumpTimer > 0 )
+            jumpTimer -= Time.deltaTime;
+
 
     }
 
@@ -259,7 +280,14 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(faceDir, 1, 1);
             //蹬墙跳状态时方向不受控制
             if ( !wallJump)
-                rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
+            {
+                //如果在跳跃，则y轴速度等于跳跃速度
+                if (jumpSpeed != 0 && jumpTimer > 0)
+                    rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, jumpSpeed * Time.deltaTime);
+                else
+                    rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
+            }
+                
         }
         //滑铲
         else
@@ -281,7 +309,11 @@ public class PlayerController : MonoBehaviour
                         dashObj.transform.localScale = this.transform.localScale;*/
 
             transform.localScale = new Vector3(faceDir, 1, 1);
-            rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, rb.velocity.y);
+            //如果在跳跃，则y轴速度等于跳跃速度
+            if (jumpSpeed != 0 && jumpTimer > 0)
+                rb.velocity = new Vector2(inputDirection.x * slideSpeed * Time.deltaTime, jumpSpeed * Time.deltaTime);
+            else
+                rb.velocity = new Vector2(inputDirection.x * slideSpeed * Time.deltaTime, rb.velocity.y);
 
         }
             
@@ -292,20 +324,23 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
+
         //土狼时间>0且是地面起跳
-        if (JumpTimer > 0 && jumpState == JumpState.GroundJump)
+        if (beforeJumpTimer > 0 && jumpState == JumpState.GroundJump)
         {
+            jumpTimer = jumpDura;
+            jumpSpeed = jumpVelocity;
             //impulse 添加一个瞬时的力
-            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             GetComponent<AudioDefination>()?.PlayAudioClip();
-            /* Debug.Log("physicsCheck.isGround:" + physicsCheck.isGround);
-            Debug.Log("physicsCheck.onWall:" + physicsCheck.onWall);*/
+            Debug.Log("jump!!!");
             //粒子特效
             effectManager.JumpDust(this.transform.position, Vector2.up);
         }
         //土狼时间>0且是蹬墙跳
-        else if (JumpTimer > 0 && jumpState == JumpState.WallJump)
+        else if (beforeJumpTimer > 0 && jumpState == JumpState.WallJump)
         {
+            //jumpTimer = jumpDura;
             //因为是瞬时的力，为了保证跳跃高度一样，在跳跃之前速度置为0
             rb.velocity = Vector2.zero;
             //蹬墙跳，x轴方向速度为inputDirection.x的反方向

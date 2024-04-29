@@ -211,7 +211,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 1, y: 1}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &121013376
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -432,7 +433,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.6, y: 0.6}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &188458685
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2086,7 +2088,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.6, y: 0.6}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &373058641
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2264,7 +2267,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.9, y: 0.9}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &400465670
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4400,7 +4404,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.9, y: 0.9}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &529551701
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4669,7 +4674,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.3, y: 0.3}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &603422981
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16304,7 +16310,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 1, y: 1}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &878932476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16405,7 +16412,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.75, y: 0.75}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &949868731
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22630,7 +22638,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: 0.3, y: 0.3}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &1970921232
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22731,7 +22740,8 @@ MonoBehaviour:
   parallaxEffectMultiplier: {x: -0.15, y: 0}
   infiniteHorizontal: 1
   infiniteVertical: 0
-  BackGroundOffset: {x: 0, y: 10.9}
+  BackGroundOffset: {x: 0, y: 0}
+  cameraBound: {fileID: 771602604}
 --- !u!212 &1974468019
 SpriteRenderer:
   m_ObjectHideFlags: 0
