@@ -27,17 +27,21 @@ Shader "Myd/PostFXMask"
         Pass
         {
             CGPROGRAM
+            //声明顶点着色器
             #pragma vertex vert
+            //声明片段着色器
             #pragma fragment frag
 
             #include "UnityCG.cginc"
 
+            //顶点着色器输入，这里的每个变量需要在方法中赋值
             struct appdata
             {
+                //:POSITION表示告诉shader 变量vertex是位置信息
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
             };
-
+            //顶点着色器输出返回值，经过图形流水线将其传递给片段着色器
             struct v2f
             {
                 float2 uv : TEXCOORD0;
@@ -65,6 +69,7 @@ Shader "Myd/PostFXMask"
             sampler2D _GlobalRenderTexture;
 
             float _DistortIntensity;
+            //片段着色器返回颜色信息， : SV_Target表示返回值是SV_Target
             fixed4 frag(v2f i) : SV_Target
             {
                 float4 uvDistort = tex2D(_DistortTex, i.uv);

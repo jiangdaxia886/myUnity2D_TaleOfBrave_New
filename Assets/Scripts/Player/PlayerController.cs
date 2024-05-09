@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour
             ShadowPool.instance.GetFormPool();
             //粒子特效
             if(physicsCheck.isGround)
-                effectManager.WallSlide(this.transform.position + (Vector3)inputDirection * 0.5f, -inputDirection);
+                effectManager.WallSlide(this.transform.position + new Vector3(inputDirection.x, 0, 0) * 0.5f, new Vector2(0, 1));
             /*            dashObj.SetActive(true);
                         dashObj.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
                         dashObj.transform.localScale = this.transform.localScale;*/
@@ -311,9 +311,9 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(faceDir, 1, 1);
             //如果在跳跃，则y轴速度等于跳跃速度
             if (jumpSpeed != 0 && jumpTimer > 0)
-                rb.velocity = new Vector2(inputDirection.x * slideSpeed * Time.deltaTime, jumpSpeed * Time.deltaTime);
+                rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, jumpSpeed * Time.deltaTime);
             else
-                rb.velocity = new Vector2(inputDirection.x * slideSpeed * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, rb.velocity.y);
 
         }
             
@@ -383,12 +383,17 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.PlayAttack();
         isAttack = true;
-        //攻击时冻帧
-        GetComponent<FrameFrozen>()?.frazee(0.05f);
+        
         //Debug.Log("isAttack");
         /*combo++;
         if(combo >= 4)
             combo = 0;*/
+    }
+
+    public void FreezeFrame()
+    {
+        //攻击时冻帧
+        GetComponent<FrameFrozen>()?.frazee(0.05f);
     }
 
 
@@ -427,7 +432,7 @@ public class PlayerController : MonoBehaviour
         if (physicsCheck.onWall && !wallJump)
         {
             //粒子特效
-            effectManager.WallSlide(this.transform.position + (Vector3)inputDirection * 0.5f + new Vector3(0,1,0) ,-inputDirection);
+            effectManager.WallSlide(this.transform.position + new Vector3(inputDirection.x,0,0) * 0.5f + new Vector3(0,1,0) ,-inputDirection);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
         }
         
