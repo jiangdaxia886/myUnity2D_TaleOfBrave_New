@@ -53,3 +53,6 @@ TagManager:
   - name: front
     uniqueID: 3545404543
     locked: 0
+  - name: sceneEffect
+    uniqueID: 1418739457
+    locked: 0

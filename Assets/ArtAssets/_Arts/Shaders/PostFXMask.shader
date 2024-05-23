@@ -41,7 +41,7 @@ Shader "Myd/PostFXMask"
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
             };
-            //顶点着色器输出返回值，经过图形流水线将其传递给片段着色器
+            //顶点着色器输出返回值，经过图形流水线将其传递给片断着色器
             struct v2f
             {
                 float2 uv : TEXCOORD0;
@@ -67,6 +67,7 @@ Shader "Myd/PostFXMask"
             sampler2D _MainTex;
             sampler2D _DistortTex;
             sampler2D _GlobalRenderTexture;
+            //sampler2D _CameraSortingLayerTexture
 
             float _DistortIntensity;
             //片段着色器返回颜色信息， : SV_Target表示返回值是SV_Target

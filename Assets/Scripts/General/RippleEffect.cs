@@ -29,6 +29,7 @@ public class RippleEffect : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         liveTime += Time.deltaTime;
+        //≤®Œ∆¿©…¢¥Û–°
         this.transform.localScale = this.transform.localScale + Vector3.one * WaveSpeed * Time.deltaTime;
         this.material.SetFloat("_DistortIntensity", (1 - Mathf.Clamp(liveTime / TotalTime, 0, 1)) * Intensity);
     }
