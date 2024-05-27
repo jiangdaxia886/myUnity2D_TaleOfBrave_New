@@ -15,8 +15,11 @@ public class RippleEffect : MonoBehaviour
     private Vector2 scale2;
 
     private float liveTime;
+
+    private Vector3 localScale;
     private void Awake()
     {
+        this.localScale = Vector3.one;
         this.scale1 = Vector2.one;
         this.scale2 = Vector2.one * 2;
         material = this.GetComponent<SpriteRenderer>().material;
@@ -30,14 +33,25 @@ public class RippleEffect : MonoBehaviour
         }
         liveTime += Time.deltaTime;
         //²¨ÎÆÀ©É¢´óÐ¡
-        this.transform.localScale = this.transform.localScale + Vector3.one * WaveSpeed * Time.deltaTime;
+        this.transform.localScale = this.transform.localScale + Vector3.one * WaveSpeed * Time.deltaTime ;
+        //²¨ÎÆÀ©É¢·½Ïò
+        if (this.localScale.x > 0)
+        {
+            this.material.SetVector("_RippleFloat", new Vector2(1, 0.5f));
+        }
+        else
+        {
+            this.material.SetVector("_RippleFloat", new Vector2(0,0.5f));
+        }
+        //²¨ÎÆÅ¤ÇúÇ¿¶È
         this.material.SetFloat("_DistortIntensity", (1 - Mathf.Clamp(liveTime / TotalTime, 0, 1)) * Intensity);
     }
 
-    public void Ripple(Vector3 position)
+    public void Ripple(Vector3 position,Vector2 localScale)
     {
         this.gameObject.SetActive(true);
-        this.transform.localScale = this.scale1;
+        this.localScale =  localScale.x > 0 ? this.scale1 : new Vector2(-this.scale1.x, this.scale1.y);
+        this.transform.localScale = localScale;
         this.transform.position = position;
         this.liveTime = 0;
     }

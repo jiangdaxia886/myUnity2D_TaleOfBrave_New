@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XInput;
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public GameObject dashObj;
     //Ripple
     public GameObject rippleEffect;
+
+    public GameObject dashRippleEffect;
 
     private SpriteRenderer spriteRenderer;
 
@@ -374,8 +377,11 @@ public class PlayerController : MonoBehaviour
             capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, slideOffsety);
             playerAnimation.PlaySlide();
             character.OnSlide(slidePowerCost);
+            //¡∞‰ÙÃÿ–ß
+            dashRippleEffect.GetComponent<RippleEffect>().Ripple(transform.position, transform.localScale);
 
         }
+        
 
     }
 
