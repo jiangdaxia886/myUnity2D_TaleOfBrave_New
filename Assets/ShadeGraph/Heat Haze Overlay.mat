@@ -56,8 +56,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - Noise_Scale: {r: 3, g: 1, b: 0, a: 0}
-    - Strength: {r: 1, g: 1, b: 0, a: 0}
+    - Noise_Scale: {r: 10, g: 1, b: 0, a: 0}
+    - Strength: {r: 0.1, g: 0.1, b: 0, a: 0}
     - Velocity: {r: 0, g: -0.3, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2187014977544169895

@@ -378,7 +378,7 @@ public class PlayerController : MonoBehaviour
             playerAnimation.PlaySlide();
             character.OnSlide(slidePowerCost);
             //¡∞‰ÙÃÿ–ß
-            dashRippleEffect.GetComponent<RippleEffect>().Ripple(transform.position, transform.localScale);
+            dashRippleEffect.GetComponent<DashRippleEffect>().DashRipple(transform.position, transform.localScale);
 
         }
         

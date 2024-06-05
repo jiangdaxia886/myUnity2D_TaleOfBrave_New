@@ -14,16 +14,16 @@ public class PostEffectsController : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("Awake!!!!!!!!");
+        //Debug.Log("Awake!!!!!!!!");
     }
 
     public void Update()
     {
-        Debug.Log("Awake!!!!!!!!");
+        //Debug.Log("Awake!!!!!!!!");
     }
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        Debug.Log("memberName!!!!!!!!");
+        //Debug.Log("memberName!!!!!!!!");
         if (postEffectMaterial == null)
         {
             postEffectMaterial = new Material(postShader);
