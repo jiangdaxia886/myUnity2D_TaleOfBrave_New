@@ -37,7 +37,7 @@ public class DashRippleEffect : MonoBehaviour
         //波纹扩散大小
         //不能用下面的写法
         //this.transform.localScale = new Vector3 (this.transform.localScale.x +  WaveSpeed * Time.deltaTime * this.transform.localScale.x, this.transform.localScale.y + WaveSpeed * Time.deltaTime * this.transform.localScale.y, this.transform.localScale.z);
-        //用到normal from height节点,且在编辑器窗口，必须要每帧更新变化transform.scale才能显示出画面，原理待探究(用my distortion或者Heat Haze Overlay材质也不会这样，my distortion和 distortion的区别在于 distortion用了normal from height节点)
+        //用到normal from height节点,且在编辑器窗口调用了，必须要每帧更新变化transform.scale才能显示出画面，原理待探究(用my distortion或者Heat Haze Overlay材质也不会这样，my distortion和 distortion的区别在于 distortion用了normal from height节点)
         this.transform.localScale = this.transform.localScale + new Vector3(this.transform.localScale.x, this.transform.localScale.y, Vector3.one.z) * WaveSpeed * Time.deltaTime;
         //波纹扩散方向
         if (this.localScale.x > 0)
