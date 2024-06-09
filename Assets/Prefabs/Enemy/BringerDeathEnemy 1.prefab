@@ -699,13 +699,13 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 13.4
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: 0, y: 55, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -1014,7 +1014,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 150
+        scalar: 200
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -5032,6 +5032,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 9042447033248876472}
     m_Modifications:
     - target: {fileID: 206879440483177754, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
+      propertyPath: takeDamageAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+    - target: {fileID: 206879440483177754, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
@@ -5043,6 +5047,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e13e1e17a49ee0f4892c91e11db98a8c, type: 2}
+    - target: {fileID: 1016047280269985791, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 260
+      objectReference: {fileID: 0}
     - target: {fileID: 2785809738467488278, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5092,9 +5100,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4534146626003156803}
     - target: {fileID: 4262972762572684680, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
+      propertyPath: onDieAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9667676b4d710dd4e9ca9992d6a16c54, type: 3}
+    - target: {fileID: 4262972762572684680, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
       propertyPath: particleSystem
       value: 
       objectReference: {fileID: 3883321219896314505}
+    - target: {fileID: 4262972762572684680, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
+      propertyPath: playAudioEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b401586e8902db43b6886b611aeee1b, type: 2}
     - target: {fileID: 5608183544135805626, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 64

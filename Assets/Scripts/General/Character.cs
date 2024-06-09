@@ -40,7 +40,7 @@ public class Character : MonoBehaviour,ISaveable
     //受伤音效广播
     public PlayAudioEventSO playAudioEvent;
     //受伤音效
-    public AudioClip audioClip;
+    public AudioClip takeDamageAudioClip;
 
     //加载新场景重置血量
     private void NewGame()
@@ -108,7 +108,7 @@ public class Character : MonoBehaviour,ISaveable
             TriggerInvulnerable();
             //执行受伤(如果当前角色添加了onTakeDamage事件，则执行)
             onTakeDamage?.Invoke(attacker.transform);
-            playAudioEvent.RaiseEvent(audioClip);
+            playAudioEvent.RaiseEvent(takeDamageAudioClip);
         }
         else 
         {

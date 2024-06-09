@@ -3,14 +3,21 @@ Shader "Myd/PostEffects"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Color ("Color", Color) = (1,1,1,1)
     }
     SubShader
     {
         // No culling or depth
         Cull Off ZWrite Off ZTest Always
-
+        Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
+        LOD 100 
         Pass
         {
+            //混合模式定义,有下面这行才能将alpha传到片段着色器
+            Blend SrcAlpha OneMinusSrcAlpha  
+            ZWrite Off  
+            Cull Off  
+            Fog { Mode Off }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -38,10 +45,12 @@ Shader "Myd/PostEffects"
             }
 
             sampler2D _MainTex;
-
+            fixed4 _Color; 
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
+                col.rgb = col.rgb * _Color.rgb;
+                //col.a = _Color.a;
                 return col;
             }
             ENDCG

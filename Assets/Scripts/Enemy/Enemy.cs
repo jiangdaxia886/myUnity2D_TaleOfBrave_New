@@ -33,6 +33,11 @@ public class Enemy : MonoBehaviour
 
     protected Material _material;
 
+    //受伤音效广播
+    public PlayAudioEventSO playAudioEvent;
+    //死亡音效
+    public AudioClip onDieAudioClip;
+
 
     [Header("基本参数")]
     public float normalSpeed;
@@ -275,6 +280,7 @@ public class Enemy : MonoBehaviour
 
         if (!anim.GetBool("isDead"))
         {
+            playAudioEvent.RaiseEvent(onDieAudioClip);
             particleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
             particleSystem.transform.localScale = new Vector3 ((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1,1,1);
             //未修改好
