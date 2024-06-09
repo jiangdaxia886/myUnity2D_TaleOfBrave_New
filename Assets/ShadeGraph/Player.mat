@@ -59,5 +59,6 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
+    - _CharacterColor: {r: 1, g: 1, b: 1, a: 0}
     - _LightColor: {r: 1.0592737, g: 0.975399, b: 0.63623035, a: 0}
   m_BuildTextureStacks: []

@@ -45,8 +45,8 @@ public class BeeEnemy : Enemy
         
     }
 
-    public override void OnDie()
+    public override void OnDie(Transform attackTransfrom)
     {
-        base.OnDie();
+        base.OnDie(this.transform);
     }
 }

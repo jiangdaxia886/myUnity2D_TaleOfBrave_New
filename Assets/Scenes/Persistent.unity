@@ -11276,7 +11276,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.13, y: 0.13, z: 0}
+  m_DefaultVelocity: {x: 0.05, y: 0.13, z: 0}
 --- !u!4 &643560086
 Transform:
   m_ObjectHideFlags: 0
@@ -20359,7 +20359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53df1b2964fb41b49a70c652e660be0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 100
   attackRange: 0
   attackRate: 0
   remoteDistanceMax: 0

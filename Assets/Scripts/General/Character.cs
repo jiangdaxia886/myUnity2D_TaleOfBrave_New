@@ -36,7 +36,7 @@ public class Character : MonoBehaviour,ISaveable
     //受伤事件
     public UnityEvent<Transform> onTakeDamage;
     //死亡事件
-    public UnityEvent onDie;
+    public UnityEvent<Transform> onDie;
     //受伤音效广播
     public PlayAudioEventSO playAudioEvent;
     //受伤音效
@@ -91,7 +91,7 @@ public class Character : MonoBehaviour,ISaveable
         {
             CurrentHealth = 0;
             OnHealthChange?.Invoke(this);
-            onDie?.Invoke();
+            onDie?.Invoke(this.transform);
         }
     }
 
@@ -113,7 +113,7 @@ public class Character : MonoBehaviour,ISaveable
         else 
         {
             CurrentHealth = 0;
-            onDie?.Invoke();
+            onDie?.Invoke(attacker.transform);
         }
         OnHealthChange.Invoke(this);
 

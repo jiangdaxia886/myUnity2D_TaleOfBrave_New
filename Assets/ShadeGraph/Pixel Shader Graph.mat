@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5831365570499567549
+--- !u!114 &-841986804870837064
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosion
-  m_Shader: {fileID: -6465566751694194690, guid: 4ca198b74c6943b40a7772f70b933613, type: 3}
+  m_Name: Pixel Shader Graph
+  m_Shader: {fileID: -6465566751694194690, guid: 157347deaaf8ed147a61909e4f423768, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 46bbc3c573c308942a8ad80c294ccd94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _secondary:
@@ -57,8 +57,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Strength: 1000
     m_Colors:
-    - _CharacterColor: {r: 1, g: 1, b: 1, a: 0}
-    - _LightColor: {r: 2.6082373, g: 0.9340069, b: 0.30347368, a: 0}
+    - _LightColor: {r: 1, g: 0.75786155, b: 0.75786155, a: 0}
+    - _PixelColor: {r: 0.9811321, g: 0.6263201, b: 0.6263201, a: 0}
   m_BuildTextureStacks: []

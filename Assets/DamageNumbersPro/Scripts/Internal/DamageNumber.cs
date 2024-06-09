@@ -1139,7 +1139,7 @@ namespace DamageNumbersPro
                 {
                     for (int n = 0; n < amount; n++)
                     {
-                        DamageNumber dn = Spawn(new Vector3(-9999, -9999, -9999));
+                        DamageNumber dn = Spawn(new Vector3(-9999, -9999, 0));
                         dn.destroyAfterSpawning = true;
                     }
                 }
@@ -1166,16 +1166,21 @@ namespace DamageNumbersPro
             #region Fallback Fix
             if (IsMesh())
             {
-                //Fix for TMP fallback fonts.
+                //Create fallback dictionary.
                 if (fallbackDictionary == null)
                 {
                     fallbackDictionary = new Dictionary<TMP_FontAsset, GameObject>();
                 }
+
+                //Get font material.
                 TMP_FontAsset fontAsset = GetFontMaterial();
-                if (!fallbackDictionary.ContainsKey(fontAsset))
+
+                //Check if in dictionary.
+                if (!fallbackDictionary.ContainsKey(fontAsset) && fontAsset != null)
                 {
-                    if (fontAsset != null && fontAsset.fallbackFontAssetTable != null && fontAsset.fallbackFontAssetTable.Count > 0)
-                    {
+                    bool usesFallbackFonts = fontAsset.fallbackFontAssetTable != null && fontAsset.fallbackFontAssetTable.Count > 0;
+                    if (fontAsset.isMultiAtlasTexturesEnabled || usesFallbackFonts)
+                    { 
                         //New tmp for fallback assets.
                         GameObject fallbackAsset = Instantiate<GameObject>(textMeshPro.gameObject);
                         fallbackAsset.transform.localScale = Vector3.zero;
@@ -1183,47 +1188,63 @@ namespace DamageNumbersPro
                         fallbackAsset.hideFlags = HideFlags.HideAndDontSave;
                         DontDestroyOnLoad(fallbackAsset);
 
-                        //Create a new string containing various unicode characters of the fallback fonts.
+                        //Create base string containing a single character of the base font.
                         string textString = "" + (char)fontAsset.characterTable[0].unicode;
-                        for (int f = 0; f < fontAsset.fallbackFontAssetTable.Count; f++)
+
+                        //Add all characters to support multi-atlas fonts.
+                        if (fontAsset.isMultiAtlasTexturesEnabled)
                         {
-                            TMP_FontAsset fallbackFont = fontAsset.fallbackFontAssetTable[f];
-
-                            if (fallbackFont != null && fallbackFont.characterTable != null)
+                            foreach (TMP_Character character in fontAsset.characterTable)
                             {
-                                foreach (TMP_Character fallbackCharacter in fallbackFont.characterTable)
-                                {
-                                    if (fallbackCharacter != null)
-                                    {
-                                        if (fontAsset.characterLookupTable.ContainsKey(fallbackCharacter.unicode))
-                                        {
-                                            //Character already in main font.
-                                        }
-                                        else
-                                        {
-                                            bool addCharacter = true;
+                                textString += (char)character.unicode;
+                            }
+                        }
 
-                                            for (int pF = 0; pF < f; pF++)
+                        //Create a new string containing various unicode characters of the fallback fonts.
+                        if (usesFallbackFonts)
+                        {
+                            for (int f = 0; f < fontAsset.fallbackFontAssetTable.Count; f++)
+                            {
+                                TMP_FontAsset fallbackFont = fontAsset.fallbackFontAssetTable[f];
+
+                                if (fallbackFont != null && fallbackFont.characterTable != null)
+                                {
+                                    foreach (TMP_Character fallbackCharacter in fallbackFont.characterTable)
+                                    {
+                                        if (fallbackCharacter != null)
+                                        {
+                                            if (fontAsset.characterLookupTable.ContainsKey(fallbackCharacter.unicode))
                                             {
-                                                TMP_FontAsset previousFallbackFont = fontAsset.fallbackFontAssetTable[pF];
-                                                if (previousFallbackFont != null && previousFallbackFont.characterLookupTable.ContainsKey(fallbackCharacter.unicode))
+                                                //Character already in main font.
+                                            }
+                                            else
+                                            {
+                                                bool addCharacter = true;
+
+                                                for (int pF = 0; pF < f; pF++)
                                                 {
-                                                    //Character already in a higher priority fallback font.
-                                                    addCharacter = false;
+                                                    TMP_FontAsset previousFallbackFont = fontAsset.fallbackFontAssetTable[pF];
+                                                    if (previousFallbackFont != null && previousFallbackFont.characterLookupTable.ContainsKey(fallbackCharacter.unicode))
+                                                    {
+                                                        //Character already in a higher priority fallback font.
+                                                        addCharacter = false;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if (addCharacter)
+                                                {
+                                                    textString += (char)fallbackCharacter.unicode;
                                                     break;
                                                 }
-                                            }
-
-                                            if (addCharacter)
-                                            {
-                                                textString += (char)fallbackCharacter.unicode;
-                                                break;
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+
+                        //Assign text and add to dictionary.
                         fallbackAsset.GetComponent<TextMeshPro>().text = textString;
                         fallbackDictionary.Add(fontAsset, fallbackAsset);
                     }

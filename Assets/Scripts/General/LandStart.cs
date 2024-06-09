@@ -9,7 +9,7 @@ public class LandStart : StateMachineBehaviour
     {
 
         animator.gameObject.GetComponent<PlayerController>().effectManager.LandDust(animator.gameObject.transform.position);
-        animator.gameObject.GetComponent<PlayerController>().rippleEffect.GetComponent<RippleEffect>().Ripple(animator.gameObject.transform.position, animator.gameObject.transform.localScale);
+        animator.gameObject.GetComponent<PlayerController>().rippleEffect.GetComponent<RippleEffect>().Ripple(animator.gameObject.transform.position, animator.gameObject.transform.localScale,new Vector2(0,0));
         
     }
 

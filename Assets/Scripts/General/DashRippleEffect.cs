@@ -33,7 +33,6 @@ public class DashRippleEffect : MonoBehaviour
            this.gameObject.SetActive(false);
         }
         liveTime += Time.deltaTime;
-        Debug.Log("this.transform.localScale.x" + this.transform.localScale.x);
         //波纹扩散大小
         //不能用下面的写法
         //this.transform.localScale = new Vector3 (this.transform.localScale.x +  WaveSpeed * Time.deltaTime * this.transform.localScale.x, this.transform.localScale.y + WaveSpeed * Time.deltaTime * this.transform.localScale.y, this.transform.localScale.z);

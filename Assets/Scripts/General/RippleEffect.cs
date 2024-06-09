@@ -38,11 +38,11 @@ public class RippleEffect : MonoBehaviour
         this.material.SetFloat("_DistortIntensity", (1 - Mathf.Clamp(liveTime / TotalTime, 0, 1)) * Intensity);
     }
 
-    public void Ripple(Vector3 position,Vector2 localScale)
+    public void Ripple(Vector3 position, Vector2 localScale, Vector2 offset)
     {
         this.gameObject.SetActive(true);
-        this.transform.localScale = this.scale1;
-        this.transform.position = position;
+        this.transform.localScale = this.localScale;
+        this.transform.position = new Vector2(position.x, position.y + offset.y);
         this.liveTime = 0;
     }
 

@@ -1,4 +1,5 @@
 using DamageNumbersPro;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,12 @@ public class Enemy : MonoBehaviour
     private Animator hitAnimator;
 
     public DamageNumber damageNumber;
+
+    public ParticleSystem particleSystem;
+
+    public GameObject deathRipple;
+
+    protected Material _material;
 
 
     [Header("基本参数")]
@@ -82,7 +89,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
-        coll2d = GetComponent<Collider2D>();
+        coll2d = GetComponent<CapsuleCollider2D>();
         enemyMagicAttack = GetComponent<EnemyMagicAttack>();
         //获得子物体受击动画的动画器
         if(transform.childCount > 0)
@@ -90,6 +97,7 @@ public class Enemy : MonoBehaviour
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         spwanPoint = transform.position;
+        _material = GetComponent<Renderer>().material;
     }
 
     private void OnEnable()
@@ -257,12 +265,41 @@ public class Enemy : MonoBehaviour
         isHurt = false;
     }
 
-    public virtual void OnDie() 
+    public virtual void OnDie(Transform attackTrans) 
     {
+
+        
         //设置当前敌人图层为ignore Raycast，在project setting中的physics2d设置人物不与ignore Raycast产生碰撞
         gameObject.layer = 2;
+
+
+        if (!anim.GetBool("isDead"))
+        {
+            particleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
+            particleSystem.transform.localScale = new Vector3 ((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1,1,1);
+            //未修改好
+            //particleSystem.GetComponent<ParticleSystem>().shape.rotation.Set(0f, 55f * (this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1, 0f);
+            #region 粒子特效
+            var s = DOTween.Sequence();
+            
+            s.AppendCallback(() =>
+            {
+                particleSystem.Play();
+
+            });
+            s.Append(_material.DOFloat(600, "_Strength", 0.05f));
+            s.AppendCallback(() =>
+            {
+                //涟漪特效
+                deathRipple.GetComponent<RippleEffect>().Ripple(transform.position, transform.localScale, coll2d.offset);
+
+            });
+
+            #endregion
+        }
         anim.SetBool("isDead", true);
         isDead = true;
+        //particleSystem.Play();
 
     }
 
