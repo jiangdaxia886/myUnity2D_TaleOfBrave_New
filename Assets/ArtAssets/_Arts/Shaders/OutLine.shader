@@ -55,14 +55,13 @@ Shader "Custom/OutLine"
             sampler2D _MainTex;
             uniform float outline_width = 1.0;
             uniform fixed4 outline_color : COLOR = fixed4(0,0,0,1);
-            float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
             sampler2D _secondary;
+
             //uniform fixed2 TexelSize = Texture_TexelSize;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 TexelSize = 1.0 / _MainTex_ST.zw;
                 float2 Uv = i.uv;
                 //uv值是0-1之间，_MainTex_TexelSize在OutLine.cs中是1/图片像素宽度,所以_MainTex_TexelSize.y是单位像素在uv上的偏移量，该值*描边宽度即让原先uv往上偏移描边宽度。
                 float2 uv_up = Uv + float2(0,_MainTex_TexelSize.y) * outline_width;
