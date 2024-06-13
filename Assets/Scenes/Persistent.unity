@@ -20359,7 +20359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53df1b2964fb41b49a70c652e660be0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 10
   attackRange: 0
   attackRate: 0
   remoteDistanceMax: 0
@@ -21492,7 +21492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185202f5db82afe46a52f0d3bef12ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformDuration: 0.15
+  transformDuration: 0.1
   transformTimer: 0
   transformFactor: 0.75
 --- !u!1 &2108728722
@@ -21587,7 +21587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2116674908
 SpriteRenderer:
   m_ObjectHideFlags: 0

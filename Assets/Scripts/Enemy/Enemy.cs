@@ -27,7 +27,9 @@ public class Enemy : MonoBehaviour
 
     public DamageNumber damageNumber;
 
-    public ParticleSystem particleSystem;
+    public ParticleSystem deathParticleSystem;
+
+    public ParticleSystem hurtParticleSystem;
 
     public GameObject deathRipple;
 
@@ -250,6 +252,10 @@ public class Enemy : MonoBehaviour
         //如果攻击者是player,才播放受击特效
         if(attackTrans.CompareTag("Player"))
             hitAnimator.SetTrigger("Hit");
+        //溅血粒子特效
+        hurtParticleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
+        hurtParticleSystem.transform.localScale = new Vector3((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1, 1, 1);
+        hurtParticleSystem.Play();
         #endregion
 
         //弹幕伤害
@@ -281,8 +287,8 @@ public class Enemy : MonoBehaviour
         if (!anim.GetBool("isDead"))
         {
             playAudioEvent.RaiseEvent(onDieAudioClip);
-            particleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
-            particleSystem.transform.localScale = new Vector3 ((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1,1,1);
+            deathParticleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
+            deathParticleSystem.transform.localScale = new Vector3 ((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1,1,1);
             //未修改好
             //particleSystem.GetComponent<ParticleSystem>().shape.rotation.Set(0f, 55f * (this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1, 0f);
             #region 粒子特效
@@ -290,7 +296,7 @@ public class Enemy : MonoBehaviour
             
             s.AppendCallback(() =>
             {
-                particleSystem.Play();
+                deathParticleSystem.Play();
 
             });
             s.Append(_material.DOFloat(600, "_Strength", 0.05f));
