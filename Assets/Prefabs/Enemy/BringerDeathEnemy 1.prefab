@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.25
-      minScalar: 0.15
+      scalar: 0.3
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5210,7 +5210,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5903,7 +5903,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 200
+        scalar: 150
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -9908,7 +9908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1fc8a3c18e50c4cb5a071f19b9499e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Intensity: 30
+  Intensity: 50
   WaveSpeed: 55
   TotalTime: 0.4
   material: {fileID: 0}
@@ -9923,7 +9923,7 @@ PrefabInstance:
     - target: {fileID: 206879440483177754, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
       propertyPath: takeDamageAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+      objectReference: {fileID: 8300000, guid: 596c1ce25497c314391b2aa3d4164b83, type: 3}
     - target: {fileID: 206879440483177754, guid: 3078ab9f66d124a48a8b74a7653a705a, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
