@@ -7,21 +7,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    //×Óµ¯ËÙ¶È
+    //å­å¼¹é€Ÿåº¦
     public float speed;
 
-    //±¬Õ¨ÌØĞ§
+    //çˆ†ç‚¸ç‰¹æ•ˆ
     public GameObject explosionPrefab;
 
-    //»ñÈ¡¸ÕÌå
+    //è·å–åˆšä½“
     private Rigidbody2D rb;
-    //»ñµÃ¹¥»÷¶ÔÏóÍ¼²ã
+    //è·å¾—æ”»å‡»å¯¹è±¡å›¾å±‚
     public LayerMask attackLayer;
 
     public float checkDistance;
-    //×Óµ¯ÒÆ¶¯·½Ïò
+    //å­å¼¹ç§»åŠ¨æ–¹å‘
     private Vector3 moveDir;
-    //µĞÈËÄ¿±êÎ»ÖÃ
+    //æ•Œäººç›®æ ‡ä½ç½®
     private Vector3 target;
 
     private double dis;
@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
     }
 
 
-    //×Óµ¯·ÉĞĞËÙ¶È·½Ïò
+    //å­å¼¹é£è¡Œé€Ÿåº¦æ–¹å‘
     public void SetSpeed() 
     {
         //rb.velocity = direction * speed;
@@ -56,30 +56,30 @@ public class Bullet : MonoBehaviour
 
     public Vector3 FoundTarget()
     {
-        //ÅĞ¶ÏÒÔtransform.positionÎªÖĞĞÄµã£¬°ë¾¶ÎªcheckDistance·¶Î§ÄÚÊÇ·ñÓĞattackLayer
+        //åˆ¤æ–­ä»¥transform.positionä¸ºä¸­å¿ƒç‚¹ï¼ŒåŠå¾„ä¸ºcheckDistanceèŒƒå›´å†…æ˜¯å¦æœ‰attackLayer
         Collider2D[] obj = Physics2D.OverlapCircleAll(transform.position, checkDistance, attackLayer);
         //Debug.Log("obj[0].name:"+obj[0].name);
         double tmp;
         double tan;
-        //Ãæ³¯·½Ïò
+        //é¢æœæ–¹å‘
         int direction = this.transform.localScale.x > 0 ? 1 : -1;
         //Debug.Log("this.transform.localScale.x :" + this.transform.localScale.x);
-        //µĞÈË·½Ïò
+        //æ•Œäººæ–¹å‘
         int enemyDirection;
         //Debug.Log("Bullet.this.transform.position:" + this.transform.position);
         if (obj.Length  > 0)
         {
-            //Ñ°ÕÒ×î½üµĞÈË
+            //å¯»æ‰¾æœ€è¿‘æ•Œäºº
             foreach (var i in obj)
             {
                 enemyDirection = i.transform.position.x - this.gameObject.transform.position.x > 0 ? 1 : -1;
-                //ÓëµĞÈË¾àÀë
+                //ä¸æ•Œäººè·ç¦»
                 tmp = Math.Sqrt( Math.Pow(i.transform.position.x - this.gameObject.transform.position.x, 2) + Math.Pow(i.transform.position.y - this.gameObject.transform.position.y, 2));
-                //µĞÈËÓëÍæ¼Ò½Ç¶È
+                //æ•Œäººä¸ç©å®¶è§’åº¦
                 tan = Math.Abs((i.transform.position.y - this.gameObject.transform.position.y) / (i.transform.position.x - this.gameObject.transform.position.x));
 
                 //Debug.Log("i.name:" + i.name+ ";tmpdistance:"+tmp+ ";x" + i.transform.position.x+";y:"+ i.transform.position.y+";tan:"+tan);
-                //Èç¹û´ËµĞÈËÔÚÍæ¼ÒÃæ³¯·½Ïò45¶È½ÇÒÔÄÚ£¬²¢ÇÒÊÇ×î½üµÄµĞÈË£¬ÔòÇĞ»»Ä¿±ê
+                //å¦‚æœæ­¤æ•Œäººåœ¨ç©å®¶é¢æœæ–¹å‘45åº¦è§’ä»¥å†…ï¼Œå¹¶ä¸”æ˜¯æœ€è¿‘çš„æ•Œäººï¼Œåˆ™åˆ‡æ¢ç›®æ ‡
                 if (tmp < dis && enemyDirection == direction && tan <= 1 )
                 {
                     dis = tmp;
@@ -89,10 +89,10 @@ public class Bullet : MonoBehaviour
             if (targetEnemy != null)
             {
                 //Debug.Log("FoundTarget()!!:"+ targetEnemy.name);
-                //µĞÈËµÄÖĞĞÄµãÊÇÔÚ½Åµ×£¬ÒòÎªÇĞ¸îµÄÊ±ºòÑ¡µÄÊÇbottom£¬ËùÒÔÄ¿±êµãµÄyÖáĞèÒªÌí¼Ó0.5f
-                //Ñ°ÕÒÄ¿±êµã
+                //æ•Œäººçš„ä¸­å¿ƒç‚¹æ˜¯åœ¨è„šåº•ï¼Œå› ä¸ºåˆ‡å‰²çš„æ—¶å€™é€‰çš„æ˜¯bottomï¼Œæ‰€ä»¥ç›®æ ‡ç‚¹çš„yè½´éœ€è¦æ·»åŠ 0.5f
+                //å¯»æ‰¾ç›®æ ‡ç‚¹
                 target = new Vector3(targetEnemy.transform.position.x, targetEnemy.transform.position.y + 0.5f, 0);
-                //Éè¶¨ÒÆ¶¯·½Ïò
+                //è®¾å®šç§»åŠ¨æ–¹å‘
                 moveDir = (target - this.gameObject.transform.position).normalized;
                 return moveDir;
             }
@@ -103,27 +103,27 @@ public class Bullet : MonoBehaviour
 
 
 
-    //Åö×²µ½µĞÈËÉú³É±¬Õ¨ÌØĞ§²¢Ïú»Ù×Óµ¯
+    //ç¢°æ’åˆ°æ•Œäººç”Ÿæˆçˆ†ç‚¸ç‰¹æ•ˆå¹¶é”€æ¯å­å¼¹
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(collision.name);
-        //Éú³É±¬Õ¨ÌØĞ§
+        //ç”Ÿæˆçˆ†ç‚¸ç‰¹æ•ˆ
         //GameObject explosion = Instantiate(explosionPrefab, this.transform.position, Quaternion.identity);
-        //Ê¹ÓÃ¶ÔÏó³ØÉú³É±¬Õ¨ÌØĞ§
+        //ä½¿ç”¨å¯¹è±¡æ± ç”Ÿæˆçˆ†ç‚¸ç‰¹æ•ˆ
         GameObject explosion = ObjectPool.Instance.GetObject(explosionPrefab);
         explosion.transform.position = this.transform.position;
         explosion.transform.localScale = rb.velocity.x > 0 ? new Vector3(1,1,1) : new Vector3(-1,1,1);
 
-        //ÔİÍ£×Óµ¯Ğ¯³Ì
+        //æš‚åœå­å¼¹æºç¨‹
         //StartCoroutine(Stop());
         //Destroy(this.gameObject);
-        //½«¸ÃÔ¤ÖÆÌå·Å»Ø¶ÔÏó³Ø
+        //å°†è¯¥é¢„åˆ¶ä½“æ”¾å›å¯¹è±¡æ± 
         ObjectPool.Instance.PushObject(this.gameObject);
 
 
     }
 
-    //ÒòÎªÃüÖĞµĞÈËºóµĞÈËÊÜ»÷character.csÖĞTakeDamage()·½·¨»áÒıÓÃattack¶ÔÏó£¬Èç¹ûÁ¢¿Ìdestroy£¬»á±¨ÕÒ²»µ½¶ÔÏó´íÎó
+    //å› ä¸ºå‘½ä¸­æ•Œäººåæ•Œäººå—å‡»character.csä¸­TakeDamage()æ–¹æ³•ä¼šå¼•ç”¨attackå¯¹è±¡ï¼Œå¦‚æœç«‹åˆ»destroyï¼Œä¼šæŠ¥æ‰¾ä¸åˆ°å¯¹è±¡é”™è¯¯
     IEnumerator Stop()
     {
         rb.velocity = Vector2.zero;

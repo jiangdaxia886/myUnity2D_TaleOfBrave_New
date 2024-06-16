@@ -6,21 +6,21 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("事件监听")]
+    [Header("浜嬩欢鐩戝惉")]
     public PlayAudioEventSO FXEvent;
 
     public PlayAudioEventSO BGMEvent;
 
     public PlayAudioEventSO HurtEvent;
-    //调整音量
+    //璋冩暣闊抽噺
     public FloatEventSO VolumeChangeEvent;
-    //监听暂停
+    //鐩戝惉鏆傚仠
     public VoidEventSo pauseEvent;
 
-    [Header("广播")]
+    [Header("骞挎挱")]
     public FloatEventSO syncVolumeEvent;
 
-    [Header("组件")]
+    [Header("缁勪欢")]
     public AudioSource BGMSource;
 
     public AudioSource FXSource;
@@ -59,8 +59,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnVolumeChangeEvent(float amount)
     {
-        //mixer的音量是-80~20分贝
-        //MasterVolume是暴露出来的mixer的参数名
+        //mixer鐨勯煶閲忔槸-80~20鍒嗚礉
+        //MasterVolume鏄毚闇插嚭鏉ョ殑mixer鐨勫弬鏁板悕
         //Debug.Log("OnVolumeChangeEvent:amount" + amount);
         mixer.SetFloat("MasterVolume", amount * 100 - 80);
     }
@@ -78,7 +78,7 @@ public class AudioManager : MonoBehaviour
         //Debug.Log("play BGM");
     }
 
-    //使用声源FXSource播放音效
+    //浣跨敤澹版簮FXSource鎾斁闊虫晥
     private void OnFXEvent(AudioClip clip)
     {
         FXSource.clip = clip;

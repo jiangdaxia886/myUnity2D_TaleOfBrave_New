@@ -16,66 +16,66 @@ public class BringerDeathChaseState : BaseState
         currentEnemy.lostTimeCounter = currentEnemy.lostTime;
         //currentEnemy.anim.SetBool("chase", true);
         attack = enemy.GetComponent<Attack>();
-        //¸ü¸ÄËÙ¶È
+        //æ›´æ”¹é€Ÿåº¦
         currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
     }
     public override void LogicUpdate()
     {
-        //µ±×·»÷¼ÆÊ±<0Ê±£¬½áÊø×·»÷£¬ÇÐ»»×´Ì¬
-        //×Óµ¯»÷ÖÐºó±»Ïú»Ù£¬ËùÒÔcurrentEnemy.attacker == nullÊ±Ò²ÒªÇÐ»»»ØÑ²Âß×´Ì¬
+        //å½“è¿½å‡»è®¡æ—¶<0æ—¶ï¼Œç»“æŸè¿½å‡»ï¼Œåˆ‡æ¢çŠ¶æ€
+        //å­å¼¹å‡»ä¸­åŽè¢«é”€æ¯ï¼Œæ‰€ä»¥currentEnemy.attacker == nullæ—¶ä¹Ÿè¦åˆ‡æ¢å›žå·¡é€»çŠ¶æ€
         if (currentEnemy.lostTimeCounter <= 0 || currentEnemy.attacker == null)
         {
             currentEnemy.SwitchState(NPCState.Patrol);
             return;
         }
-        //µ±Ãæ³¯Ç½ÇÒÅöµ½Ç½Ê±ÔÙ×ªÉí
+        //å½“é¢æœå¢™ä¸”ç¢°åˆ°å¢™æ—¶å†è½¬èº«
         if (!currentEnemy.physicsCheck.isGround || (currentEnemy.physicsCheck.touchLeftWall && currentEnemy.faceDir.x < 0 || currentEnemy.physicsCheck.touchRightWall && currentEnemy.faceDir.x > 0))
         {
             //Debug.Log("111111"+ !currentEnemy.physicsCheck.isGround);
             currentEnemy.transform.localScale = new Vector3(currentEnemy.faceDir.x, 1, 1);
-            // ÒÆ¶¯·½Ïò
+            // ç§»åŠ¨æ–¹å‘
             //currentEnemy.faceDir = new Vector3(-(currentEnemy.attacker.position.x - currentEnemy.transform.position.x), 0, 0).normalized;
         }
-        //Íæ¼ÒÓëenemy¾àÀë
+        //çŽ©å®¶ä¸Ženemyè·ç¦»
         float distince = (currentEnemy.attacker.position - currentEnemy.transform.position).magnitude;
 
 
-        //ÅÐ¶Ï¾àÀë
-        //Èç¹û¾àÀë±ÈÔ¶³Ì¹¥»÷¾àÀëÔ¶£¬Ôò×·»÷
+        //åˆ¤æ–­è·ç¦»
+        //å¦‚æžœè·ç¦»æ¯”è¿œç¨‹æ”»å‡»è·ç¦»è¿œï¼Œåˆ™è¿½å‡»
         if (distince > attack.remoteDistanceMax)
         {
-            //³¬³ö¹¥»÷·¶Î§ÔòÈ¡Ïû¹¥»÷×´Ì¬
+            //è¶…å‡ºæ”»å‡»èŒƒå›´åˆ™å–æ¶ˆæ”»å‡»çŠ¶æ€
             isAttack = false;
             currentEnemy.anim.SetBool("walk", true);
         }
-        //Ô¶³Ì¹¥»÷
+        //è¿œç¨‹æ”»å‡»
         else if (distince >= attack.remoteDistanceMin && distince <= attack.remoteDistanceMax)
         {
             attackRateCounter -= Time.deltaTime;
             if (attackRateCounter <= 0)
             {
                 currentEnemy.anim.SetTrigger("magicAttack");
-                //Ô¶³Ì¹¥»÷
-                //Ö´ÐÐÐ­³Ì
+                //è¿œç¨‹æ”»å‡»
+                //æ‰§è¡Œåç¨‹
                 currentEnemy.MagicAttack();
-                //ÖØÖÃ¹¥»÷Ê±¼ä
+                //é‡ç½®æ”»å‡»æ—¶é—´
                 attackRateCounter = attack.attackRate;
             }
         }
-        //µ½´ï¹¥»÷·¶Î§ÏÈÍ£ÏÂ
+        //åˆ°è¾¾æ”»å‡»èŒƒå›´å…ˆåœä¸‹
         else if (distince < attack.remoteDistanceMin)
         {
             
-            //½üÕ½
+            //è¿‘æˆ˜
             isAttack = true;
-            //Èç¹ûÊÜÉË×´Ì¬£¬Ôò¿ÉÒÔ±»»÷ÍË£¬Èç¹û²»ÊÇÊÜÉË×´Ì¬£¬Ôòµ½´ï¹¥»÷·¶Î§Í£Ö¹
+            //å¦‚æžœå—ä¼¤çŠ¶æ€ï¼Œåˆ™å¯ä»¥è¢«å‡»é€€ï¼Œå¦‚æžœä¸æ˜¯å—ä¼¤çŠ¶æ€ï¼Œåˆ™åˆ°è¾¾æ”»å‡»èŒƒå›´åœæ­¢
             if (!currentEnemy.isHurt)
             currentEnemy.rb.velocity = Vector2.zero;
             currentEnemy.anim.SetBool("walk", false);
             attackRateCounter -= Time.deltaTime;
             if (attackRateCounter <= 0)
             {
-                //ÖØÖÃ¹¥»÷Ê±¼ä
+                //é‡ç½®æ”»å‡»æ—¶é—´
                 attackRateCounter = attack.attackRate;
                 currentEnemy.anim.SetTrigger("nearAttack");
             }

@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ĞèÒª¹ÒÔØµÄ×é¼ş,¹ÒÔØEnemyºó×Ô¶¯Ìí¼Ó
+//éœ€è¦æŒ‚è½½çš„ç»„ä»¶,æŒ‚è½½Enemyåè‡ªåŠ¨æ·»åŠ 
 [RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(PhysicsCheck))]
 public class Enemy : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
 
-    //protected ×ÓÀà¿ÉÒÔ·ÃÎÊ
+    //protected å­ç±»å¯ä»¥è®¿é—®
     [HideInInspector]public Animator anim;
 
     [HideInInspector] public Animator magicAttackAnim;
@@ -35,13 +35,13 @@ public class Enemy : MonoBehaviour
 
     protected Material _material;
 
-    //ÊÜÉËÒôĞ§¹ã²¥
+    //å—ä¼¤éŸ³æ•ˆå¹¿æ’­
     public PlayAudioEventSO playAudioEvent;
-    //ËÀÍöÒôĞ§
+    //æ­»äº¡éŸ³æ•ˆ
     public AudioClip onDieAudioClip;
 
 
-    [Header("»ù±¾²ÎÊı")]
+    [Header("åŸºæœ¬å‚æ•°")]
     public float normalSpeed;
 
     public float chaseSpeed;
@@ -51,22 +51,22 @@ public class Enemy : MonoBehaviour
     public Vector3 faceDir;
 
     public float hurtForce;
-    //¹¥»÷Õß
+    //æ”»å‡»è€…
     public Transform attacker;
-    //³öÉúµã
+    //å‡ºç”Ÿç‚¹
     public Vector3 spwanPoint;
 
-    [Header("¼ì²â")]
+    [Header("æ£€æµ‹")]
     public Vector2 centerOffset;
 
     public Vector2 checkSize;
-    //·¢ÏÖÍæ¼Ò¾àÀë
+    //å‘ç°ç©å®¶è·ç¦»
     public float checkDistance;
 
 
     public LayerMask attackLayer;
 
-    [Header("¼ÆÊ±Æ÷")]
+    [Header("è®¡æ—¶å™¨")]
     public float waitTime;
 
     public float waitTimeCounter;
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
 
     public float lostTimeCounter;
 
-    [Header("×´Ì¬")]
+    [Header("çŠ¶æ€")]
     public bool isHurt;
 
     public bool isDead;
@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         coll2d = GetComponent<CapsuleCollider2D>();
         enemyMagicAttack = GetComponent<EnemyMagicAttack>();
-        //»ñµÃ×ÓÎïÌåÊÜ»÷¶¯»­µÄ¶¯»­Æ÷
+        //è·å¾—å­ç‰©ä½“å—å‡»åŠ¨ç”»çš„åŠ¨ç”»å™¨
         if(transform.childCount > 0)
             hitAnimator = transform.GetChild(0).GetComponent<Animator>();
         currentSpeed = normalSpeed;
@@ -117,7 +117,7 @@ public class Enemy : MonoBehaviour
     {
 
         
-        //µ±Ãæ³¯Ç½ÇÒÅöµ½Ç½Ê±ÔÙ×ªÉí
+        //å½“é¢æœå¢™ä¸”ç¢°åˆ°å¢™æ—¶å†è½¬èº«
         currentState.LogicUpdate();
         TimeCounter();
 
@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //¸ÕÌå·ÅÔÚfixedUpdateÖ´ĞĞ
+    //åˆšä½“æ”¾åœ¨fixedUpdateæ‰§è¡Œ
     private void FixedUpdate()
     {
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
@@ -143,10 +143,10 @@ public class Enemy : MonoBehaviour
         currentState.OnExit();
     }
 
-    //virtual±íÊ¾¿ÉÒÔ±»ÖØĞ´
+    //virtualè¡¨ç¤ºå¯ä»¥è¢«é‡å†™
     public virtual void Move()
     {
-        //Èç¹ûµ±Ç°Ã»ÓĞ²¥·ÅÎÏÅ£µÄpremove¶¯»­£¬ÔòÒÆ¶¯,GetCurrentAnimatorStateInfo(0)±íÊ¾µÚ0¸ölayer£¬¼´animationÖĞµÄbaseLayer
+        //å¦‚æœå½“å‰æ²¡æœ‰æ’­æ”¾èœ—ç‰›çš„premoveåŠ¨ç”»ï¼Œåˆ™ç§»åŠ¨,GetCurrentAnimatorStateInfo(0)è¡¨ç¤ºç¬¬0ä¸ªlayerï¼Œå³animationä¸­çš„baseLayer
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("snailPreMove") && !anim.GetCurrentAnimatorStateInfo(0).IsName("snailRecover"))
         {
             rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime, rb.velocity.y);
@@ -159,22 +159,22 @@ public class Enemy : MonoBehaviour
         if(wait) 
         { 
             waitTimeCounter -= Time.deltaTime;
-            //µÈ´ıÊ±¼ä½áÊøºó×ªÉí
+            //ç­‰å¾…æ—¶é—´ç»“æŸåè½¬èº«
             if (waitTimeCounter <= 0) 
             { 
                 wait = false;
-                //ÒòÎªfaceDir=-transform.localScale.x£¬ËùÒÔÕâÀï×ªÉí²»ÓÃ¸ºÖµ£¨ÒòÎªËÙ¶È·½ÏòºÍtransform.localScale.xÊÇ·´µÄ£¬ËùÒÔfaceDir³õÊ¼»¯Ê±=-transform.localScale.x£©
-                //Ä£ĞÍ×ªÉí
+                //å› ä¸ºfaceDir=-transform.localScale.xï¼Œæ‰€ä»¥è¿™é‡Œè½¬èº«ä¸ç”¨è´Ÿå€¼ï¼ˆå› ä¸ºé€Ÿåº¦æ–¹å‘å’Œtransform.localScale.xæ˜¯åçš„ï¼Œæ‰€ä»¥faceDiråˆå§‹åŒ–æ—¶=-transform.localScale.xï¼‰
+                //æ¨¡å‹è½¬èº«
                 transform.localScale = new Vector3(faceDir.x, 1, 1);
-                //·½Ïò±äÁ¿×ªÏò
+                //æ–¹å‘å˜é‡è½¬å‘
                 faceDir = new Vector3(-transform.localScale.x, 0, 0);
-                //ÖØĞÂ¼ì²âµã
+                //é‡æ–°æ£€æµ‹ç‚¹
                 physicsCheck.Check();
                 waitTimeCounter = waitTime;
                 //Debug.Log("Enemy.!currentEnemy.physicsCheck.isGround" + !this.physicsCheck.isGround );
             }
         }
-        //Èç¹ûÃ»ÓĞ·¢ÏÖÍæ¼Ò£¬Ôò½«×·»÷µÈ´ıÊ±¼ä¼õÉÙ
+        //å¦‚æœæ²¡æœ‰å‘ç°ç©å®¶ï¼Œåˆ™å°†è¿½å‡»ç­‰å¾…æ—¶é—´å‡å°‘
         if (!FoundPlayer() && lostTimeCounter > 0 )
         {
             lostTimeCounter -= Time.deltaTime;
@@ -182,15 +182,15 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //·¢ÏÖÍæ¼Ò
+    //å‘ç°ç©å®¶
     public virtual bool FoundPlayer() 
     {
-        //ÏòÇ°·½·¢ÉäÒ»¸öºĞ×Ó¼ì²âÉäÏß£¬´ÓÖĞĞÄµãtransform.position + (Vector3)centerOffset£¬Ïò·½ÏòÎªfaceDir·¢ÉäÒ»¸ö´óĞ¡ÎªcheckSize½Ç¶ÈÎª0µÄÉäÏß£¬ÉäÏß³¤¶ÈÎªcheckDistance£¬¼ì²â¶ÔÏóÎªattackLayer
+        //å‘å‰æ–¹å‘å°„ä¸€ä¸ªç›’å­æ£€æµ‹å°„çº¿ï¼Œä»ä¸­å¿ƒç‚¹transform.position + (Vector3)centerOffsetï¼Œå‘æ–¹å‘ä¸ºfaceDirå‘å°„ä¸€ä¸ªå¤§å°ä¸ºcheckSizeè§’åº¦ä¸º0çš„å°„çº¿ï¼Œå°„çº¿é•¿åº¦ä¸ºcheckDistanceï¼Œæ£€æµ‹å¯¹è±¡ä¸ºattackLayer
         return Physics2D.BoxCast(transform.position + (Vector3)centerOffset,checkSize,0,faceDir,checkDistance,attackLayer);
 
     }
 
-    //Éú³ÉÄ§·¨¹¥»÷
+    //ç”Ÿæˆé­”æ³•æ”»å‡»
     public void MagicAttack() 
     {
         StartCoroutine(MagicAttackGenerate());
@@ -199,15 +199,15 @@ public class Enemy : MonoBehaviour
     private IEnumerator MagicAttackGenerate()
     {
         //Debug.Log("this.attacker.transform.position:" + this.attacker.transform.position);
-        //Ğ­³Ì£¬ÔÚÖ´ĞĞÍêÌ§ÊÖ´ı0.75sÔÙÖ´ĞĞÏÂÒ»²½
+        //åç¨‹ï¼Œåœ¨æ‰§è¡Œå®ŒæŠ¬æ‰‹å¾…0.75så†æ‰§è¡Œä¸‹ä¸€æ­¥
         yield return new WaitForSeconds(0.75f);
-        //Ô¶³Ì¹¥»÷
+        //è¿œç¨‹æ”»å‡»
         enemyMagicAttack.AfterMagicAttack(attacker);
     }
 
     public void SwitchState(NPCState state)
     {
-        //¸ù¾İ´«½øÀ´µÄÃ¶¾ÙÖµstateÅĞ¶ÏcurrentStateÇĞ»»µ½ÄÄÖÖ×´Ì¬
+        //æ ¹æ®ä¼ è¿›æ¥çš„æšä¸¾å€¼stateåˆ¤æ–­currentStateåˆ‡æ¢åˆ°å“ªç§çŠ¶æ€
         var newState = state switch
         {
             NPCState.Patrol => patrolState,
@@ -215,9 +215,9 @@ public class Enemy : MonoBehaviour
             NPCState.Skill => skillState,
             _ => null
         };
-        //µ±Ç°×´Ì¬ÍË³ö
+        //å½“å‰çŠ¶æ€é€€å‡º
         currentState.OnExit();
-        //ÇĞ»»µ½ĞÂ×´Ì¬
+        //åˆ‡æ¢åˆ°æ–°çŠ¶æ€
         currentState = newState;
         currentState.OnEnter(this);
     }
@@ -227,12 +227,12 @@ public class Enemy : MonoBehaviour
         return transform.position;
     }
 
-    #region ÊÂ¼şÖ´ĞĞ·½·¨
+    #region äº‹ä»¶æ‰§è¡Œæ–¹æ³•
     public void OnTakeDamage(Transform attackTrans) 
     {
         attacker = attackTrans;
-        //ÊÜ»÷×ªÉí
-        //Èç¹ûÍæ¼ÒÔÚÒ°ÖíÓÒ²à£¬ÔòÒ°ÖíÏòÓÒ£¨Ò°ÖíÄ¬ÈÏ-1ÊÇÏòÓÒ£¬1Ïò×ó£©
+        //å—å‡»è½¬èº«
+        //å¦‚æœç©å®¶åœ¨é‡çŒªå³ä¾§ï¼Œåˆ™é‡çŒªå‘å³ï¼ˆé‡çŒªé»˜è®¤-1æ˜¯å‘å³ï¼Œ1å‘å·¦ï¼‰
         if (attackTrans.position.x - transform.position.x > 0) 
         {
             transform.localScale = new Vector3(-1, 1, 1);
@@ -243,27 +243,27 @@ public class Enemy : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             
         }
-        //ÊÜÉË±»»÷ÍË
+        //å—ä¼¤è¢«å‡»é€€
         isHurt = true;
         anim.SetTrigger("hurt");
 
-        #region ÊÜ»÷ÌØĞ§
+        #region å—å‡»ç‰¹æ•ˆ
         hitAnimator.transform.position = new Vector2(this.transform.position.x, attackTrans.position.y + 1.2f);
-        //Èç¹û¹¥»÷ÕßÊÇplayer,²Å²¥·ÅÊÜ»÷ÌØĞ§
+        //å¦‚æœæ”»å‡»è€…æ˜¯player,æ‰æ’­æ”¾å—å‡»ç‰¹æ•ˆ
         if(attackTrans.CompareTag("Player"))
             hitAnimator.SetTrigger("Hit");
-        //½¦ÑªÁ£×ÓÌØĞ§
+        //æº…è¡€ç²’å­ç‰¹æ•ˆ
         hurtParticleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
         hurtParticleSystem.transform.localScale = new Vector3((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1, 1, 1);
         hurtParticleSystem.Play();
         #endregion
 
-        //µ¯Ä»ÉËº¦
+        //å¼¹å¹•ä¼¤å®³
         damageNumber.Spawn(transform.position + new Vector3(0,2,0), attackTrans.GetComponent<Attack>().damage);
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
-        //ÊÜÉËÊ±ÏÈ½«Ò°ÖíÍ£ÏÂ£¬ÔÙ±»»÷ÍË
+        //å—ä¼¤æ—¶å…ˆå°†é‡çŒªåœä¸‹ï¼Œå†è¢«å‡»é€€
         rb.velocity = new Vector2(0, rb.velocity.y);
-        //Ö´ĞĞĞ­³Ì
+        //æ‰§è¡Œåç¨‹
         StartCoroutine(OnHurt(dir));
         
     }
@@ -271,7 +271,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator OnHurt(Vector2 dir) 
     {
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
-        //Ğ­³Ì£¬ÔÚÖ´ĞĞÍê»÷ÍËºóµÈ´ı0.5sÔÙÖ´ĞĞÏÂÒ»²½
+        //åç¨‹ï¼Œåœ¨æ‰§è¡Œå®Œå‡»é€€åç­‰å¾…0.5så†æ‰§è¡Œä¸‹ä¸€æ­¥
         yield return new WaitForSeconds(0.3f);
         isHurt = false;
     }
@@ -280,7 +280,7 @@ public class Enemy : MonoBehaviour
     {
 
         
-        //ÉèÖÃµ±Ç°µĞÈËÍ¼²ãÎªignore Raycast£¬ÔÚproject settingÖĞµÄphysics2dÉèÖÃÈËÎï²»Óëignore Raycast²úÉúÅö×²
+        //è®¾ç½®å½“å‰æ•Œäººå›¾å±‚ä¸ºignore Raycastï¼Œåœ¨project settingä¸­çš„physics2dè®¾ç½®äººç‰©ä¸ä¸ignore Raycastäº§ç”Ÿç¢°æ’
         gameObject.layer = 2;
 
 
@@ -289,9 +289,9 @@ public class Enemy : MonoBehaviour
             playAudioEvent.RaiseEvent(onDieAudioClip);
             deathParticleSystem.transform.position = new Vector2(transform.position.x, transform.position.y + coll2d.offset.y);
             deathParticleSystem.transform.localScale = new Vector3 ((this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1,1,1);
-            //Î´ĞŞ¸ÄºÃ
+            //æœªä¿®æ”¹å¥½
             //particleSystem.GetComponent<ParticleSystem>().shape.rotation.Set(0f, 55f * (this.transform.position.x - attacker.transform.position.x) > 0 ? 1 : -1, 0f);
-            #region Á£×ÓÌØĞ§
+            #region ç²’å­ç‰¹æ•ˆ
             var s = DOTween.Sequence();
             
             s.AppendCallback(() =>
@@ -302,7 +302,7 @@ public class Enemy : MonoBehaviour
             s.Append(_material.DOFloat(600, "_Strength", 0.05f));
             s.AppendCallback(() =>
             {
-                //Á°äôÌØĞ§
+                //æ¶Ÿæ¼ªç‰¹æ•ˆ
                 deathRipple.GetComponent<RippleEffect>().Ripple(transform.position, transform.localScale, coll2d.offset);
 
             });
@@ -315,7 +315,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //ËÀÍöÖ®ºóÏú»Ù´ËµĞÈË
+    //æ­»äº¡ä¹‹åé”€æ¯æ­¤æ•Œäºº
     public void DestoryAfterAnimation() 
     {
         Destroy(this.gameObject);
@@ -324,7 +324,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnDrawGizmosSelected()
     {
-        //ÔÚ³¡¾°ÖĞ»æÖÆ¼ì²â·¶Î§£¨Åö×²·¶Î§¿ÉÊÓ»¯£©
+        //åœ¨åœºæ™¯ä¸­ç»˜åˆ¶æ£€æµ‹èŒƒå›´ï¼ˆç¢°æ’èŒƒå›´å¯è§†åŒ–ï¼‰
         Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset + new Vector3(checkDistance * faceDir.x,0), 0.2f);
     }
 }

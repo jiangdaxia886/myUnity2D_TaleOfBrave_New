@@ -13,11 +13,11 @@ public class BringerDeathEnemy : Enemy
 
     public override bool FoundPlayer()
     {
-        //ÏòÇ°·½·¢ÉäÒ»¸öºĞ×Ó¼ì²âÉäÏß£¬´ÓÖĞĞÄµãtransform.position + (Vector3)centerOffset£¬Ïò·½ÏòÎªfaceDir·¢ÉäÒ»¸ö´óĞ¡ÎªcheckSize½Ç¶ÈÎª0µÄÉäÏß£¬ÉäÏß³¤¶ÈÎªcheckDistance£¬¼ì²â¶ÔÏóÎªattackLayer
+        //å‘å‰æ–¹å‘å°„ä¸€ä¸ªç›’å­æ£€æµ‹å°„çº¿ï¼Œä»ä¸­å¿ƒç‚¹transform.position + (Vector3)centerOffsetï¼Œå‘æ–¹å‘ä¸ºfaceDirå‘å°„ä¸€ä¸ªå¤§å°ä¸ºcheckSizeè§’åº¦ä¸º0çš„å°„çº¿ï¼Œå°„çº¿é•¿åº¦ä¸ºcheckDistanceï¼Œæ£€æµ‹å¯¹è±¡ä¸ºattackLayer
         var obj = Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
         if (obj)
         {
-            //½«attackerÉèÖÃÎªÍæ¼Ò
+            //å°†attackerè®¾ç½®ä¸ºç©å®¶
             attacker = obj.transform;
         }
         return obj;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//±¬Õ¨ÌØÐ§
+//çˆ†ç‚¸ç‰¹æ•ˆ
 public class Explosion : MonoBehaviour
 {
     private Animator anim;
@@ -19,9 +19,9 @@ public class Explosion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //»ñÈ¡µ±Ç°¶¯»­½ø¶È
+        //èŽ·å–å½“å‰åŠ¨ç”»è¿›åº¦
         animatorStateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        //µ±¶¯»­²¥·ÅÍêÏú»Ù±¬Õ¨ÌØÐ§
+        //å½“åŠ¨ç”»æ’­æ”¾å®Œé”€æ¯çˆ†ç‚¸ç‰¹æ•ˆ
         if (animatorStateInfo.normalizedTime >= 1)
         {
 

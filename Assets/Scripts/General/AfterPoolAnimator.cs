@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// ½«µ±Ç°¶ÔÏó³Ø´´½¨³öÀ´µÄ¶¯»­ÎïÌå·Å»Ø¶ÔÏó³Ø
+/// å°†å½“å‰å¯¹è±¡æ± åˆ›å»ºå‡ºæ¥çš„åŠ¨ç”»ç‰©ä½“æ”¾å›žå¯¹è±¡æ± 
 /// </summary>
 public class AfterPoolAnimator : MonoBehaviour
 {
@@ -23,9 +23,9 @@ public class AfterPoolAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //»ñÈ¡µ±Ç°¶¯»­½ø¶È
+        //èŽ·å–å½“å‰åŠ¨ç”»è¿›åº¦
         animatorStateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        //µ±¶¯»­²¥·ÅÍêÏú»Ù±¬Õ¨ÌØÐ§
+        //å½“åŠ¨ç”»æ’­æ”¾å®Œé”€æ¯çˆ†ç‚¸ç‰¹æ•ˆ
         if (animatorStateInfo.normalizedTime >= 1)
         {
 

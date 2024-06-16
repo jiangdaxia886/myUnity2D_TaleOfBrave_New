@@ -8,30 +8,30 @@ using UnityEngine.InputSystem.XInput;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("ÊÂ¼ş¼àÌı")]
-    //½ûÓÃÈËÎï²Ù×÷ÊÂ¼ş
+    [Header("äº‹ä»¶ç›‘å¬")]
+    //ç¦ç”¨äººç‰©æ“ä½œäº‹ä»¶
     public SceneLoadEventSo sceneLoadEvent;
 
     public VoidEventSo afterSceneLoadedEvent;
-    //£¨ÓÃÓÚrestart°´Å¥¼ÓÔØÓÎÏ·)ÈËÎïisdeadÖÃfalse
+    //ï¼ˆç”¨äºrestartæŒ‰é’®åŠ è½½æ¸¸æˆ)äººç‰©isdeadç½®false
     public VoidEventSo loadDataEvent;
-    //£¨ÓÃÓÚbackToMenuEvent°´Å¥¼ÓÔØÓÎÏ·)ÈËÎïisdeadÖÃfalse
+    //ï¼ˆç”¨äºbackToMenuEventæŒ‰é’®åŠ è½½æ¸¸æˆ)äººç‰©isdeadç½®false
     public VoidEventSo backToMenuEvent;
 
 
-    //ÓÃunity×Ô¶¯Éú³ÉµÄPlayerInputController¿ØÖÆÆ÷Àà
+    //ç”¨unityè‡ªåŠ¨ç”Ÿæˆçš„PlayerInputControlleræ§åˆ¶å™¨ç±»
     public PlayerInputController inputController;
-    //¸ÕÌåÀà
+    //åˆšä½“ç±»
     private Rigidbody2D rb;
-    //×Ô¶¨ÒåµÄÅö×²¼ì²â
+    //è‡ªå®šä¹‰çš„ç¢°æ’æ£€æµ‹
     private PhysicsCheck physicsCheck;
-    //»ñÈ¡PlayerAnimationÀà
+    //è·å–PlayerAnimationç±»
     private PlayerAnimation playerAnimation;
-    //»ñÈ¡CapsuleCollider2DÀà
+    //è·å–CapsuleCollider2Dç±»
     private CapsuleCollider2D capsuleCollider;
     
     private Character character;
-    //²ĞÓ°
+    //æ®‹å½±
     public GameObject dashObj;
     //Ripple
     public GameObject rippleEffect;
@@ -46,19 +46,19 @@ public class PlayerController : MonoBehaviour
 
 
 
-    //µ±Ç°Î»ÖÃ
+    //å½“å‰ä½ç½®
     public Vector2 inputDirection;
 
-    [Header("»ù±¾²ÎÊı")]
+    [Header("åŸºæœ¬å‚æ•°")]
     public float speed;
 
     private float runSpeed;
 
-    //=>±íÊ¾walkSpeedÊ±runSpeedµÄÒ»°ë
+    //=>è¡¨ç¤ºwalkSpeedæ—¶runSpeedçš„ä¸€åŠ
     private float walkSpeed => speed / 2.5f;
 
     public float slideSpeed;
-    //»¬²ùÁ¦¶ÈÏûºÄ
+    //æ»‘é“²åŠ›åº¦æ¶ˆè€—
     public int slidePowerCost;
 
     public float jumpForce;
@@ -67,9 +67,9 @@ public class PlayerController : MonoBehaviour
 
     private float jumpSpeed;
 
-    //ÌøÔ¾×î´óÊ±³¤
+    //è·³è·ƒæœ€å¤§æ—¶é•¿
     public float jumpDura;
-    //ÌøÔ¾¼ÆÊ±Æ÷
+    //è·³è·ƒè®¡æ—¶å™¨
     private float jumpTimer;
 
     public float onWallJumpForce;
@@ -79,11 +79,11 @@ public class PlayerController : MonoBehaviour
     public float slideSize;
 
     public float slideOffsety;
-    //ÍÁÀÇÊ±¼ä
+    //åœŸç‹¼æ—¶é—´
     public float JumpGraceTime;
 
 
-    //»ñÈ¡³õÊ¼Åö×²Ìå´óĞ¡
+    //è·å–åˆå§‹ç¢°æ’ä½“å¤§å°
     [HideInInspector] public float capsuleCollider2Dy;
 
     [HideInInspector] public float capsuleCollider2DOffsety;
@@ -93,12 +93,12 @@ public class PlayerController : MonoBehaviour
 
     //public int combo;
 
-    [Header("ÎïÀí²ÄÖÊ")]
+    [Header("ç‰©ç†æè´¨")]
     public PhysicsMaterial2D normal;
 
     public PhysicsMaterial2D wall;
 
-    [Header("×´Ì¬")]
+    [Header("çŠ¶æ€")]
 
     public bool isHurt;
 
@@ -107,9 +107,9 @@ public class PlayerController : MonoBehaviour
     public bool isAttack;
 
     public bool isSlide;
-    //»¬²ù·½Ïò
+    //æ»‘é“²æ–¹å‘
     public float slideDirection;
-    //ÈËÎï³¯Ïò
+    //äººç‰©æœå‘
     public float playerDirection;
 
     public bool wallJump;
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        //»ñµÃ×Ô¶¨ÒåµÄÅö×²¼ì²âÀà
+        //è·å¾—è‡ªå®šä¹‰çš„ç¢°æ’æ£€æµ‹ç±»
         physicsCheck = GetComponent<PhysicsCheck>();
         playerAnimation = GetComponent<PlayerAnimation>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -130,9 +130,9 @@ public class PlayerController : MonoBehaviour
         //spriteRenderer = this.GetComponent<SpriteRenderer>();
         capsuleCollider2Dy = capsuleCollider.size.y;
         capsuleCollider2DOffsety = capsuleCollider.offset.y;
-        //ÊµÀı»¯¿ØÖÆÆ÷Àà
+        //å®ä¾‹åŒ–æ§åˆ¶å™¨ç±»
         inputController = new PlayerInputController();
-        //started°´¼ü°´ÏÂÈ¥ÄÇÒ»¿ÌÌøÔ¾,½«jump·½·¨×÷ÎªÊÂ¼ş°´¼ü°´ÏÂµÄÄÇÒ»¿ÌÀ´Ö´ĞĞ
+        //startedæŒ‰é”®æŒ‰ä¸‹å»é‚£ä¸€åˆ»è·³è·ƒ,å°†jumpæ–¹æ³•ä½œä¸ºäº‹ä»¶æŒ‰é”®æŒ‰ä¸‹çš„é‚£ä¸€åˆ»æ¥æ‰§è¡Œ
         //inputController.GamePlay.Jump.started += Jump;
         inputController.GamePlay.Jump.performed += Jump;
         inputController.GamePlay.Jump.canceled += ctx =>
@@ -140,11 +140,11 @@ public class PlayerController : MonoBehaviour
                 jumpSpeed = 0;
         };
         inputController.Enable();
-        //¹¥»÷
+        //æ”»å‡»
         inputController.GamePlay.Attack.started += PlayerAttack;
-        //»¬²ù
+        //æ»‘é“²
         inputController.GamePlay.Slide.started += Slide;
-        //µ±²½ĞĞ°´¼ü°´×¡Ê±(lambda±í´ïÊ½,´«ÈëÒ»¸ö»Øµ÷º¯Êı)
+        //å½“æ­¥è¡ŒæŒ‰é”®æŒ‰ä½æ—¶(lambdaè¡¨è¾¾å¼,ä¼ å…¥ä¸€ä¸ªå›è°ƒå‡½æ•°)
         runSpeed = speed;
         inputController.GamePlay.WalkButton.performed += ctx => 
         {
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
                 speed = walkSpeed;
             }
         };
-        //µ±²½ĞĞ°´¼ü²»°´Ê±
+        //å½“æ­¥è¡ŒæŒ‰é”®ä¸æŒ‰æ—¶
         inputController.GamePlay.WalkButton.canceled += ctx =>
         {
             if (physicsCheck.isGround)
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
         sceneLoadEvent.LoadRequestEvent += OnLoadEvent;
         afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadedEvent;
         loadDataEvent.OnEventRaised += OnLoadDataEvent;
-        //·µ»ØÖ÷²Ëµ¥°´¼üÒ²ÈËÎï¸´»î
+        //è¿”å›ä¸»èœå•æŒ‰é”®ä¹Ÿäººç‰©å¤æ´»
         backToMenuEvent.OnEventRaised += OnLoadDataEvent;
     }
 
@@ -184,24 +184,24 @@ public class PlayerController : MonoBehaviour
         sceneLoadEvent.LoadRequestEvent -= OnLoadEvent;
         afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadedEvent;
         loadDataEvent.OnEventRaised -= OnLoadDataEvent;
-        //·µ»ØÖ÷²Ëµ¥°´¼üÒ²ÈËÎï¸´»î
+        //è¿”å›ä¸»èœå•æŒ‰é”®ä¹Ÿäººç‰©å¤æ´»
         backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
     }
 
 
 
-    //¸ÕÌå·ÅÔÚfixedUpdateÖ´ĞĞ
+    //åˆšä½“æ”¾åœ¨fixedUpdateæ‰§è¡Œ
     private void FixedUpdate()
     {
         if (!isHurt && !isAttack)
-            //ÈËÎïÒÆ¶¯
+            //äººç‰©ç§»åŠ¨
             Move();
         CheckState();
-        //ÍÁÀÇÊ±¼ä£¨JumpTimer > 0 Ê±¿ÉÒÔÌøÔ¾£©
+        //åœŸç‹¼æ—¶é—´ï¼ˆJumpTimer > 0 æ—¶å¯ä»¥è·³è·ƒï¼‰
         if (physicsCheck.isGround || physicsCheck.onWall)
         {
             beforeJumpTimer = JumpGraceTime;
-            //¼ÇÂ¼ÆğÌø×´Ì¬
+            //è®°å½•èµ·è·³çŠ¶æ€
             jumpState = physicsCheck.isGround ? JumpState.GroundJump : JumpState.WallJump;
         }
         else if(beforeJumpTimer > 0)
@@ -214,12 +214,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //Update()·½·¨Ã¿Ò»Ö¡¶¼»áÖ´ĞĞ
+    //Update()æ–¹æ³•æ¯ä¸€å¸§éƒ½ä¼šæ‰§è¡Œ
     private void Update()
     {
-        //»ñµÃÊäÈë·½ÏòÖµ
+        //è·å¾—è¾“å…¥æ–¹å‘å€¼
         inputDirection = inputController.GamePlay.Move.ReadValue<Vector2>();
-        //»ñµÃµ±Ç°Ãæ³¯·½Ïò
+        //è·å¾—å½“å‰é¢æœæ–¹å‘
         if(inputDirection.x != 0)
             playerDirection = inputDirection.x;
         //CheckState();
@@ -236,8 +236,8 @@ public class PlayerController : MonoBehaviour
 
 
 
-    //²âÊÔ
-    //ÈËÎïÔÚ´¥·¢Æ÷·¶Î§ÄÚ»áÒ»Ö±¼ì²â
+    //æµ‹è¯•
+    //äººç‰©åœ¨è§¦å‘å™¨èŒƒå›´å†…ä¼šä¸€ç›´æ£€æµ‹
     /*    private void OnTriggerStay2D(Collider2D collision)
         {
             Debug.Log(collision.name);
@@ -245,12 +245,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
-        //³¡¾°¼ÓÔØÊ±½ûÓÃÈËÎï²Ù×÷
+        //åœºæ™¯åŠ è½½æ—¶ç¦ç”¨äººç‰©æ“ä½œ
         inputController.GamePlay.Disable();
-        //Debug.Log("³¡¾°¼ÓÔØÊ±½ûÓÃÈËÎï²Ù×÷");
+        //Debug.Log("åœºæ™¯åŠ è½½æ—¶ç¦ç”¨äººç‰©æ“ä½œ");
     }
 
-    //µ±ÖØĞÂ¼ÓÔØÊı¾İÊ±isDeadÖÃfalse
+    //å½“é‡æ–°åŠ è½½æ•°æ®æ—¶isDeadç½®false
     private void OnLoadDataEvent()
     {
         isDead = false;
@@ -258,22 +258,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnAfterSceneLoadedEvent()
     {
-        //³¡¾°¼ÓÔØºó»Ö¸´ÈËÎï²Ù×÷
+        //åœºæ™¯åŠ è½½åæ¢å¤äººç‰©æ“ä½œ
         inputController.GamePlay.Enable();
-        //Debug.Log("³¡¾°¼ÓÔØºó»Ö¸´ÈËÎï²Ù×÷");
+        //Debug.Log("åœºæ™¯åŠ è½½åæ¢å¤äººç‰©æ“ä½œ");
     }
 
     public void Move() {
-        //ÈËÎïÒÆ¶¯,xÖáËÙ¶ÈÊÇ¼ÆËãµÄ£¬yÖáËÙ¶ÈÊÇÔ­ÓĞµÄ9.81ÖØÁ¦¼ÓËÙ¶È
-        //Èç¹û²»ÔÚ»¬²ù×´Ì¬£¬ÔòÕı³£ÒÆ¶¯¼°·­×ª£¬Èç¹ûÔÚ£¬Ôò¼ÓËÙ£¬ÇÒ²»ÄÜ·­×ª
+        //äººç‰©ç§»åŠ¨,xè½´é€Ÿåº¦æ˜¯è®¡ç®—çš„ï¼Œyè½´é€Ÿåº¦æ˜¯åŸæœ‰çš„9.81é‡åŠ›åŠ é€Ÿåº¦
+        //å¦‚æœä¸åœ¨æ»‘é“²çŠ¶æ€ï¼Œåˆ™æ­£å¸¸ç§»åŠ¨åŠç¿»è½¬ï¼Œå¦‚æœåœ¨ï¼Œåˆ™åŠ é€Ÿï¼Œä¸”ä¸èƒ½ç¿»è½¬
         //Debug.Log("inputDirection.x"+inputDirection.x);
         if (!isSlide)
         {
-            //Á£×ÓÌØĞ§²ĞÓ°£¨Î´ĞŞ¸´bug£©
+            //ç²’å­ç‰¹æ•ˆæ®‹å½±ï¼ˆæœªä¿®å¤bugï¼‰
             //dashObj.SetActive(false);
 /*            dashObj.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
             dashObj.transform.localScale = this.transform.localScale;*/
-            //ÈËÎï·­×ª
+            //äººç‰©ç¿»è½¬
             int faceDir = (int)transform.localScale.x;
 
             if (inputDirection.x > 0)
@@ -281,10 +281,10 @@ public class PlayerController : MonoBehaviour
             if (inputDirection.x < 0)
                 faceDir = -1;
             transform.localScale = new Vector3(faceDir, 1, 1);
-            //µÅÇ½Ìø×´Ì¬Ê±·½Ïò²»ÊÜ¿ØÖÆ
+            //è¹¬å¢™è·³çŠ¶æ€æ—¶æ–¹å‘ä¸å—æ§åˆ¶
             if ( !wallJump)
             {
-                //Èç¹ûÔÚÌøÔ¾£¬ÔòyÖáËÙ¶ÈµÈÓÚÌøÔ¾ËÙ¶È
+                //å¦‚æœåœ¨è·³è·ƒï¼Œåˆ™yè½´é€Ÿåº¦ç­‰äºè·³è·ƒé€Ÿåº¦
                 if (jumpSpeed != 0 && jumpTimer > 0)
                     rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, jumpSpeed * Time.deltaTime);
                 else
@@ -292,19 +292,19 @@ public class PlayerController : MonoBehaviour
             }
                 
         }
-        //»¬²ù
+        //æ»‘é“²
         else
         {
-            //ÈËÎï·­×ª
+            //äººç‰©ç¿»è½¬
             int faceDir = (int)transform.localScale.x;
 
             if (slideDirection > 0)
                 faceDir = 1;
             if (slideDirection < 0)
                 faceDir = -1;
-            //²ĞÓ°
+            //æ®‹å½±
             ShadowPool.instance.GetFormPool();
-            //Á£×ÓÌØĞ§
+            //ç²’å­ç‰¹æ•ˆ
             if(physicsCheck.isGround)
                 effectManager.WallSlide(this.transform.position + new Vector3(inputDirection.x, 0, 0) * 0.5f, new Vector2(0, 1));
             /*            dashObj.SetActive(true);
@@ -312,7 +312,7 @@ public class PlayerController : MonoBehaviour
                         dashObj.transform.localScale = this.transform.localScale;*/
 
             transform.localScale = new Vector3(faceDir, 1, 1);
-            //Èç¹ûÔÚÌøÔ¾£¬ÔòyÖáËÙ¶ÈµÈÓÚÌøÔ¾ËÙ¶È
+            //å¦‚æœåœ¨è·³è·ƒï¼Œåˆ™yè½´é€Ÿåº¦ç­‰äºè·³è·ƒé€Ÿåº¦
             if (jumpSpeed != 0 && jumpTimer > 0)
                 rb.velocity = new Vector2(slideDirection * slideSpeed * Time.deltaTime, jumpSpeed * Time.deltaTime);
             else
@@ -328,28 +328,28 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext context)
     {
 
-        //ÍÁÀÇÊ±¼ä>0ÇÒÊÇµØÃæÆğÌø
+        //åœŸç‹¼æ—¶é—´>0ä¸”æ˜¯åœ°é¢èµ·è·³
         if (beforeJumpTimer > 0 && jumpState == JumpState.GroundJump)
         {
             jumpTimer = jumpDura;
             jumpSpeed = jumpVelocity;
-            //impulse Ìí¼ÓÒ»¸öË²Ê±µÄÁ¦
+            //impulse æ·»åŠ ä¸€ä¸ªç¬æ—¶çš„åŠ›
             //rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             GetComponent<AudioDefination>()?.PlayAudioClip();
             Debug.Log("jump!!!");
-            //Á£×ÓÌØĞ§
+            //ç²’å­ç‰¹æ•ˆ
             effectManager.JumpDust(this.transform.position, Vector2.up);
         }
-        //ÍÁÀÇÊ±¼ä>0ÇÒÊÇµÅÇ½Ìø
+        //åœŸç‹¼æ—¶é—´>0ä¸”æ˜¯è¹¬å¢™è·³
         else if (beforeJumpTimer > 0 && jumpState == JumpState.WallJump)
         {
             //jumpTimer = jumpDura;
-            //ÒòÎªÊÇË²Ê±µÄÁ¦£¬ÎªÁË±£Ö¤ÌøÔ¾¸ß¶ÈÒ»Ñù£¬ÔÚÌøÔ¾Ö®Ç°ËÙ¶ÈÖÃÎª0
+            //å› ä¸ºæ˜¯ç¬æ—¶çš„åŠ›ï¼Œä¸ºäº†ä¿è¯è·³è·ƒé«˜åº¦ä¸€æ ·ï¼Œåœ¨è·³è·ƒä¹‹å‰é€Ÿåº¦ç½®ä¸º0
             rb.velocity = Vector2.zero;
-            //µÅÇ½Ìø£¬xÖá·½ÏòËÙ¶ÈÎªinputDirection.xµÄ·´·½Ïò
+            //è¹¬å¢™è·³ï¼Œxè½´æ–¹å‘é€Ÿåº¦ä¸ºinputDirection.xçš„åæ–¹å‘
             rb.AddForce(new Vector3(-0.45f * inputDirection.x, 2f,0) * onWallJumpForce, ForceMode2D.Impulse);
             wallJump = true;
-            //Á£×ÓÌØĞ§
+            //ç²’å­ç‰¹æ•ˆ
             effectManager.JumpDust(this.transform.position + (Vector3)inputDirection * 0.5f + new Vector3(0,0.3f,0), -inputDirection);
             /*             Debug.Log("Time.time"+Time.time);
                      if (wallJump)
@@ -361,23 +361,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //»¬²ù
+    //æ»‘é“²
     private void Slide(InputAction.CallbackContext context) 
     {
         //Debug.Log("isSlide" + !this.isSlide);
         if (!isSlide && physicsCheck.isGround && character.currentPower >= slidePowerCost)
         {
             isSlide = true;
-            //»¬²ù·½ÏòµÈÓÚÃæ³¯·½Ïò
+            //æ»‘é“²æ–¹å‘ç­‰äºé¢æœæ–¹å‘
             slideDirection = playerDirection;
-            //»¬²ùÈËÎïÎŞµĞ
+            //æ»‘é“²äººç‰©æ— æ•Œ
             character.ActiveInvulnerable();
-            //ÉèÖÃÅö×²Ìå£¬»¬²ùÊ±±ä°«
+            //è®¾ç½®ç¢°æ’ä½“ï¼Œæ»‘é“²æ—¶å˜çŸ®
             capsuleCollider.size = new Vector2(capsuleCollider.size.x, slideSize);
             capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, slideOffsety);
             playerAnimation.PlaySlide();
             character.OnSlide(slidePowerCost);
-            //Á°äôÌØĞ§
+            //æ¶Ÿæ¼ªç‰¹æ•ˆ
             dashRippleEffect.GetComponent<DashRippleEffect>().DashRipple(transform.position, transform.localScale);
 
         }
@@ -398,32 +398,32 @@ public class PlayerController : MonoBehaviour
 
     public void FreezeFrame()
     {
-        //¹¥»÷Ê±¶³Ö¡
+        //æ”»å‡»æ—¶å†»å¸§
         GetComponent<FrameFrozen>()?.frazee(0.05f);
     }
 
 
     #region UnityEvent
-    //ÔÚcharacterÀàÖĞµÄonTakeDamageÊÂ¼şÖĞÌí¼ÓÁË´Ë·½·¨
+    //åœ¨characterç±»ä¸­çš„onTakeDamageäº‹ä»¶ä¸­æ·»åŠ äº†æ­¤æ–¹æ³•
     public void GetHurt(Transform attacker)
     {
         isHurt = true;
         rb.velocity = Vector2.zero;
-        //ÈÃ½ÇÉ«Î»ÖÃ¼õÈ¥µĞÈËÎ»ÖÃ£¬µÃµ½·½Ïò£¬ÔÙ¹éÒ»»¯£¬¼´Ô½Ô¶Á¦Ô½Ğ¡
+        //è®©è§’è‰²ä½ç½®å‡å»æ•Œäººä½ç½®ï¼Œå¾—åˆ°æ–¹å‘ï¼Œå†å½’ä¸€åŒ–ï¼Œå³è¶Šè¿œåŠ›è¶Šå°
         Vector2 dir = new Vector2((transform.position.x - attacker.position.x), 0).normalized;
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
     }
 
-    //ÔÚcharacterÀàÖĞµÄonDieÊÂ¼şÖĞÌí¼ÓÁË´Ë·½·¨
+    //åœ¨characterç±»ä¸­çš„onDieäº‹ä»¶ä¸­æ·»åŠ äº†æ­¤æ–¹æ³•
     public void PlayerDead() 
     {
         isDead = true;
-        //ËÀÍöÖ®ºó¹Ø±Õ¿ØÖÆÆ÷µÄgameplay²¿·ÖµÄ²Ù×÷
+        //æ­»äº¡ä¹‹åå…³é—­æ§åˆ¶å™¨çš„gameplayéƒ¨åˆ†çš„æ“ä½œ
         inputController.GamePlay.Disable();
     }
     #endregion
 
-    //µ±ÔÚµØÃæÉÏÊ±ÓÃÄ¦²ÁÁ¦²ÄÖÊ£¬²»ÔÚµØÃæÉÏÓÃ¹â»¬²ÄÖÊ
+    //å½“åœ¨åœ°é¢ä¸Šæ—¶ç”¨æ‘©æ“¦åŠ›æè´¨ï¼Œä¸åœ¨åœ°é¢ä¸Šç”¨å…‰æ»‘æè´¨
     public void CheckState()
     {
 /*        if (wallJump)
@@ -434,15 +434,15 @@ public class PlayerController : MonoBehaviour
 
         }*/
         capsuleCollider.sharedMaterial = physicsCheck.isGround?normal:wall;
-        //ÏÂ»¬¼õÂı,Í¬Ê±²»ÊÇwalljump×´Ì¬Ê±²Å¼õÂı£¬ÒòÎªonwallµÄ¼à²âµã±ÈÅö×²ÌåÍ»³ö£¬ËùÒÔÔÚwalljumpÊ±Ò²»á´¦ÓÚonwall£¬»áµ¼ÖÂµÅÇ½ÌøÌø²»¸ß
+        //ä¸‹æ»‘å‡æ…¢,åŒæ—¶ä¸æ˜¯walljumpçŠ¶æ€æ—¶æ‰å‡æ…¢ï¼Œå› ä¸ºonwallçš„ç›‘æµ‹ç‚¹æ¯”ç¢°æ’ä½“çªå‡ºï¼Œæ‰€ä»¥åœ¨walljumpæ—¶ä¹Ÿä¼šå¤„äºonwallï¼Œä¼šå¯¼è‡´è¹¬å¢™è·³è·³ä¸é«˜
         if (physicsCheck.onWall && !wallJump)
         {
-            //Á£×ÓÌØĞ§
+            //ç²’å­ç‰¹æ•ˆ
             effectManager.WallSlide(this.transform.position + new Vector3(inputDirection.x,0,0) * 0.5f + new Vector3(0,1,0) ,-inputDirection);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
         }
         
-        //yÖáËÙ¶ÈĞ¡ÓÚ7Ê±µÅÇ½ÌøÎªfalse,×óÓÒ¿ÉÒÔ²Ù¿ØÒÆ¶¯
+        //yè½´é€Ÿåº¦å°äº7æ—¶è¹¬å¢™è·³ä¸ºfalse,å·¦å³å¯ä»¥æ“æ§ç§»åŠ¨
         if (wallJump && rb.velocity.y < 7f)
         {
             wallJump = false;

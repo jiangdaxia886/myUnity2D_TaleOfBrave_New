@@ -14,12 +14,12 @@ public class BringerDeathPatrolState : BaseState
 
     public override void LogicUpdate()
     {
-        //发现player切换到chase
+        //鍙戠幇player鍒囨崲鍒癱hase
         if (currentEnemy.FoundPlayer())
         {
             currentEnemy.SwitchState(NPCState.Chase);
         }
-        //当面朝墙且碰到墙时或前方是悬崖再转身
+        //褰撻潰鏈濆涓旂鍒板鏃舵垨鍓嶆柟鏄偓宕栧啀杞韩
         if (!currentEnemy.physicsCheck.isGround || (currentEnemy.physicsCheck.touchLeftWall && currentEnemy.faceDir.x < 0 || currentEnemy.physicsCheck.touchRightWall && currentEnemy.faceDir.x > 0))
         {
             //Debug.Log("Snail111111"+ !currentEnemy.physicsCheck.isGround);

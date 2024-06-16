@@ -10,7 +10,7 @@ public class AudioDefination : MonoBehaviour
 
     public bool playOnEnable;
 
-    //µ±±¾ÎïÌåÉúĞ§Ê±²¥·ÅÒôÀÖ
+    //å½“æœ¬ç‰©ä½“ç”Ÿæ•ˆæ—¶æ’­æ”¾éŸ³ä¹
     private void OnEnable()
     {
         if (playOnEnable) 
